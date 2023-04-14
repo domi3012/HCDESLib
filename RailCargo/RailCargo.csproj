@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{49458A63-B651-4645-8887-F4B06C1EDBC6}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>RailCargo</RootNamespace>
+        <AssemblyName>RailCargo</AssemblyName>
+        <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Xml" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Simulation Core\SimulationCore.csproj">
+            <Project>{46743dc8-423c-42dc-988e-d42853d9ba4e}</Project>
+            <Name>SimulationCore</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\SimulationWPFVisualizationTools\SimulationWPFVisualizationTools.csproj">
+            <Project>{04d17195-bb5d-495a-b564-490e8711556c}</Project>
+            <Name>SimulationWPFVisualizationTools</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\WPFVisualizationBase\WPFVisualizationBase\WPFVisualizationBase.csproj">
+            <Project>{77cc14e4-2538-4ad6-8f29-986b0b63eb27}</Project>
+            <Name>WPFVisualizationBase</Name>
+        </ProjectReference>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="HCCM\Activities\DriveToDepatureArea.cs" />
+        <Compile Include="HCCM\Activities\ShuntingWagon.cs" />
+        <Compile Include="HCCM\Activities\TrainCreation.cs" />
+        <Compile Include="HCCM\Activities\TrainDrive.cs" />
+        <Compile Include="HCCM\Activities\TrainPreparation.cs" />
+        <Compile Include="HCCM\Activities\TrainWaitingForDeparture.cs" />
+        <Compile Include="HCCM\Activities\WagonCollection.cs" />
+        <Compile Include="HCCM\Activities\WaitingForSilo.cs" />
+        <Compile Include="HCCM\Activities\WaitingForTrainSelectionSilo.cs" />
+        <Compile Include="HCCM\Activities\WaitingForTrainSelectionWagon.cs" />
+        <Compile Include="HCCM\Activities\WaitingInDepartureArea.cs" />
+        <Compile Include="HCCM\Activities\WaitingInSilo.cs" />
+        <Compile Include="HCCM\ControlUnits\Network.cs" />
+        <Compile Include="HCCM\ControlUnits\ShuntingYard.cs" />
+        <Compile Include="HCCM\Entities\ArrivalArea.cs" />
+        <Compile Include="HCCM\Entities\BookingSystem.cs" />
+        <Compile Include="HCCM\Entities\DepartureArea.cs" />
+        <Compile Include="HCCM\Entities\NetworkPath.cs" />
+        <Compile Include="HCCM\Entities\Silo.cs" />
+        <Compile Include="HCCM\Entities\Train.cs" />
+        <Compile Include="HCCM\Entities\Wagon.cs" />
+        <Compile Include="HCCM\Events\FreeSilo.cs" />
+        <Compile Include="HCCM\Events\SiloFinished.cs" />
+        <Compile Include="HCCM\Events\SiloSelection.cs" />
+        <Compile Include="HCCM\Events\TrainArrival.cs" />
+        <Compile Include="HCCM\Events\TrainArrivalInEndDestination.cs" />
+        <Compile Include="HCCM\Events\TrainCreation.cs" />
+        <Compile Include="HCCM\Events\TrainDepartureTimeWillArriveIn.cs" />
+        <Compile Include="HCCM\Events\TrainDepartureIncoming.cs" />
+        <Compile Include="HCCM\Events\TrainDepartureTimeArrived.cs" />
+        <Compile Include="HCCM\Events\TrainSelection.cs" />
+        <Compile Include="HCCM\Events\WagonArrival.cs" />
+        <Compile Include="HCCM\Events\WagonArrivalInEndDestination.cs" />
+        <Compile Include="HCCM\Requests\RequestForDeparture.cs" />
+        <Compile Include="HCCM\Requests\RequestForDepartureArea.cs" />
+        <Compile Include="HCCM\Requests\RequestForSilo.cs" />
+        <Compile Include="HCCM\Requests\RequestSiloStatus.cs" />
+        <Compile Include="HCCM\Requests\RequestDepartureAllowed.cs" />
+        <Compile Include="HCCM\Requests\RequestSorting.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+
+</Project>

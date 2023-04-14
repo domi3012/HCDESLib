@@ -1,0 +1,10 @@
+C:\Users\domi\git\HCDESLib\RailCargo\bin\Debug\RailCargo.dll
+C:\Users\domi\git\HCDESLib\RailCargo\bin\Debug\RailCargo.pdb
+C:\Users\domi\git\HCDESLib\RailCargo\obj\Debug\RailCargo.csproj.AssemblyReference.cache
+C:\Users\domi\git\HCDESLib\RailCargo\obj\Debug\RailCargo.csproj.CoreCompileInputs.cache
+C:\Users\domi\git\HCDESLib\RailCargo\obj\Debug\RailCargo.dll
+C:\Users\domi\git\HCDESLib\RailCargo\obj\Debug\RailCargo.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\RailCargo\obj\Debug\RailCargo.csproj.AssemblyReference.cache
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\RailCargo\obj\Debug\RailCargo.csproj.CoreCompileInputs.cache
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\RailCargo\obj\Debug\RailCargo.dll
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\RailCargo\obj\Debug\RailCargo.pdb
