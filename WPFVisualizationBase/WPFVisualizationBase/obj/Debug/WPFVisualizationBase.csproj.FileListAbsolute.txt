@@ -13,3 +13,9 @@ C:\Users\furian.MBI\Documents\Auckland\HCDESLib\WPFVisualizationBase\WPFVisualiz
 C:\Users\furian.MBI\Documents\Auckland\HCDESLib\WPFVisualizationBase\WPFVisualizationBase\obj\Debug\WPFVisualizationBase.csprojResolveAssemblyReference.cache
 C:\Users\furian.MBI\Documents\Auckland\HCDESLib\WPFVisualizationBase\WPFVisualizationBase\obj\Debug\WPFVisualizationBase.dll
 C:\Users\furian.MBI\Documents\Auckland\HCDESLib\WPFVisualizationBase\WPFVisualizationBase\obj\Debug\WPFVisualizationBase.pdb
+C:\Users\domi\git\HCDESLib\WPFVisualizationBase\WPFVisualizationBase\bin\Debug\WPFVisualizationBase.dll
+C:\Users\domi\git\HCDESLib\WPFVisualizationBase\WPFVisualizationBase\bin\Debug\WPFVisualizationBase.pdb
+C:\Users\domi\git\HCDESLib\WPFVisualizationBase\WPFVisualizationBase\obj\Debug\WPFVisualizationBase.csproj.AssemblyReference.cache
+C:\Users\domi\git\HCDESLib\WPFVisualizationBase\WPFVisualizationBase\obj\Debug\WPFVisualizationBase.csproj.CoreCompileInputs.cache
+C:\Users\domi\git\HCDESLib\WPFVisualizationBase\WPFVisualizationBase\obj\Debug\WPFVisualizationBase.dll
+C:\Users\domi\git\HCDESLib\WPFVisualizationBase\WPFVisualizationBase\obj\Debug\WPFVisualizationBase.pdb

@@ -13,3 +13,9 @@ C:\Users\furian.MBI\Documents\Auckland\HCDESLib\Simulation Core\bin\Debug\Simula
 C:\Users\furian.MBI\Documents\Auckland\HCDESLib\Simulation Core\obj\Debug\SimulationCore.csprojResolveAssemblyReference.cache
 C:\Users\furian.MBI\Documents\Auckland\HCDESLib\Simulation Core\obj\Debug\SimulationCoreLibrary.dll
 C:\Users\furian.MBI\Documents\Auckland\HCDESLib\Simulation Core\obj\Debug\SimulationCoreLibrary.pdb
+C:\Users\domi\git\HCDESLib\Simulation Core\bin\Debug\SimulationCoreLibrary.dll
+C:\Users\domi\git\HCDESLib\Simulation Core\bin\Debug\SimulationCoreLibrary.pdb
+C:\Users\domi\git\HCDESLib\Simulation Core\obj\Debug\SimulationCore.csproj.AssemblyReference.cache
+C:\Users\domi\git\HCDESLib\Simulation Core\obj\Debug\SimulationCore.csproj.CoreCompileInputs.cache
+C:\Users\domi\git\HCDESLib\Simulation Core\obj\Debug\SimulationCoreLibrary.dll
+C:\Users\domi\git\HCDESLib\Simulation Core\obj\Debug\SimulationCoreLibrary.pdb

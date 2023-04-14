@@ -12,3 +12,12 @@ C:\Users\furian.MBI\Documents\Auckland\HCDESLib\GeneralHealthCareElements\bin\De
 C:\Users\furian.MBI\Documents\Auckland\HCDESLib\GeneralHealthCareElements\obj\Debug\GeneralHealthCareElements.csprojResolveAssemblyReference.cache
 C:\Users\furian.MBI\Documents\Auckland\HCDESLib\GeneralHealthCareElements\obj\Debug\GeneralHealthCareElementsLibrary.dll
 C:\Users\furian.MBI\Documents\Auckland\HCDESLib\GeneralHealthCareElements\obj\Debug\GeneralHealthCareElementsLibrary.pdb
+C:\Users\domi\git\HCDESLib\GeneralHealthCareElements\bin\Debug\GeneralHealthCareElementsLibrary.dll
+C:\Users\domi\git\HCDESLib\GeneralHealthCareElements\bin\Debug\GeneralHealthCareElementsLibrary.pdb
+C:\Users\domi\git\HCDESLib\GeneralHealthCareElements\bin\Debug\SimulationCoreLibrary.dll
+C:\Users\domi\git\HCDESLib\GeneralHealthCareElements\bin\Debug\SimulationCoreLibrary.pdb
+C:\Users\domi\git\HCDESLib\GeneralHealthCareElements\obj\Debug\GeneralHealthCareElements.csproj.AssemblyReference.cache
+C:\Users\domi\git\HCDESLib\GeneralHealthCareElements\obj\Debug\GeneralHealthCareElements.csproj.CoreCompileInputs.cache
+C:\Users\domi\git\HCDESLib\GeneralHealthCareElements\obj\Debug\GeneralHealthCareElements.csproj.CopyComplete
+C:\Users\domi\git\HCDESLib\GeneralHealthCareElements\obj\Debug\GeneralHealthCareElementsLibrary.dll
+C:\Users\domi\git\HCDESLib\GeneralHealthCareElements\obj\Debug\GeneralHealthCareElementsLibrary.pdb
