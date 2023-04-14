@@ -85,6 +85,7 @@
         <Compile Include="HCCM\Events\TrainSelection.cs" />
         <Compile Include="HCCM\Events\WagonArrival.cs" />
         <Compile Include="HCCM\Events\WagonArrivalInEndDestination.cs" />
+        <Compile Include="HCCM\Input\InputTimeTable.cs" />
         <Compile Include="HCCM\Requests\RequestForDeparture.cs" />
         <Compile Include="HCCM\Requests\RequestForDepartureArea.cs" />
         <Compile Include="HCCM\Requests\RequestForSilo.cs" />
@@ -92,6 +93,7 @@
         <Compile Include="HCCM\Requests\RequestDepartureAllowed.cs" />
         <Compile Include="HCCM\Requests\RequestSorting.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="TrainNetworkSimulation.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

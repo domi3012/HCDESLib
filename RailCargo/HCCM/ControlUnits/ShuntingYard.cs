@@ -9,6 +9,11 @@ namespace RailCargo.HCCM.ControlUnits
         public ShuntingYard(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel) : base(name, parentControlUnit, parentSimulationModel)
         {
         }
+        
+        protected override void CustomInitialize(DateTime startTime, ISimulationEngine simEngine)
+        {
+            Console.WriteLine(Name);
+        }
 
         protected override bool PerformCustomRules(DateTime time, ISimulationEngine simEngine)
         {
