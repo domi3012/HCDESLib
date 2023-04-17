@@ -1,21 +1,27 @@
-C:\Users\Nik\Documents\Auckland\HCCM\NiksWorkingDir\Source\Simulation Core\bin\Debug\SimulationCoreLibrary.dll
-C:\Users\Nik\Documents\Auckland\HCCM\NiksWorkingDir\Source\Simulation Core\bin\Debug\SimulationCoreLibrary.pdb
-C:\Users\Nik\Documents\Auckland\HCCM\NiksWorkingDir\Source\Simulation Core\obj\Debug\SimulationCoreLibrary.dll
-C:\Users\Nik\Documents\Auckland\HCCM\NiksWorkingDir\Source\Simulation Core\obj\Debug\SimulationCoreLibrary.pdb
-C:\Users\Nik\Documents\Auckland\HCCM\NiksWorkingDir\Source\Simulation Core\obj\Debug\SimulationCore.csprojResolveAssemblyReference.cache
-C:\Users\Nik\Documents\Auckland\HCDESLib\Simulation Core\bin\Debug\SimulationCoreLibrary.dll
-C:\Users\Nik\Documents\Auckland\HCDESLib\Simulation Core\bin\Debug\SimulationCoreLibrary.pdb
-C:\Users\Nik\Documents\Auckland\HCDESLib\Simulation Core\obj\Debug\SimulationCore.csprojResolveAssemblyReference.cache
-C:\Users\Nik\Documents\Auckland\HCDESLib\Simulation Core\obj\Debug\SimulationCoreLibrary.dll
-C:\Users\Nik\Documents\Auckland\HCDESLib\Simulation Core\obj\Debug\SimulationCoreLibrary.pdb
-C:\Users\furian.MBI\Documents\Auckland\HCDESLib\Simulation Core\bin\Debug\SimulationCoreLibrary.dll
-C:\Users\furian.MBI\Documents\Auckland\HCDESLib\Simulation Core\bin\Debug\SimulationCoreLibrary.pdb
-C:\Users\furian.MBI\Documents\Auckland\HCDESLib\Simulation Core\obj\Debug\SimulationCore.csprojResolveAssemblyReference.cache
-C:\Users\furian.MBI\Documents\Auckland\HCDESLib\Simulation Core\obj\Debug\SimulationCoreLibrary.dll
-C:\Users\furian.MBI\Documents\Auckland\HCDESLib\Simulation Core\obj\Debug\SimulationCoreLibrary.pdb
-C:\Users\domi\git\HCDESLib\Simulation Core\bin\Debug\SimulationCoreLibrary.dll
-C:\Users\domi\git\HCDESLib\Simulation Core\bin\Debug\SimulationCoreLibrary.pdb
-C:\Users\domi\git\HCDESLib\Simulation Core\obj\Debug\SimulationCore.csproj.AssemblyReference.cache
-C:\Users\domi\git\HCDESLib\Simulation Core\obj\Debug\SimulationCore.csproj.CoreCompileInputs.cache
-C:\Users\domi\git\HCDESLib\Simulation Core\obj\Debug\SimulationCoreLibrary.dll
-C:\Users\domi\git\HCDESLib\Simulation Core\obj\Debug\SimulationCoreLibrary.pdb
+C:/Users/Nik/Documents/Auckland/HCCM/NiksWorkingDir/Source/Simulation Core/bin/Debug/SimulationCoreLibrary.dll
+C:/Users/Nik/Documents/Auckland/HCCM/NiksWorkingDir/Source/Simulation Core/bin/Debug/SimulationCoreLibrary.pdb
+C:/Users/Nik/Documents/Auckland/HCCM/NiksWorkingDir/Source/Simulation Core/obj/Debug/SimulationCoreLibrary.dll
+C:/Users/Nik/Documents/Auckland/HCCM/NiksWorkingDir/Source/Simulation Core/obj/Debug/SimulationCoreLibrary.pdb
+C:/Users/Nik/Documents/Auckland/HCCM/NiksWorkingDir/Source/Simulation Core/obj/Debug/SimulationCore.csprojResolveAssemblyReference.cache
+C:/Users/Nik/Documents/Auckland/HCDESLib/Simulation Core/bin/Debug/SimulationCoreLibrary.dll
+C:/Users/Nik/Documents/Auckland/HCDESLib/Simulation Core/bin/Debug/SimulationCoreLibrary.pdb
+C:/Users/Nik/Documents/Auckland/HCDESLib/Simulation Core/obj/Debug/SimulationCore.csprojResolveAssemblyReference.cache
+C:/Users/Nik/Documents/Auckland/HCDESLib/Simulation Core/obj/Debug/SimulationCoreLibrary.dll
+C:/Users/Nik/Documents/Auckland/HCDESLib/Simulation Core/obj/Debug/SimulationCoreLibrary.pdb
+C:/Users/furian.MBI/Documents/Auckland/HCDESLib/Simulation Core/bin/Debug/SimulationCoreLibrary.dll
+C:/Users/furian.MBI/Documents/Auckland/HCDESLib/Simulation Core/bin/Debug/SimulationCoreLibrary.pdb
+C:/Users/furian.MBI/Documents/Auckland/HCDESLib/Simulation Core/obj/Debug/SimulationCore.csprojResolveAssemblyReference.cache
+C:/Users/furian.MBI/Documents/Auckland/HCDESLib/Simulation Core/obj/Debug/SimulationCoreLibrary.dll
+C:/Users/furian.MBI/Documents/Auckland/HCDESLib/Simulation Core/obj/Debug/SimulationCoreLibrary.pdb
+C:/Users/domi/git/HCDESLib/Simulation Core/bin/Debug/SimulationCoreLibrary.dll
+C:/Users/domi/git/HCDESLib/Simulation Core/bin/Debug/SimulationCoreLibrary.pdb
+C:/Users/domi/git/HCDESLib/Simulation Core/obj/Debug/SimulationCore.csproj.AssemblyReference.cache
+C:/Users/domi/git/HCDESLib/Simulation Core/obj/Debug/SimulationCore.csproj.CoreCompileInputs.cache
+C:/Users/domi/git/HCDESLib/Simulation Core/obj/Debug/SimulationCoreLibrary.dll
+C:/Users/domi/git/HCDESLib/Simulation Core/obj/Debug/SimulationCoreLibrary.pdb
+/Users/domi/Desktop/masterarbeit könig/hcdes/Simulation Core/bin/Debug/SimulationCoreLibrary.dll
+/Users/domi/Desktop/masterarbeit könig/hcdes/Simulation Core/bin/Debug/SimulationCoreLibrary.pdb
+/Users/domi/Desktop/masterarbeit könig/hcdes/Simulation Core/obj/Debug/SimulationCore.csproj.AssemblyReference.cache
+/Users/domi/Desktop/masterarbeit könig/hcdes/Simulation Core/obj/Debug/SimulationCore.csproj.CoreCompileInputs.cache
+/Users/domi/Desktop/masterarbeit könig/hcdes/Simulation Core/obj/Debug/SimulationCoreLibrary.dll
+/Users/domi/Desktop/masterarbeit könig/hcdes/Simulation Core/obj/Debug/SimulationCoreLibrary.pdb

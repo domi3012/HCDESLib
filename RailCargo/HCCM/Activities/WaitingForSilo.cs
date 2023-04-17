@@ -1,23 +1,28 @@
 using System;
+using RailCargo.HCCM.Events;
+using RailCargo.HCCM.staticVariables;
 using SimulationCore.HCCMElements;
+using SimulationCore.MathTool.Distributions;
 using SimulationCore.SimulationClasses;
 
 namespace RailCargo.HCCM.Activities
 {
     public class WaitingForSilo : Activity
     {
-        public WaitingForSilo(ControlUnit parentControlUnit, string activityType, bool preEmptable) : base(parentControlUnit, activityType, preEmptable)
+        public WaitingForSilo(ControlUnit parentControlUnit, string activityType, bool preEmptable) : base(
+            parentControlUnit, activityType, preEmptable)
         {
         }
 
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)
         {
-            throw new NotImplementedException();
+            simEngine.AddScheduledEvent(EndEvent,
+                time + TimeSpan.FromMinutes(Distributions.Instance.Exponential(Constants.TIMETOWAITFORSILO)));
         }
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
-            throw new NotImplementedException();
+            SiloSelection siloSelection = new SiloSelection(ParentControlUnit);
         }
 
         public override string ToString()

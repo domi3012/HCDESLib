@@ -6,7 +6,7 @@ namespace RailCargo.HCCM.Events
 {
     public class SiloSelection : Event
     {
-        public SiloSelection(EventType type, ControlUnit parentControlUnit) : base(type, parentControlUnit)
+        public SiloSelection(ControlUnit parentControlUnit) : base(EventType.Standalone, parentControlUnit)
         {
         }
 

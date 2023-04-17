@@ -95,6 +95,8 @@
         <Compile Include="HCCM\Requests\RequestSiloStatus.cs" />
         <Compile Include="HCCM\Requests\RequestDepartureAllowed.cs" />
         <Compile Include="HCCM\Requests\RequestSorting.cs" />
+        <Compile Include="HCCM\staticVariables\AllShuntingYards.cs" />
+        <Compile Include="HCCM\staticVariables\Constants.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="TrainNetworkSimulation.cs" />
     </ItemGroup>

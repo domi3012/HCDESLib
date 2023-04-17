@@ -17,8 +17,7 @@ namespace RailCargo.HCCM.ControlUnits
 
         protected override void CustomInitialize(DateTime startTime, ISimulationEngine simEngine)
         {
-            //base.CustomInitialize(startTime, simEngine);
-            
+            Console.WriteLine("Hello we are running the simulation");
         }
 
         protected override bool PerformCustomRules(DateTime time, ISimulationEngine simEngine)
