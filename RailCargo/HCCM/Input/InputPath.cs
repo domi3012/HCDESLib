@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace RailCargo.HCCM.Input
 {
-    public class InputTimeTable
+    public class InputPath
     {
-        public InputTimeTable()
+        public InputPath()
         {
         }
     }

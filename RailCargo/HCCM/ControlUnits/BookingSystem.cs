@@ -5,17 +5,12 @@ using SimulationCore.SimulationClasses;
 
 namespace RailCargo.HCCM.ControlUnits
 {
-    public class Network : ControlUnit
+
+
+    public class BookingSystem : ControlUnit
     {
-        private readonly InputTimeTable _inputData;
-
-        public Network(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel) : base(name, parentControlUnit, parentSimulationModel)
+        public BookingSystem(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel) : base(name, parentControlUnit, parentSimulationModel)
         {
-        }
-
-        protected override void CustomInitialize(DateTime startTime, ISimulationEngine simEngine)
-        {
-            Console.WriteLine("BIBIBU");
         }
 
         protected override bool PerformCustomRules(DateTime time, ISimulationEngine simEngine)
@@ -33,4 +28,5 @@ namespace RailCargo.HCCM.ControlUnits
             throw new NotImplementedException();
         }
     }
+    
 }

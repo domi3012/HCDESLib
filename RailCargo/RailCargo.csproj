@@ -9,7 +9,7 @@
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>RailCargo</RootNamespace>
         <AssemblyName>RailCargo</AssemblyName>
-        <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -64,7 +64,9 @@
         <Compile Include="HCCM\Activities\WaitingForTrainSelectionWagon.cs" />
         <Compile Include="HCCM\Activities\WaitingInDepartureArea.cs" />
         <Compile Include="HCCM\Activities\WaitingInSilo.cs" />
+        <Compile Include="HCCM\ControlUnits\BookingSystem.cs" />
         <Compile Include="HCCM\ControlUnits\Network.cs" />
+        <Compile Include="HCCM\ControlUnits\RoutingPath.cs" />
         <Compile Include="HCCM\ControlUnits\ShuntingYard.cs" />
         <Compile Include="HCCM\Entities\ArrivalArea.cs" />
         <Compile Include="HCCM\Entities\BookingSystem.cs" />
@@ -85,6 +87,7 @@
         <Compile Include="HCCM\Events\TrainSelection.cs" />
         <Compile Include="HCCM\Events\WagonArrival.cs" />
         <Compile Include="HCCM\Events\WagonArrivalInEndDestination.cs" />
+        <Compile Include="HCCM\Input\InputPath.cs" />
         <Compile Include="HCCM\Input\InputTimeTable.cs" />
         <Compile Include="HCCM\Requests\RequestForDeparture.cs" />
         <Compile Include="HCCM\Requests\RequestForDepartureArea.cs" />
