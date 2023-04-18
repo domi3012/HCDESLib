@@ -2,13 +2,13 @@ using System;
 using SimulationCore.HCCMElements;
 namespace RailCargo.HCCM.Requests
 {
-    public class CheckSiloStatus : ActivityRequest
+    public class RequestCheckSiloStatus : ActivityRequest
     {
-        public CheckSiloStatus(string activity, Entity[] origin, DateTime time) : base(activity, origin, time)
+        public RequestCheckSiloStatus(string activity, Entity[] origin, DateTime time) : base(activity, origin, time)
         {
         }
 
-        public CheckSiloStatus(string activity, Entity origin, DateTime time) : base(activity, origin, time)
+        public RequestCheckSiloStatus(string activity, Entity origin, DateTime time) : base(activity, origin, time)
         {
         }
     }

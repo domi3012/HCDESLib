@@ -20,16 +20,16 @@ namespace RailCargo.HCCM.staticVariables
             }
         }
 
-        private readonly Dictionary<string, ShuntingYard> s_yards = new Dictionary<string, ShuntingYard>();
+        private readonly Dictionary<string, CU_ShuntingYard> s_yards = new Dictionary<string, CU_ShuntingYard>();
 
-        public ShuntingYard GetYards(string key)
+        public CU_ShuntingYard GetYards(string key)
         {
             return s_yards[key];
         }
 
-        public void SetYards(string key, ShuntingYard shuntingYard)
+        public void SetYards(string key, CU_ShuntingYard cuShuntingYard)
         {
-            s_yards[key] = shuntingYard;
+            s_yards[key] = cuShuntingYard;
         }
     }
 }

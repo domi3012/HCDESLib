@@ -15,18 +15,18 @@ namespace RailCargo
             var inputPath = new InputPath();
             var inputTimeTable = new InputTimeTable();
             // Initialize all control units
-            var routingPath = new RoutingPath("CU_RoutingPath", null,
+            var routingPath = new CU_RoutingPath("CU_RoutingPath", null,
                 this, inputPath);
-            var shuntingYards = new ShuntingYard[10]; //TODO only test
+            var shuntingYards = new CU_ShuntingYard[10]; //TODO only test
             for (var i = 0; i < 10; i++)
             {
-                shuntingYards[i] = new ShuntingYard(i.ToString(), routingPath, this);
+                shuntingYards[i] = new CU_ShuntingYard(i.ToString(), routingPath, this);
                 AllShuntingYards.Instance.SetYards(i.ToString(), shuntingYards[i]);
             }
 
-            var network = new Network("CU_NETWORK", routingPath, this, inputTimeTable);
+            var network = new CU_Network("CU_NETWORK", routingPath, this, inputTimeTable);
 
-            var bookingSystem = new BookingSystem("CU_BOOKINGSYSTEM", routingPath, this);
+            var bookingSystem = new CU_BookingSystem("CU_BOOKINGSYSTEM", routingPath, this);
             
 
             routingPath.SetChildControlUnits(shuntingYards);
