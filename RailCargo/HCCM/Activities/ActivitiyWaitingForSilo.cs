@@ -21,15 +21,13 @@ namespace RailCargo.HCCM.Activities
 
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)
         {
-            // simEngine.AddScheduledEvent(EndEvent,
-            //     time + TimeSpan.FromMinutes(Distributions.Instance.Exponential(Constants.TIMETOWAITFORSILO)));
-            RequestForSilo requestForSilo = new RequestForSilo(ActivityName, _entityTrain, time);
-            ParentControlUnit.AddRequest(requestForSilo);
         }
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
-            EventSiloSelection eventSiloSelection = new EventSiloSelection(ParentControlUnit);
+            //EventSiloSelection eventSiloSelection = new EventSiloSelection(ParentControlUnit);
+            Console.WriteLine("Received successfully a silo");
+            
         }
 
         public override string ToString()

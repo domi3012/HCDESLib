@@ -1,5 +1,7 @@
 using System;
+using RailCargo.HCCM.Activities;
 using RailCargo.HCCM.Entities;
+using RailCargo.HCCM.staticVariables;
 using SimulationCore.HCCMElements;
 using SimulationCore.SimulationClasses;
 
@@ -7,13 +9,21 @@ namespace RailCargo.HCCM.Events
 {
     public class EventSiloSelection : Event
     {
-        public EventSiloSelection(ControlUnit parentControlUnit) : base(EventType.Standalone, parentControlUnit)
+        private readonly EntityTrain _train;
+
+        public EventSiloSelection(ControlUnit parentControlUnit, EntityTrain train) : base(EventType.Standalone,
+            parentControlUnit)
         {
+            _train = train;
         }
 
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)
         {
-            EntitySilo entitySilo = new EntitySilo();
+            EntitySilo entitySilo = new EntitySilo(_train.EndLocation, Constants.CAPACITY_SILO);
+            ParentControlUnit.AddEntity(entitySilo);
+            var activityWagonCollection =
+                new ActivityWagonCollection(ParentControlUnit, entitySilo, Constants.ACTIVITY_WAGON_COLLECTION, true);
+            SequentialEvents.Add(activityWagonCollection.StartEvent);
         }
 
         public override string ToString()

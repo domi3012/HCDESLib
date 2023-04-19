@@ -17,6 +17,7 @@ namespace RailCargo.HCCM.Activities
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
+            
             throw new NotImplementedException();
         }
 

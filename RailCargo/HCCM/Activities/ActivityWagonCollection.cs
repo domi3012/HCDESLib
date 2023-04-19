@@ -1,4 +1,5 @@
 using System;
+using RailCargo.HCCM.Entities;
 using SimulationCore.HCCMElements;
 using SimulationCore.SimulationClasses;
 
@@ -6,8 +7,11 @@ namespace RailCargo.HCCM.Activities
 {
     public class ActivityWagonCollection : Activity
     {
-        public ActivityWagonCollection(ControlUnit parentControlUnit, string activityType, bool preEmptable) : base(parentControlUnit, activityType, preEmptable)
+        private readonly EntitySilo _silo;
+
+        public ActivityWagonCollection(ControlUnit parentControlUnit, EntitySilo silo, string activityType, bool preEmptable) : base(parentControlUnit, activityType, preEmptable)
         {
+            _silo = silo;
         }
 
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)

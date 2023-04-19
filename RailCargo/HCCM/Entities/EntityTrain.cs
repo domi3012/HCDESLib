@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using SimulationCore.HCCMElements;
+using SimulationCore.SimulationClasses;
 
 namespace RailCargo.HCCM.Entities
 {
-    public class EntityTrain : Entity
+    public class EntityTrain : Entity, IActiveEntity
     {
         private readonly string _startLocation;
         private static int s_identifier = 1;
@@ -21,6 +24,7 @@ namespace RailCargo.HCCM.Entities
         public int ArrivalTime => _arrivalTime;
 
         private readonly int _arrivalTime;
+        private List<Activity> _currentActivities;
 
         public EntityTrain(String startLocation, String endLocation,
             int departureTime, int arrivalTime) : base(s_identifier++)
@@ -29,6 +33,7 @@ namespace RailCargo.HCCM.Entities
             _endLocation = endLocation;
             _departureTime = departureTime;
             _arrivalTime = arrivalTime;
+            
         }
 
         public override string ToString()
@@ -39,6 +44,54 @@ namespace RailCargo.HCCM.Entities
         public override Entity Clone()
         {
             throw new System.NotImplementedException();
+        }
+
+        public List<Activity> GetCurrentActivities()
+        {
+            return _currentActivities;
+        }
+
+        public void StopCurrentActivities(DateTime time, ISimulationEngine simEngine)
+        {
+            while (_currentActivities.Count > 0)
+            {
+                _currentActivities.First().EndEvent.Trigger(time, simEngine);
+            }
+        }
+
+        public void StopWaitingActivity(DateTime time, ISimulationEngine simEngine)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Event StartWaitingActivity(IDynamicHoldingEntity waitingArea = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddActivity(Activity activity)
+        {
+            _currentActivities.Add(activity);
+        }
+
+        public void RemoveActivity(Activity activity)
+        {
+            _currentActivities.Remove(activity);
+        }
+
+        public bool IsWaiting()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsWaitingOrPreEmptable()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsInOnlyActivity(string activity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

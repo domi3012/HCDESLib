@@ -18,11 +18,12 @@ namespace RailCargo.HCCM.Events
 
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)
         {
-            // AllShuntingYards.Instance.GetYards(_entityTrain.StartLocation)
-            //     .AddRequest(new Requests.RequestForSilo(Constants.REQUEST_FOR_SILO, _entityTrain, time));
-            // zug wartet hier
+            AllShuntingYards.Instance.GetYards(_entityTrain.StartLocation)
+                .AddRequest(new Requests.RequestForSilo(Constants.REQUEST_FOR_SILO, _entityTrain, time));
+            //zug wartet hier
             var waitingForSilo = new ActivitiyWaitingForSilo(ParentControlUnit,
-                Constants.WAITING_FOR_SILO, true, _entityTrain);
+                Constants.ACTIVITY_WAITING_FOR_SILO, true, _entityTrain);
+            _entityTrain.AddActivity(waitingForSilo);
             SequentialEvents.Add(waitingForSilo.StartEvent);
         }
 

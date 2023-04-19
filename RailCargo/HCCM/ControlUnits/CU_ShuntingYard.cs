@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using RailCargo.HCCM.Activities;
+using RailCargo.HCCM.Entities;
 using RailCargo.HCCM.Events;
 using RailCargo.HCCM.Requests;
 using RailCargo.HCCM.staticVariables;
@@ -12,8 +13,9 @@ namespace RailCargo.HCCM.ControlUnits
 {
     public class CU_ShuntingYard : ControlUnit
     {
-        public CU_ShuntingYard(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel) : base(
-            name, parentControlUnit, parentSimulationModel)
+        public CU_ShuntingYard(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel) :
+            base(
+                name, parentControlUnit, parentSimulationModel)
         {
         }
 
@@ -28,23 +30,16 @@ namespace RailCargo.HCCM.ControlUnits
                 RAEL.Where(p => p.Activity == Constants.REQUEST_FOR_SILO).Cast<RequestForSilo>().ToList();
             foreach (RequestForSilo request in requestsForSilo)
             {
-                var siloSelection = new EventSiloSelection(this);
-                if (true)
+                // create when silo is possible to create TODO change to actual number
+                var siloCreationPossible = true;
+                if (siloCreationPossible)
                 {
+                    //Some need to check which direction the silo has and what about multiple silos in the same direction
+                    var siloSelection = new EventSiloSelection(this, (EntityTrain)request.Origin[0]);
+                    siloSelection.Trigger(time, simEngine);
+                    ((EntityTrain)request.Origin[0]).StopCurrentActivities(time, simEngine);
                     RemoveRequest(request);
-                } //silo zuordnen
-            }
-
-
-            var requestForSiloAssignment =
-                RAEL.Where(p => p.Activity == Constants.WAITING_FOR_SILO).Cast<RequestForSilo>().ToList();
-            foreach (RequestForSilo request in requestsForSilo)
-            {
-                RemoveRequest(request);
-                //request.
-                ActivitiyWaitingForSilo activitiyWaitingForSilo = new ActivitiyWaitingForSilo(this,
-                    Constants.WAITING_FOR_SILO, true, request.Origin[0]);
-                activitiyWaitingForSilo.StartEvent.Trigger(time, simEngine);
+                }
             }
 
 

@@ -1,4 +1,7 @@
 using System;
+using RailCargo.HCCM.Entities;
+using RailCargo.HCCM.Requests;
+using RailCargo.HCCM.staticVariables;
 using SimulationCore.HCCMElements;
 using SimulationCore.SimulationClasses;
 
@@ -6,18 +9,29 @@ namespace RailCargo.HCCM.Activities
 {
     public class ActivityDriveToDepartureArea : Activity
     {
-        public ActivityDriveToDepartureArea(ControlUnit parentControlUnit, string activityType, bool preEmptable) : base(parentControlUnit, activityType, preEmptable)
+        private readonly EntityTrain _train;
+
+        public ActivityDriveToDepartureArea(ControlUnit parentControlUnit, EntityTrain train, string activityType, bool preEmptable) : base(parentControlUnit, activityType, preEmptable)
         {
+            _train = train;
         }
 
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)
         {
-            throw new NotImplementedException();
+            RequestForDepartureArea requestForDepartureArea =
+                new RequestForDepartureArea(Constants.REQUEST_FOR_DEPARTURE_AREA, _train, time);
+            ParentControlUnit.AddRequest(requestForDepartureArea);
         }
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
-            throw new NotImplementedException();
+            //Request for Ausfahrt
+            RequestForDeparture requestForDeparture =
+                new RequestForDeparture(Constants.REQUEST_FOR_DEPARTURE, _train, time);
+            ParentControlUnit.ParentControlUnit.AddRequest(requestForDeparture);
+            ActivityTrainWaitingForDeparture trainWaitingForDeparture =
+                new ActivityTrainWaitingForDeparture(ParentControlUnit.ParentControlUnit, Constants.ACTIVITY_WAITING_FOR_DEPARTURE, false);
+            EndEvent.SequentialEvents.Add(trainWaitingForDeparture.StartEvent);
         }
 
         public override string ToString()
