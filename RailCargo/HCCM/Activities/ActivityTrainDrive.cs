@@ -1,4 +1,6 @@
 using System;
+using RailCargo.HCCM.Entities;
+using RailCargo.HCCM.Events;
 using SimulationCore.HCCMElements;
 using SimulationCore.SimulationClasses;
 
@@ -6,19 +8,24 @@ namespace RailCargo.HCCM.Activities
 {
     public class ActivityTrainDrive : Activity
     {
-        public ActivityTrainDrive(ControlUnit parentControlUnit, string activityType, bool preEmptable) : base(parentControlUnit, activityType, preEmptable)
+        private readonly EntityTrain _train;
+
+        public ActivityTrainDrive(ControlUnit parentControlUnit, string activityType, bool preEmptable, EntityTrain train) : base(parentControlUnit, activityType, preEmptable)
         {
+            _train = train;
         }
 
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)
         {
-            throw new NotImplementedException();
+            EventTrainArrival trainArrival = new EventTrainArrival(EventType.Standalone, ParentControlUnit, _train);
+            //TODO get drive time from cu network or bookingsystem
+            var timeToDrive = DateTime.Now;
+            simEngine.AddScheduledEvent(trainArrival, time);
         }
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
-            
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public override string ToString()

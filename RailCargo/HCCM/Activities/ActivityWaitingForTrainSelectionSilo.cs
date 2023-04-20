@@ -12,12 +12,12 @@ namespace RailCargo.HCCM.Activities
 
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public override string ToString()

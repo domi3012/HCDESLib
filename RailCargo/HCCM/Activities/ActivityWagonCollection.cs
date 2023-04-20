@@ -9,7 +9,8 @@ namespace RailCargo.HCCM.Activities
     {
         private readonly EntitySilo _silo;
 
-        public ActivityWagonCollection(ControlUnit parentControlUnit, EntitySilo silo, string activityType, bool preEmptable) : base(parentControlUnit, activityType, preEmptable)
+        public ActivityWagonCollection(ControlUnit parentControlUnit, string activityType, bool preEmptable,
+            EntitySilo silo ) : base(parentControlUnit, activityType, preEmptable)
         {
             _silo = silo;
         }

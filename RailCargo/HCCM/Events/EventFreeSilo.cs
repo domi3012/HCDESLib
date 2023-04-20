@@ -1,4 +1,7 @@
 using System;
+using RailCargo.HCCM.Activities;
+using RailCargo.HCCM.Entities;
+using RailCargo.HCCM.staticVariables;
 using SimulationCore.HCCMElements;
 using SimulationCore.SimulationClasses;
 
@@ -6,13 +9,21 @@ namespace RailCargo.HCCM.Events
 {
     public class EventFreeSilo : Event
     {
-        public EventFreeSilo(EventType type, ControlUnit parentControlUnit) : base(type, parentControlUnit)
+        private readonly EntitySilo _silo;
+
+        public EventFreeSilo(EventType type, ControlUnit parentControlUnit, EntitySilo silo) : base(type,
+            parentControlUnit)
         {
+            _silo = silo;
         }
 
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)
         {
-            throw new NotImplementedException();
+            var waitingForTrainSelectionSilo = new ActivityWaitingForTrainSelectionSilo(ParentControlUnit,
+                Constants.ACTIVITY_WAITING_FOR_TRAIN_SELECTION_SILO, false);
+            _silo.AddActivity(waitingForTrainSelectionSilo);
+            SequentialEvents.Add(waitingForTrainSelectionSilo.StartEvent);
+            
         }
 
         public override string ToString()

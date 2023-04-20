@@ -38,6 +38,24 @@ namespace RailCargo.HCCM.ControlUnits
                     var siloSelection = new EventSiloSelection(this, (EntityTrain)request.Origin[0]);
                     siloSelection.Trigger(time, simEngine);
                     ((EntityTrain)request.Origin[0]).StopCurrentActivities(time, simEngine);
+                    //TODO not sure if allowed to do that
+                    siloSelection.Silo.StopCurrentActivities(time, simEngine);
+                    RemoveRequest(request);
+                }
+            }
+
+            var requestsForSorting = RAEL.Where(p => p.Activity == Constants.REQUEST_FOR_SORTING).Cast<RequestSorting>()
+                .ToList();
+            foreach (var request in requestsForSorting)
+            {
+                var isSiloAvailable = true;
+                if (isSiloAvailable)
+                {
+                    var wagon = (EntityWagon)request.Origin[0];
+                    wagon.StopCurrentActivities(time, simEngine);
+                    ActivityWaitingInSilo waitingInSilo =
+                        new ActivityWaitingInSilo(this, Constants.ACTIVITY_WAITING_IN_SILO, true);
+                    waitingInSilo.StartEvent.Trigger(time, simEngine);
                     RemoveRequest(request);
                 }
             }
