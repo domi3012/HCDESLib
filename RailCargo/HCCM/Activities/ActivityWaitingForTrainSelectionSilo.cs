@@ -1,4 +1,6 @@
 using System;
+using RailCargo.HCCM.Entities;
+using RailCargo.HCCM.staticVariables;
 using SimulationCore.HCCMElements;
 using SimulationCore.SimulationClasses;
 
@@ -6,8 +8,11 @@ namespace RailCargo.HCCM.Activities
 {
     public class ActivityWaitingForTrainSelectionSilo : Activity 
     {
-        public ActivityWaitingForTrainSelectionSilo(ControlUnit parentControlUnit, string activityType, bool preEmptable) : base(parentControlUnit, activityType, preEmptable)
+        private readonly EntitySilo _silo;
+
+        public ActivityWaitingForTrainSelectionSilo(ControlUnit parentControlUnit, string activityType, bool preEmptable, EntitySilo silo) : base(parentControlUnit, activityType, preEmptable)
         {
+            _silo = silo;
         }
 
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)
@@ -17,7 +22,10 @@ namespace RailCargo.HCCM.Activities
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
-            //throw new NotImplementedException();
+            ActivityShuntingWagon shuntingWagon =
+                new ActivityShuntingWagon(ParentControlUnit, Constants.ACTIVITY_SHUNTING_WAGON, false, _silo);
+            _silo.AddActivity(shuntingWagon);
+            EndEvent.SequentialEvents.Add(shuntingWagon.StartEvent);
         }
 
         public override string ToString()

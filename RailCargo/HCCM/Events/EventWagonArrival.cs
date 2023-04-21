@@ -32,13 +32,13 @@ namespace RailCargo.HCCM.Events
                     continue;
                 }
 
-                ActivityWaitingForTrainSelectionSilo waitingForTrainSelectionSilo =
-                    new ActivityWaitingForTrainSelectionSilo(ParentControlUnit,
-                        Constants.ACTIVITY_WAITING_FOR_TRAIN_SELECTION_SILO, true);
-                wagon.AddActivity(waitingForTrainSelectionSilo);
-                SequentialEvents.Add(waitingForTrainSelectionSilo.StartEvent);
+                var waitingForTrainSelectionWagon =
+                    new ActivityWaitingForTrainSelectionWagon(ParentControlUnit,
+                        Constants.ACTIVITY_WAITING_FOR_TRAIN_SELECTION_WAGON, true);
+                wagon.AddActivity(waitingForTrainSelectionWagon);
+                SequentialEvents.Add(waitingForTrainSelectionWagon.StartEvent);
 
-                RequestSorting requestSorting = new RequestSorting(Constants.REQUEST_FOR_SORTING, wagon, time);
+                var requestSorting = new RequestSorting(Constants.REQUEST_FOR_SORTING, wagon, time);
                 ParentControlUnit.AddRequest(requestSorting);
             }
         }

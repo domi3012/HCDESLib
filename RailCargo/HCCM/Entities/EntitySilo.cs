@@ -12,11 +12,25 @@ namespace RailCargo.HCCM.Entities
         private readonly string _destination;
         private int _capacity;
         private List<Activity> _currentActivities;
+        private int _currentCapactiy;
+
+        public int Capacity
+        {
+            get => _capacity;
+            set => _capacity = value;
+        }
+
+        public int CurrentCapactiy
+        {
+            get => _currentCapactiy;
+            set => _currentCapactiy = value;
+        }
 
         public EntitySilo(string destination, int capacity) : base(++s_identifier)
         {
             _destination = destination;
             _capacity = capacity;
+            _currentCapactiy = 0;
         }
 
         public override string ToString()

@@ -60,6 +60,25 @@ namespace RailCargo.HCCM.ControlUnits
                 }
             }
 
+            var requestForSiloStatus = RAEL.Where(p => p.Activity == Constants.REQUEST_FOR_SILO_STATUS)
+                .Cast<RequestCheckSiloStatus>().ToList();
+            foreach (var request in requestForSiloStatus)
+            {
+                var silo = (EntitySilo)request.Origin[0];
+                var currentQuantity = silo.CurrentCapactiy;
+                var maxQuantity = silo.Capacity;
+                if (maxQuantity == currentQuantity)
+                {
+                    silo.StopCurrentActivities(time, simEngine);
+                    RemoveRequest(request);
+                }
+
+                {
+                    
+                }
+
+            }
+
 
             return false;
         }

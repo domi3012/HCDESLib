@@ -20,9 +20,10 @@ namespace RailCargo.HCCM.Events
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)
         {
             var waitingForTrainSelectionSilo = new ActivityWaitingForTrainSelectionSilo(ParentControlUnit,
-                Constants.ACTIVITY_WAITING_FOR_TRAIN_SELECTION_SILO, false);
+                Constants.ACTIVITY_WAITING_FOR_TRAIN_SELECTION_SILO, false, _silo);
             _silo.AddActivity(waitingForTrainSelectionSilo);
-            SequentialEvents.Add(waitingForTrainSelectionSilo.StartEvent);
+            // As the train is already selected, we can assign it instantly
+            SequentialEvents.Add(waitingForTrainSelectionSilo.EndEvent);
             
         }
 
