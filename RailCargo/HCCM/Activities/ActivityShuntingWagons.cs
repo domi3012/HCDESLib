@@ -1,16 +1,19 @@
 using System;
 using RailCargo.HCCM.Entities;
+using RailCargo.HCCM.Events;
+using RailCargo.HCCM.Requests;
 using RailCargo.HCCM.staticVariables;
 using SimulationCore.HCCMElements;
 using SimulationCore.SimulationClasses;
 
 namespace RailCargo.HCCM.Activities
 {
-    public class ActivityWaitingForTrainSelectionSilo : Activity 
+    public class ActivityShuntingWagons : Activity
     {
         private readonly EntitySilo _silo;
 
-        public ActivityWaitingForTrainSelectionSilo(ControlUnit parentControlUnit, string activityType, bool preEmptable, EntitySilo silo) : base(parentControlUnit, activityType, preEmptable)
+        public ActivityShuntingWagons(ControlUnit parentControlUnit, string activityType, bool preEmptable, EntitySilo silo) : base(
+            parentControlUnit, activityType, preEmptable)
         {
             _silo = silo;
         }
@@ -18,14 +21,15 @@ namespace RailCargo.HCCM.Activities
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)
         {
             //throw new NotImplementedException();
+            var checkSiloStatus =
+                new RequestCheckSiloStatus(Constants.REQUEST_FOR_SILO_STATUS, _silo, time);
+            ParentControlUnit.AddRequest(checkSiloStatus);
         }
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
-            ActivityShuntingWagons shuntingWagons =
-                new ActivityShuntingWagons(ParentControlUnit, Constants.ACTIVITY_SHUNTING_WAGON, false, _silo);
-            _silo.AddActivity(shuntingWagons);
-            EndEvent.SequentialEvents.Add(shuntingWagons.StartEvent);
+            EventSiloFinished siloFinished = new EventSiloFinished(EventType.Standalone, ParentControlUnit, _silo);
+            EndEvent.SequentialEvents.Add(siloFinished);
         }
 
         public override string ToString()

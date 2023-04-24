@@ -8,6 +8,13 @@ namespace RailCargo.HCCM.Entities
     public class EntityWagon : Entity, IActiveEntity
     {
         private List<Activity> _currentActivies;
+        private EntitySilo _silo = null;
+
+        public EntitySilo Silo
+        {
+            get => _silo;
+            set => _silo = value;
+        }
 
         public EntityWagon(int identifier) : base(identifier)
         {

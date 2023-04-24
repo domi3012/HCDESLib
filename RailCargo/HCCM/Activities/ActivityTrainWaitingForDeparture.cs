@@ -10,26 +10,25 @@ namespace RailCargo.HCCM.Activities
 {
     public class ActivityTrainWaitingForDeparture : Activity
     {
-        private readonly EntityTrain _train;
-
-        public EntityTrain Train => _train;
+        public EntityTrain Train { get; }
 
         public ActivityTrainWaitingForDeparture(ControlUnit parentControlUnit, string activityType, bool preEmptable, EntityTrain train) : base(parentControlUnit, activityType, preEmptable)
         {
-            _train = train;
+            Train = train;
         }
 
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)
         {
             RequestForDeparture requestForDeparture =
-                new RequestForDeparture(Constants.REQUEST_FOR_DEPARTURE, _train, time);
+                new RequestForDeparture(Constants.REQUEST_FOR_DEPARTURE, Train, time);
             ParentControlUnit.ParentControlUnit.AddRequest(requestForDeparture);
         }
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
             var trainDrive =
-                new ActivityTrainDrive(ParentControlUnit, Constants.ACTIVITY_TRAIN_DRIVE, false, _train);
+                new ActivityTrainDrive(ParentControlUnit, Constants.ACTIVITY_TRAIN_DRIVE, false, Train);
+            //simEngine.AddScheduledEvent(trainDrive.EndEvent, time); //TODO wie lange
             EndEvent.SequentialEvents.Add(trainDrive.StartEvent);
         }
 

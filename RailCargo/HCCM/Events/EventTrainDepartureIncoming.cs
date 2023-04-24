@@ -11,7 +11,7 @@ namespace RailCargo.HCCM.Events
     public class EventTrainDepartureIncoming : Event
     {
         private readonly EntityTrain _train;
-
+        //Triggered by timetable (Fahrplan)
         public EventTrainDepartureIncoming(EventType type, EntityTrain train, ControlUnit parentControlUnit) : base(
             type, parentControlUnit)
         {
@@ -20,9 +20,13 @@ namespace RailCargo.HCCM.Events
 
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)
         {
-            ActivityDriveToDepartureArea driveToDepartureArea =
-                new ActivityDriveToDepartureArea(ParentControlUnit, _train, Constants.ACTIVITY_DRIVE_TO_DEPARTURE_AREA, false);
-            SequentialEvents.Add(driveToDepartureArea.StartEvent);
+            var waitingForAllowance =
+                new ActivityWaitingForAllowance(ParentControlUnit, Constants.ACTIVITY_WAITING_FOR_ALLOWANCE, false, _train);
+            RequestForDepartureArea requestForDepartureArea =
+                new RequestForDepartureArea(Constants.REQUEST_FOR_DEPARTURE_AREA, _train, time);
+            SequentialEvents.Add(waitingForAllowance.StartEvent);
+            ParentControlUnit.AddRequest(requestForDepartureArea);
+            
         }
 
         public override string ToString()

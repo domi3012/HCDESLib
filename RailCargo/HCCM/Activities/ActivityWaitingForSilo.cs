@@ -9,11 +9,11 @@ using SimulationCore.SimulationClasses;
 
 namespace RailCargo.HCCM.Activities
 {
-    public class ActivitiyWaitingForSilo : Activity
+    public class ActivityWaitingForSilo : Activity
     {
         private readonly EntityTrain _entityTrain;
 
-        public ActivitiyWaitingForSilo(ControlUnit parentControlUnit, string activityType, bool preEmptable, Entity train) : base(
+        public ActivityWaitingForSilo(ControlUnit parentControlUnit, string activityType, bool preEmptable, Entity train) : base(
             parentControlUnit, activityType, preEmptable)
         {
             _entityTrain = (EntityTrain)train;

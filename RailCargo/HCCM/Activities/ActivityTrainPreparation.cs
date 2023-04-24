@@ -4,20 +4,21 @@ using SimulationCore.SimulationClasses;
 
 namespace RailCargo.HCCM.Activities
 {
-    public class AcitvityTrainPreparation : Activity
+    public class ActivityTrainPreparation : Activity
     {
-        public AcitvityTrainPreparation(ControlUnit parentControlUnit, string activityType, bool preEmptable) : base(parentControlUnit, activityType, preEmptable)
+        public ActivityTrainPreparation(ControlUnit parentControlUnit, string activityType, bool preEmptable) : base(parentControlUnit, activityType, preEmptable)
         {
         }
 
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)
         {
-            throw new NotImplementedException();
+            //TODO get Train PrepartationTime
+            simEngine.AddScheduledEvent(EndEvent, DateTime.Now);
         }
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public override string ToString()

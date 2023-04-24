@@ -26,6 +26,8 @@ namespace RailCargo.HCCM.Entities
             set => _currentCapactiy = value;
         }
 
+        public EntityTrain Train { get; set; }
+
         public EntitySilo(string destination, int capacity) : base(++s_identifier)
         {
             _destination = destination;

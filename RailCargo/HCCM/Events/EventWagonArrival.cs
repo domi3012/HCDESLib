@@ -34,7 +34,7 @@ namespace RailCargo.HCCM.Events
 
                 var waitingForTrainSelectionWagon =
                     new ActivityWaitingForTrainSelectionWagon(ParentControlUnit,
-                        Constants.ACTIVITY_WAITING_FOR_TRAIN_SELECTION_WAGON, true);
+                        Constants.ACTIVITY_WAITING_FOR_TRAIN_SELECTION_WAGON, true, wagon);
                 wagon.AddActivity(waitingForTrainSelectionWagon);
                 SequentialEvents.Add(waitingForTrainSelectionWagon.StartEvent);
 

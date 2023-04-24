@@ -54,12 +54,14 @@
     <ItemGroup>
         <Compile Include="HCCM\Activities\AcitvityDriveToDepatureArea.cs" />
         <Compile Include="HCCM\Activities\ActivityShuntingWagon.cs" />
+        <Compile Include="HCCM\Activities\ActivityShuntingWagons.cs" />
         <Compile Include="HCCM\Activities\ActivityTrainCreation.cs" />
         <Compile Include="HCCM\Activities\ActivityTrainDrive.cs" />
-        <Compile Include="HCCM\Activities\AcitvityTrainPreparation.cs" />
+        <Compile Include="HCCM\Activities\ActivityTrainPreparation.cs" />
         <Compile Include="HCCM\Activities\ActivityTrainWaitingForDeparture.cs" />
         <Compile Include="HCCM\Activities\ActivityWagonCollection.cs" />
-        <Compile Include="HCCM\Activities\ActivitiyWaitingForSilo.cs" />
+        <Compile Include="HCCM\Activities\ActivityWaitingForAllowance.cs" />
+        <Compile Include="HCCM\Activities\ActivityWaitingForSilo.cs" />
         <Compile Include="HCCM\Activities\ActivityWaitingForTrainSelectionSilo.cs" />
         <Compile Include="HCCM\Activities\ActivityWaitingForTrainSelectionWagon.cs" />
         <Compile Include="HCCM\Activities\ActivityWaitingInDepartureArea.cs" />

@@ -32,7 +32,8 @@ namespace RailCargo.HCCM.ControlUnits
             {
                 EntityTrain scheduledEntityTrain = new EntityTrain(train.Item1, train.Item2,
                     train.Item3, train.Item4, train.Item5);
-                EventTrainCreation eventTrainCreation = new EventTrainCreation(this, scheduledEntityTrain);
+                //TODO change to actual typ
+                EventTrainCreation eventTrainCreation = new EventTrainCreation(this, scheduledEntityTrain, "VBF");
                 //TODO change to depatureTime - placeholder
                 simEngine.AddScheduledEvent(eventTrainCreation, DateTime.Now);
             }

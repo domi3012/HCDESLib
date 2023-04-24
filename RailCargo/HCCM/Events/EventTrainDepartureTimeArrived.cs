@@ -1,18 +1,33 @@
 using System;
+using RailCargo.HCCM.Activities;
+using RailCargo.HCCM.Entities;
+using RailCargo.HCCM.Requests;
+using RailCargo.HCCM.staticVariables;
 using SimulationCore.HCCMElements;
 using SimulationCore.SimulationClasses;
 
 namespace RailCargo.HCCM.Events
 {
-    public class EventTrainDepartureTimeArrived : Event 
+    public class EventTrainDepartureTimeArrived : Event
     {
-        public EventTrainDepartureTimeArrived(EventType type, ControlUnit parentControlUnit) : base(type, parentControlUnit)
+        private readonly EntityTrain _train;
+
+        public EventTrainDepartureTimeArrived(EventType type, ControlUnit parentControlUnit, EntityTrain train) : base(
+            type, parentControlUnit)
         {
+            _train = train;
         }
 
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)
         {
-            throw new NotImplementedException();
+            ActivityTrainWaitingForDeparture trainWaitingForDeparture =
+                new ActivityTrainWaitingForDeparture(ParentControlUnit, Constants.ACTIVITY_WAITING_FOR_DEPARTURE, false,
+                    _train);
+            _train.AddActivity(trainWaitingForDeparture);
+            trainWaitingForDeparture.StartEvent.Trigger(time, simEngine);
+            RequestForDeparture requestForDeparture =
+                new RequestForDeparture(Constants.REQUEST_FOR_DEPARTURE, _train, time);
+            ParentControlUnit.AddRequest(requestForDeparture);
         }
 
         public override string ToString()

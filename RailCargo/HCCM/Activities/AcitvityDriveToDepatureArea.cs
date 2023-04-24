@@ -18,9 +18,7 @@ namespace RailCargo.HCCM.Activities
 
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)
         {
-            RequestForDepartureArea requestForDepartureArea =
-                new RequestForDepartureArea(Constants.REQUEST_FOR_DEPARTURE_AREA, _train, time);
-            ParentControlUnit.AddRequest(requestForDepartureArea);
+            
         }
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)

@@ -53,9 +53,8 @@ namespace RailCargo.HCCM.ControlUnits
                 {
                     var wagon = (EntityWagon)request.Origin[0];
                     wagon.StopCurrentActivities(time, simEngine);
-                    ActivityWaitingInSilo waitingInSilo =
-                        new ActivityWaitingInSilo(this, Constants.ACTIVITY_WAITING_IN_SILO, true);
-                    waitingInSilo.StartEvent.Trigger(time, simEngine);
+                    //var shuntingWagon = new Acitvity
+                    // is it allowed to shunt here
                     RemoveRequest(request);
                 }
             }
@@ -72,12 +71,8 @@ namespace RailCargo.HCCM.ControlUnits
                     silo.StopCurrentActivities(time, simEngine);
                     RemoveRequest(request);
                 }
-
-                {
-                    
-                }
-
             }
+            
 
 
             return false;

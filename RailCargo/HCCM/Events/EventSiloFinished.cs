@@ -1,4 +1,5 @@
 using System;
+using RailCargo.HCCM.Entities;
 using SimulationCore.HCCMElements;
 using SimulationCore.SimulationClasses;
 
@@ -6,13 +7,16 @@ namespace RailCargo.HCCM.Events
 {
     public class EventSiloFinished : Event
     {
-        public EventSiloFinished(EventType type, ControlUnit parentControlUnit) : base(type, parentControlUnit)
+        private readonly EntitySilo _silo;
+
+        public EventSiloFinished(EventType type, ControlUnit parentControlUnit, EntitySilo silo) : base(type, parentControlUnit)
         {
+            _silo = silo;
         }
 
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)
         {
-            throw new NotImplementedException();
+            _silo.Train.StopCurrentActivities(time, simEngine);
         }
 
         public override string ToString()

@@ -10,14 +10,18 @@ namespace RailCargo.HCCM.Activities
     {
         private readonly EntityTrain _train;
 
-        public ActivityTrainDrive(ControlUnit parentControlUnit, string activityType, bool preEmptable, EntityTrain train) : base(parentControlUnit, activityType, preEmptable)
+        public ActivityTrainDrive(ControlUnit parentControlUnit, string activityType, bool preEmptable,
+            EntityTrain train) : base(parentControlUnit, activityType, preEmptable)
         {
             _train = train;
         }
 
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)
         {
-            EventTrainArrival trainArrival = new EventTrainArrival(EventType.Standalone, ParentControlUnit, _train);
+            var destinationTyp = "BB";
+            var destination = "Vienna";
+            EventTrainArrival trainArrival = new EventTrainArrival(EventType.Standalone, ParentControlUnit, _train,
+                destinationTyp, destination);
             //TODO get drive time from cu network or bookingsystem
             var timeToDrive = DateTime.Now;
             simEngine.AddScheduledEvent(trainArrival, time);
@@ -25,7 +29,6 @@ namespace RailCargo.HCCM.Activities
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
-            //throw new NotImplementedException();
         }
 
         public override string ToString()
