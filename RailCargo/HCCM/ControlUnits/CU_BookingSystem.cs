@@ -9,8 +9,11 @@ namespace RailCargo.HCCM.ControlUnits
 
     public class CU_BookingSystem : ControlUnit
     {
-        public CU_BookingSystem(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel) : base(name, parentControlUnit, parentSimulationModel)
+        private readonly InputTimeTable _input;
+
+        public CU_BookingSystem(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel, InputTimeTable input) : base(name, parentControlUnit, parentSimulationModel)
         {
+            _input = input;
         }
 
         protected override bool PerformCustomRules(DateTime time, ISimulationEngine simEngine)

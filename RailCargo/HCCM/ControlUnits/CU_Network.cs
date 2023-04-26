@@ -18,8 +18,8 @@ namespace RailCargo.HCCM.ControlUnits
         private readonly List<Tuple<String, String, int, int, List<EntityWagon>>> _timeTable = new List<Tuple<String, String, int, int, List<EntityWagon>>>
             { Tuple.Create("1", "2", 1, 2, new List<EntityWagon>()), Tuple.Create("2", "3", 1, 2, new List<EntityWagon>()), Tuple.Create("4", "2", 2, 3, new List<EntityWagon>()) };
 
-        public CU_Network(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel,
-            InputTimeTable inputTimeTable) : base(name,
+        public CU_Network(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel
+            ) : base(name,
             parentControlUnit, parentSimulationModel)
         {
             //_timeTable = inputTimeTable;

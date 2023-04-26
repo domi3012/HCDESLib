@@ -8,3 +8,12 @@ C:\Users\domi\git\HCDESLib\RailCargo\obj\Debug\RailCargo.pdb
 \\Mac\Home\Desktop\masterarbeit könig\hcdes\RailCargo\obj\Debug\RailCargo.csproj.CoreCompileInputs.cache
 \\Mac\Home\Desktop\masterarbeit könig\hcdes\RailCargo\obj\Debug\RailCargo.dll
 \\Mac\Home\Desktop\masterarbeit könig\hcdes\RailCargo\obj\Debug\RailCargo.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\RailCargo\bin\Debug\RailCargo.dll
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\RailCargo\bin\Debug\RailCargo.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\RailCargo\bin\Debug\SimulationCoreLibrary.dll
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\RailCargo\bin\Debug\SimulationWPFVisualizationTools.dll
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\RailCargo\bin\Debug\WPFVisualizationBase.dll
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\RailCargo\bin\Debug\SimulationCoreLibrary.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\RailCargo\bin\Debug\SimulationWPFVisualizationTools.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\RailCargo\bin\Debug\WPFVisualizationBase.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\RailCargo\obj\Debug\RailCargo.csproj.CopyComplete

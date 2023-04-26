@@ -47,8 +47,8 @@ namespace RailCargo.HCCM.Events
                     simEngine.AddScheduledEvent(trainDepartureTimeArrived, DateTime.Today);
                     break;
                 case "VBF":
-                    RequestForSilo requestForSilo = new RequestForSilo(Constants.REQUEST_FOR_SILO, _train, time);
-                    ParentControlUnit.AddRequest(requestForSilo);
+                    //RequestForSilo requestForSilo = new RequestForSilo(Constants.REQUEST_FOR_SILO, _train, time);
+                    //ParentControlUnit.AddRequest(requestForSilo);
                     EventWagonArrival wagonArrival =
                         new EventWagonArrival(EventType.Standalone, ParentControlUnit, _train);
                     SequentialEvents.Add(wagonArrival);

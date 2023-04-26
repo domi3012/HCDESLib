@@ -2,6 +2,7 @@
 using SampleHospitalModel.ModelLog;
 using SimpleQueueExample.ModelElements;
 using SimulationCore.HCCMElements;
+using RailCargo;
 using SimulationCore.Interfaces;
 using SimulationCore.SimulationClasses;
 using SimulationWPFVisualizationTools;
@@ -485,12 +486,14 @@ namespace HiCoSimulator
 
             /*_simulationModel = new HospitalSimulationModelWithVisualization((DateTime)DatePickerStartDate.SelectedDate,
             (DateTime)DatePickerEndDate.SelectedDate);*/
-            _simulationModel = new SimulationModelQueuing((DateTime)DatePickerStartDate.SelectedDate,
-                (DateTime)DatePickerEndDate.SelectedDate,
-                2,
-                3,
-                5,
-                10);
+            // _simulationModel = new SimulationModelQueuing((DateTime)DatePickerStartDate.SelectedDate,
+            //     (DateTime)DatePickerEndDate.SelectedDate,
+            //     2,
+            //     3,
+            //     5,
+            //     10);
+            _simulationModel = new TrainNetworkSimulation((DateTime)DatePickerStartDate.SelectedDate,
+                (DateTime)DatePickerEndDate.SelectedDate);
 
             _simulationEngine = new SimulationEngine();
             SimulationEngine.LoggingEngine = new BaseLoggingEngine(SimulationModel);

@@ -103,3 +103,33 @@ C:\Users\domi\git\HCDESLib\HiCoSimulator\HiCoSimulator\obj\Debug\HiCoSimulator.e
 C:\Users\domi\git\HCDESLib\HiCoSimulator\HiCoSimulator\obj\Debug\HiCoSimulator.pdb
 C:\Users\domi\git\HCDESLib\HiCoSimulator\HiCoSimulator\bin\Debug\RailCargoSimulation.dll
 C:\Users\domi\git\HCDESLib\HiCoSimulator\HiCoSimulator\bin\Debug\RailCargoSimulation.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\bin\Debug\HiCoSimulator.exe.config
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\bin\Debug\HiCoSimulator.exe
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\bin\Debug\HiCoSimulator.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\bin\Debug\RailCargo.dll
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\bin\Debug\SampleHospitalModel.dll
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\bin\Debug\SimpleQueuingExample.dll
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\bin\Debug\SimulationCoreLibrary.dll
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\bin\Debug\SimulationWPFVisualizationTools.dll
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\bin\Debug\WPFVisualizationBase.dll
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\bin\Debug\GeneralHealthCareElementsLibrary.dll
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\bin\Debug\RailCargo.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\bin\Debug\SampleHospitalModel.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\bin\Debug\SimpleQueuingExample.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\bin\Debug\SimulationCoreLibrary.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\bin\Debug\SimulationWPFVisualizationTools.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\bin\Debug\WPFVisualizationBase.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\bin\Debug\GeneralHealthCareElementsLibrary.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\obj\Debug\HiCoSimulator.csproj.AssemblyReference.cache
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\obj\Debug\HiCoSimulator.csproj.SuggestedBindingRedirects.cache
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\obj\Debug\MainWindow.baml
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\obj\Debug\MainWindow.g.cs
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\obj\Debug\App.g.cs
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\obj\Debug\HiCoSimulator_MarkupCompile.cache
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\obj\Debug\HiCoSimulator.g.resources
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\obj\Debug\HiCoSimulator.Properties.Resources.resources
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\obj\Debug\HiCoSimulator.csproj.GenerateResource.cache
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\obj\Debug\HiCoSimulator.csproj.CoreCompileInputs.cache
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\obj\Debug\HiCoSimulator.csproj.CopyComplete
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\obj\Debug\HiCoSimulator.exe
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\HiCoSimulator\HiCoSimulator\obj\Debug\HiCoSimulator.pdb

@@ -100,6 +100,10 @@
     <Resource Include="Icons\PlayIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\RailCargo\RailCargo.csproj">
+      <Project>{49458a63-b651-4645-8887-f4b06c1edbc6}</Project>
+      <Name>RailCargo</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SampleHospitalModel\SampleHospitalModel.csproj">
       <Project>{08fee1b9-8e57-4f3a-a600-296c3c611093}</Project>
       <Name>SampleHospitalModel</Name>

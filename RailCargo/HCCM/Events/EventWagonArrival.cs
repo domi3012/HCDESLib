@@ -31,7 +31,8 @@ namespace RailCargo.HCCM.Events
                     SequentialEvents.Add(wagonArrivalInEndDestination);
                     continue;
                 }
-
+                RequestForSilo requestForSilo = new RequestForSilo(Constants.REQUEST_FOR_SILO, wagon, time);
+                ParentControlUnit.AddRequest(requestForSilo);
                 var waitingForTrainSelectionWagon =
                     new ActivityWaitingForTrainSelectionWagon(ParentControlUnit,
                         Constants.ACTIVITY_WAITING_FOR_TRAIN_SELECTION_WAGON, true, wagon);

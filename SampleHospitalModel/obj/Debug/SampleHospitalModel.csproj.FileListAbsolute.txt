@@ -52,3 +52,18 @@ C:\Users\domi\git\HCDESLib\SampleHospitalModel\obj\Debug\SampleHospitalModel.csp
 C:\Users\domi\git\HCDESLib\SampleHospitalModel\obj\Debug\SampleHospitalModel.csproj.CopyComplete
 C:\Users\domi\git\HCDESLib\SampleHospitalModel\obj\Debug\SampleHospitalModel.dll
 C:\Users\domi\git\HCDESLib\SampleHospitalModel\obj\Debug\SampleHospitalModel.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\SampleHospitalModel\bin\Debug\SampleHospitalModel.dll
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\SampleHospitalModel\bin\Debug\SampleHospitalModel.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\SampleHospitalModel\bin\Debug\GeneralHealthCareElementsLibrary.dll
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\SampleHospitalModel\bin\Debug\SimulationCoreLibrary.dll
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\SampleHospitalModel\bin\Debug\SimulationWPFVisualizationTools.dll
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\SampleHospitalModel\bin\Debug\WPFVisualizationBase.dll
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\SampleHospitalModel\bin\Debug\GeneralHealthCareElementsLibrary.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\SampleHospitalModel\bin\Debug\SimulationCoreLibrary.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\SampleHospitalModel\bin\Debug\SimulationWPFVisualizationTools.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\SampleHospitalModel\bin\Debug\WPFVisualizationBase.pdb
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\SampleHospitalModel\obj\Debug\SampleHospitalModel.csproj.AssemblyReference.cache
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\SampleHospitalModel\obj\Debug\SampleHospitalModel.csproj.CoreCompileInputs.cache
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\SampleHospitalModel\obj\Debug\SampleHospitalModel.csproj.CopyComplete
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\SampleHospitalModel\obj\Debug\SampleHospitalModel.dll
+\\Mac\Home\Desktop\masterarbeit könig\hcdes\SampleHospitalModel\obj\Debug\SampleHospitalModel.pdb

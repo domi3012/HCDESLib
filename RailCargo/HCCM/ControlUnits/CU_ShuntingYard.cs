@@ -57,6 +57,7 @@ namespace RailCargo.HCCM.ControlUnits
                     // is it allowed to shunt here
                     RemoveRequest(request);
                 }
+                //Create a request for silo 
             }
 
             var requestForSiloStatus = RAEL.Where(p => p.Activity == Constants.REQUEST_FOR_SILO_STATUS)
