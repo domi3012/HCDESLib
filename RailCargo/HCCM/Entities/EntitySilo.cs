@@ -11,7 +11,7 @@ namespace RailCargo.HCCM.Entities
         private static int s_identifier;
         private readonly string _destination;
         private int _capacity;
-        private List<Activity> _currentActivities;
+        private List<Activity> _currentActivities = new List<Activity>();
         private int _currentCapactiy;
 
         public int Capacity

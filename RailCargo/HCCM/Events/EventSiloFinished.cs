@@ -29,6 +29,6 @@ namespace RailCargo.HCCM.Events
             throw new NotImplementedException();
         }
 
-        public override Entity[] AffectedEntities { get; }
+        public override Entity[] AffectedEntities { get { return new Entity[] { _silo }; } }
     }
 }

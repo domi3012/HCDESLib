@@ -17,3 +17,16 @@ C:\Users\domi\git\HCDESLib\RailCargo\obj\Debug\RailCargo.pdb
 \\Mac\Home\Desktop\masterarbeit könig\hcdes\RailCargo\bin\Debug\SimulationWPFVisualizationTools.pdb
 \\Mac\Home\Desktop\masterarbeit könig\hcdes\RailCargo\bin\Debug\WPFVisualizationBase.pdb
 \\Mac\Home\Desktop\masterarbeit könig\hcdes\RailCargo\obj\Debug\RailCargo.csproj.CopyComplete
+C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\bin\Debug\RailCargo.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\bin\Debug\RailCargo.pdb
+C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\bin\Debug\SimulationCoreLibrary.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\bin\Debug\SimulationWPFVisualizationTools.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\bin\Debug\WPFVisualizationBase.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\bin\Debug\SimulationCoreLibrary.pdb
+C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\bin\Debug\SimulationWPFVisualizationTools.pdb
+C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\bin\Debug\WPFVisualizationBase.pdb
+C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\obj\Debug\RailCargo.csproj.AssemblyReference.cache
+C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\obj\Debug\RailCargo.csproj.CoreCompileInputs.cache
+C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\obj\Debug\RailCargo.csproj.CopyComplete
+C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\obj\Debug\RailCargo.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\obj\Debug\RailCargo.pdb

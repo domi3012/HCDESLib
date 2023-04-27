@@ -9,29 +9,29 @@ namespace RailCargo.HCCM.Entities
     public class EntityTrain : Entity, IActiveEntity
     {
         private readonly string _startLocation;
-        private static int _identifier = 1;
         private readonly string _endLocation;
-        private readonly int _departureTime;
+        private readonly DateTime _departureTime;
 
         public string StartLocation => _startLocation;
-
-        public static int Identifier => _identifier;
+        
 
         public string EndLocation => _endLocation;
 
-        public int DepartureTime => _departureTime;
+        public DateTime DepartureTime => _departureTime;
 
-        public int ArrivalTime => _arrivalTime;
+        public DateTime ArrivalTime => _arrivalTime;
 
-        private readonly int _arrivalTime;
-        private List<Activity> _currentActivities;
+        private readonly DateTime _arrivalTime;
+        private List<Activity> _currentActivities = new List<Activity>();
         private readonly List<EntityWagon> _wagonList;
+        private readonly int _id;
 
         public List<EntityWagon> WagonList => _wagonList;
 
-        public EntityTrain(String startLocation, String endLocation,
-            int departureTime, int arrivalTime, List<EntityWagon> wagonList) : base(_identifier++)
+        public EntityTrain(int id, string startLocation, string endLocation,
+            DateTime departureTime, DateTime arrivalTime, List<EntityWagon> wagonList) : base(id)
         {
+            _id = id;
             _startLocation = startLocation;
             _endLocation = endLocation;
             _departureTime = departureTime;

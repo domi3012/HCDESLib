@@ -13,14 +13,14 @@ namespace RailCargo.HCCM.staticVariables
             get {
                 if (_instance == null)
                 {
-                    return new AllShuntingYards();
+                    _instance = new AllShuntingYards();
+                    return _instance;
                 }
-
                 return _instance;
             }
         }
 
-        private readonly Dictionary<string, CU_ShuntingYard> s_yards = new Dictionary<string, CU_ShuntingYard>();
+        private Dictionary<string, CU_ShuntingYard> s_yards = new Dictionary<string, CU_ShuntingYard>();
 
         public CU_ShuntingYard GetYards(string key)
         {
@@ -29,7 +29,7 @@ namespace RailCargo.HCCM.staticVariables
 
         public void SetYards(string key, CU_ShuntingYard cuShuntingYard)
         {
-            s_yards[key] = cuShuntingYard;
+            s_yards.Add(key,cuShuntingYard);
         }
     }
 }

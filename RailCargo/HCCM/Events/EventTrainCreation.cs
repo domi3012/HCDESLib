@@ -12,7 +12,8 @@ namespace RailCargo.HCCM.Events
         private readonly EntityTrain _entityTrain;
         private readonly string _departureTyp;
 
-        public EventTrainCreation(ControlUnit parentControlUnit, EntityTrain entityTrain, string departureTyp) : base(EventType.Standalone, parentControlUnit)
+        public EventTrainCreation(ControlUnit parentControlUnit, EntityTrain entityTrain, string departureTyp) : base(
+            EventType.Standalone, parentControlUnit)
         {
             _entityTrain = entityTrain;
             _departureTyp = departureTyp;
@@ -35,7 +36,8 @@ namespace RailCargo.HCCM.Events
                 case "VBF":
                     //TODO overthink the concept of train creation
                     var affectedShuntingYard = AllShuntingYards.Instance.GetYards(_entityTrain.StartLocation);
-                    affectedShuntingYard.AddRequest(new Requests.RequestForSilo(Constants.REQUEST_FOR_SILO, _entityTrain, time));
+                    affectedShuntingYard.AddRequest(new Requests.RequestForSilo(Constants.REQUEST_FOR_SILO,
+                        _entityTrain, time));
                     //zug wartet hier
                     var waitingForSilo = new ActivityWaitingForSilo(affectedShuntingYard,
                         Constants.ACTIVITY_WAITING_FOR_SILO, true, _entityTrain);
@@ -58,6 +60,15 @@ namespace RailCargo.HCCM.Events
             throw new NotImplementedException();
         }
 
-        public override Entity[] AffectedEntities { get; }
+        public override Entity[] AffectedEntities
+        {
+            get
+            {
+                return new Entity[]
+                {
+                    _entityTrain
+                };
+            }
+        }
     }
 }

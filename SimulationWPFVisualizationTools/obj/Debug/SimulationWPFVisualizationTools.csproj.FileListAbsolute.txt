@@ -56,3 +56,14 @@ C:\Users\domi\git\HCDESLib\SimulationWPFVisualizationTools\obj\Debug\SimulationW
 \\Mac\Home\Desktop\masterarbeit könig\hcdes\SimulationWPFVisualizationTools\obj\Debug\SimulationWPFVisualizationTools.csproj.CopyComplete
 \\Mac\Home\Desktop\masterarbeit könig\hcdes\SimulationWPFVisualizationTools\obj\Debug\SimulationWPFVisualizationTools.dll
 \\Mac\Home\Desktop\masterarbeit könig\hcdes\SimulationWPFVisualizationTools\obj\Debug\SimulationWPFVisualizationTools.pdb
+C:\Users\koenig11\RiderProjects\HCDESLib\SimulationWPFVisualizationTools\bin\Debug\SimulationWPFVisualizationTools.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\SimulationWPFVisualizationTools\bin\Debug\SimulationWPFVisualizationTools.pdb
+C:\Users\koenig11\RiderProjects\HCDESLib\SimulationWPFVisualizationTools\bin\Debug\SimulationCoreLibrary.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\SimulationWPFVisualizationTools\bin\Debug\WPFVisualizationBase.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\SimulationWPFVisualizationTools\bin\Debug\SimulationCoreLibrary.pdb
+C:\Users\koenig11\RiderProjects\HCDESLib\SimulationWPFVisualizationTools\bin\Debug\WPFVisualizationBase.pdb
+C:\Users\koenig11\RiderProjects\HCDESLib\SimulationWPFVisualizationTools\obj\Debug\SimulationWPFVisualizationTools.csproj.AssemblyReference.cache
+C:\Users\koenig11\RiderProjects\HCDESLib\SimulationWPFVisualizationTools\obj\Debug\SimulationWPFVisualizationTools.csproj.CoreCompileInputs.cache
+C:\Users\koenig11\RiderProjects\HCDESLib\SimulationWPFVisualizationTools\obj\Debug\SimulationWPFVisualizationTools.csproj.CopyComplete
+C:\Users\koenig11\RiderProjects\HCDESLib\SimulationWPFVisualizationTools\obj\Debug\SimulationWPFVisualizationTools.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\SimulationWPFVisualizationTools\obj\Debug\SimulationWPFVisualizationTools.pdb

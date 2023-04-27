@@ -109,8 +109,8 @@ namespace HiCoSimulator
 
         private void WainWindowOnLoad(object sender, RoutedEventArgs e)
         {
-            SimulationModel.SimulationDrawingEngine.InitializeModelVisualizationAtTime(SimulationModel.StartTime,
-                SimulationModel);
+            // SimulationModel.SimulationDrawingEngine.InitializeModelVisualizationAtTime(SimulationModel.StartTime,
+            //     SimulationModel);
         } // end of WainWindowOnLoad
 
         #endregion
@@ -500,7 +500,7 @@ namespace HiCoSimulator
             SimulationEngine.CreateEventLog = true;
             SimulationEngine.SimulationModel = SimulationModel;
             SimulationModel.Initialize(SimulationEngine);
-            SimulationModel.InitializeVisualization(DrawingSystem);
+            //SimulationModel.InitializeVisualization(DrawingSystem);
         } // end of CreateModel
 
         #endregion
@@ -523,8 +523,8 @@ namespace HiCoSimulator
                 SimulationModel.InitializeVisualization(DrawingSystem);
 
                 // initialize drawing engine
-                SimulationModel.SimulationDrawingEngine.InitializeModelVisualizationAtTime(SimulationModel.StartTime,
-                    SimulationModel);
+                // SimulationModel.SimulationDrawingEngine.InitializeModelVisualizationAtTime(SimulationModel.StartTime,
+                //     SimulationModel);
 
                 // times are set
                 _currentTime = SimulationModel.StartTime;

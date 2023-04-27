@@ -15,8 +15,8 @@ namespace RailCargo.HCCM.ControlUnits
     {
         //private readonly InputTimeTable _timeTable;
         // TODO change back to InputTimeTable
-        private readonly List<Tuple<String, String, int, int, List<EntityWagon>>> _timeTable = new List<Tuple<String, String, int, int, List<EntityWagon>>>
-            { Tuple.Create("1", "2", 1, 2, new List<EntityWagon>()), Tuple.Create("2", "3", 1, 2, new List<EntityWagon>()), Tuple.Create("4", "2", 2, 3, new List<EntityWagon>()) };
+        // private readonly List<Tuple<String, String, int, int, List<EntityWagon>>> _timeTable = new List<Tuple<String, String, int, int, List<EntityWagon>>>
+        //     { Tuple.Create("1", "2", 1, 2, new List<EntityWagon>()), Tuple.Create("2", "3", 1, 2, new List<EntityWagon>()), Tuple.Create("4", "2", 2, 3, new List<EntityWagon>()) };
 
         public CU_Network(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel
             ) : base(name,
@@ -27,16 +27,6 @@ namespace RailCargo.HCCM.ControlUnits
 
         protected override void CustomInitialize(DateTime startTime, ISimulationEngine simEngine)
         {
-            Console.WriteLine("We are generating the train creation");
-            foreach (var train in _timeTable)
-            {
-                EntityTrain scheduledEntityTrain = new EntityTrain(train.Item1, train.Item2,
-                    train.Item3, train.Item4, train.Item5);
-                //TODO change to actual typ
-                EventTrainCreation eventTrainCreation = new EventTrainCreation(this, scheduledEntityTrain, "VBF");
-                //TODO change to depatureTime - placeholder
-                simEngine.AddScheduledEvent(eventTrainCreation, DateTime.Now);
-            }
         }
 
         protected override bool PerformCustomRules(DateTime time, ISimulationEngine simEngine)

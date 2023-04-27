@@ -31,3 +31,9 @@ C:/Users/domi/git/HCDESLib/Simulation Core/obj/Debug/SimulationCoreLibrary.pdb
 \\Mac\Home\Desktop\masterarbeit könig\hcdes\Simulation Core\obj\Debug\SimulationCore.csproj.CoreCompileInputs.cache
 \\Mac\Home\Desktop\masterarbeit könig\hcdes\Simulation Core\obj\Debug\SimulationCoreLibrary.dll
 \\Mac\Home\Desktop\masterarbeit könig\hcdes\Simulation Core\obj\Debug\SimulationCoreLibrary.pdb
+C:\Users\koenig11\RiderProjects\HCDESLib\Simulation Core\bin\Debug\SimulationCoreLibrary.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\Simulation Core\bin\Debug\SimulationCoreLibrary.pdb
+C:\Users\koenig11\RiderProjects\HCDESLib\Simulation Core\obj\Debug\SimulationCore.csproj.AssemblyReference.cache
+C:\Users\koenig11\RiderProjects\HCDESLib\Simulation Core\obj\Debug\SimulationCore.csproj.CoreCompileInputs.cache
+C:\Users\koenig11\RiderProjects\HCDESLib\Simulation Core\obj\Debug\SimulationCoreLibrary.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\Simulation Core\obj\Debug\SimulationCoreLibrary.pdb

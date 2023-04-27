@@ -29,3 +29,9 @@ C:/Users/domi/git/HCDESLib/WPFVisualizationBase/WPFVisualizationBase/obj/Debug/W
 \\Mac\Home\Desktop\masterarbeit könig\hcdes\WPFVisualizationBase\WPFVisualizationBase\obj\Debug\WPFVisualizationBase.csproj.CoreCompileInputs.cache
 \\Mac\Home\Desktop\masterarbeit könig\hcdes\WPFVisualizationBase\WPFVisualizationBase\obj\Debug\WPFVisualizationBase.dll
 \\Mac\Home\Desktop\masterarbeit könig\hcdes\WPFVisualizationBase\WPFVisualizationBase\obj\Debug\WPFVisualizationBase.pdb
+C:\Users\koenig11\RiderProjects\HCDESLib\WPFVisualizationBase\WPFVisualizationBase\bin\Debug\WPFVisualizationBase.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\WPFVisualizationBase\WPFVisualizationBase\bin\Debug\WPFVisualizationBase.pdb
+C:\Users\koenig11\RiderProjects\HCDESLib\WPFVisualizationBase\WPFVisualizationBase\obj\Debug\WPFVisualizationBase.csproj.AssemblyReference.cache
+C:\Users\koenig11\RiderProjects\HCDESLib\WPFVisualizationBase\WPFVisualizationBase\obj\Debug\WPFVisualizationBase.csproj.CoreCompileInputs.cache
+C:\Users\koenig11\RiderProjects\HCDESLib\WPFVisualizationBase\WPFVisualizationBase\obj\Debug\WPFVisualizationBase.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\WPFVisualizationBase\WPFVisualizationBase\obj\Debug\WPFVisualizationBase.pdb

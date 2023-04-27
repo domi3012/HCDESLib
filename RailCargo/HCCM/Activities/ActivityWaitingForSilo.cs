@@ -13,7 +13,8 @@ namespace RailCargo.HCCM.Activities
     {
         private readonly EntityTrain _entityTrain;
 
-        public ActivityWaitingForSilo(ControlUnit parentControlUnit, string activityType, bool preEmptable, Entity train) : base(
+        public ActivityWaitingForSilo(ControlUnit parentControlUnit, string activityType, bool preEmptable,
+            Entity train) : base(
             parentControlUnit, activityType, preEmptable)
         {
             _entityTrain = (EntityTrain)train;
@@ -27,7 +28,6 @@ namespace RailCargo.HCCM.Activities
         {
             //EventSiloSelection eventSiloSelection = new EventSiloSelection(ParentControlUnit);
             Console.WriteLine("Received successfully a silo");
-            
         }
 
         public override string ToString()
@@ -40,6 +40,9 @@ namespace RailCargo.HCCM.Activities
             throw new NotImplementedException();
         }
 
-        public override Entity[] AffectedEntities { get; }
+        public override Entity[] AffectedEntities
+        {
+            get { return new Entity[] { _entityTrain }; }
+        }
     }
 }

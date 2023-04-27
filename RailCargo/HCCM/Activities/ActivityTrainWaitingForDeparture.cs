@@ -10,7 +10,7 @@ namespace RailCargo.HCCM.Activities
 {
     public class ActivityTrainWaitingForDeparture : Activity
     {
-        public EntityTrain Train { get; }
+        public EntityTrain Train { get; set; }
 
         public ActivityTrainWaitingForDeparture(ControlUnit parentControlUnit, string activityType, bool preEmptable, EntityTrain train) : base(parentControlUnit, activityType, preEmptable)
         {
@@ -42,6 +42,6 @@ namespace RailCargo.HCCM.Activities
             throw new NotImplementedException();
         }
 
-        public override Entity[] AffectedEntities { get; }
+        public override Entity[] AffectedEntities { get { return new Entity[] { Train }; } }
     }
 }

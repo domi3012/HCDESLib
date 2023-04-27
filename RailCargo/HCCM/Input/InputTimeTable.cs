@@ -15,21 +15,35 @@ namespace RailCargo.HCCM.Input
 {
     public class InputTimeTable
     {
+        List<TrainMovement> _trains = new List<TrainMovement>();
+
+        public List<TrainMovement> Trains
+        {
+            get => _trains;
+            set => _trains = value;
+        }
+
         public InputTimeTable()
         {
-            using (StreamReader reader = new StreamReader(@"\\Mac\\Home\\Desktop\\masterarbeit könig\\hcdes\\RailCargo\\HCCM\\Data\\TimeTable.csv"))
+            
+            using (StreamReader reader = new StreamReader(@"C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\HCCM\Data\TimeTable.csv"))
             {
                 string line; 
 
                 while ((line = reader.ReadLine()) != null)
                 {
-                    //Define pattern
-                    Regex CSVParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
 
-                    //Separating columns to array
-                    string[] X = CSVParser.Split(line);
 
-                    /* Do something with X */
+                    var result = Regex.Split(line, ",(?![^<]*>)");
+
+                    var id = int.Parse(result[0]);
+                    var departure = result[1];
+                    var destination = result[2];
+                    var departureTime = DateTime.Parse(result[3]);
+                    var arrivalTime = DateTime.Parse(result[4]);
+                    var wagons = Regex.Split(Regex.Replace(result[5], "<|>", ""), ",");
+                    Trains.Add(new TrainMovement(id, departure, destination, departureTime, arrivalTime, wagons.ToList()));
+
                 }
             }
         }
