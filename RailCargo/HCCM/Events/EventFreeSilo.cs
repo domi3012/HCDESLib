@@ -29,7 +29,7 @@ namespace RailCargo.HCCM.Events
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return "Event_Free_Silo";
         }
 
         public override Event Clone()

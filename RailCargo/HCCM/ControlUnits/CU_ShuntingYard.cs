@@ -38,8 +38,9 @@ namespace RailCargo.HCCM.ControlUnits
                     var siloSelection = new EventSiloSelection(this, (EntityTrain)request.Origin[0]);
                     siloSelection.Trigger(time, simEngine);
                     ((EntityTrain)request.Origin[0]).StopCurrentActivities(time, simEngine);
-                    //TODO not sure if allowed to do that
-                    siloSelection.Silo.StopCurrentActivities(time, simEngine);
+                    //maybe start wagon collection for train here
+                    
+                    //siloSelection.Silo.StopCurrentActivities(time, simEngine); here the only activity is shuntingwagoons
                     RemoveRequest(request);
                 }
             }
@@ -64,6 +65,7 @@ namespace RailCargo.HCCM.ControlUnits
                 .Cast<RequestCheckSiloStatus>().ToList();
             foreach (var request in requestForSiloStatus)
             {
+                //how to initialy set the wagon to full?
                 var silo = (EntitySilo)request.Origin[0];
                 var currentQuantity = silo.CurrentCapactiy;
                 var maxQuantity = silo.Capacity;
@@ -72,6 +74,17 @@ namespace RailCargo.HCCM.ControlUnits
                     silo.StopCurrentActivities(time, simEngine);
                     RemoveRequest(request);
                 }
+            }
+            
+            var requestForDepatureArea = RAEL.Where(p => p.Activity == Constants.REQUEST_FOR_DEPARTURE_AREA)
+                .Cast<RequestForDepartureArea>().ToList();
+            foreach (var request in requestForDepatureArea)
+            {
+                var train = (EntityTrain)request.Origin[0];
+                //TODO only finish first activity
+                train.GetCurrentActivities()[0].EndEvent.Trigger(time, simEngine);
+                //train.StopCurrentActivities(time, simEngine);
+                RemoveRequest(request);
             }
             
 

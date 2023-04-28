@@ -1,4 +1,5 @@
 using System;
+using RailCargo.HCCM.staticVariables;
 using SimulationCore.HCCMElements;
 using SimulationCore.SimulationClasses;
 
@@ -22,7 +23,7 @@ namespace RailCargo.HCCM.Activities
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return Constants.ACTIVITY_WAITING_IN_SILO;
         }
 
         public override Activity Clone()

@@ -32,13 +32,14 @@ namespace RailCargo.HCCM.ControlUnits
                 //TODO change to actual typ
                 EventTrainCreation eventTrainCreation = new EventTrainCreation(this, scheduledEntityTrain, "VBF");
                 //TODO change to depatureTime - placeholder
-                simEngine.AddScheduledEvent(eventTrainCreation, train.Departure);
+                simEngine.AddScheduledEvent(eventTrainCreation, train.Departure.AddHours(-1));
             }
         }
 
         protected override bool PerformCustomRules(DateTime time, ISimulationEngine simEngine)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return false;
         }
 
         public override Event EntityEnterControlUnit(DateTime time, ISimulationEngine simEngine, Entity entity,

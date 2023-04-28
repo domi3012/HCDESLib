@@ -21,7 +21,7 @@ namespace RailCargo.HCCM.Events
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return "Event_Silo_Finished";
         }
 
         public override Event Clone()

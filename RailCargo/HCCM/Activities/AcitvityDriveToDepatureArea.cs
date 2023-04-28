@@ -18,7 +18,8 @@ namespace RailCargo.HCCM.Activities
 
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)
         {
-            
+            //TODO is 10 minutes accurate
+            simEngine.AddScheduledEvent(EndEvent, time.AddMinutes(10));
         }
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
@@ -31,7 +32,7 @@ namespace RailCargo.HCCM.Activities
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return Constants.ACTIVITY_DRIVE_TO_DEPARTURE_AREA;
         }
 
         public override Activity Clone()

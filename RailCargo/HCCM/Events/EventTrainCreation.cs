@@ -41,8 +41,11 @@ namespace RailCargo.HCCM.Events
                     //zug wartet hier
                     var waitingForSilo = new ActivityWaitingForSilo(affectedShuntingYard,
                         Constants.ACTIVITY_WAITING_FOR_SILO, true, _entityTrain);
-                    _entityTrain.AddActivity(waitingForSilo);
+                    //_entityTrain.AddActivity(waitingForSilo);
                     SequentialEvents.Add(waitingForSilo.StartEvent);
+                    var trainDepartureIncoming =
+                        new EventTrainDepartureIncoming(EventType.Standalone, _entityTrain, affectedShuntingYard);
+                    simEngine.AddScheduledEvent(trainDepartureIncoming, _entityTrain.DepartureTime.AddMinutes(-15));
                     break;
                 default:
                     Console.WriteLine("Not implemented" + _departureTyp);
@@ -52,7 +55,7 @@ namespace RailCargo.HCCM.Events
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return "EventTrainCreation";
         }
 
         public override Event Clone()

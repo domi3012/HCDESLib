@@ -32,7 +32,7 @@ namespace RailCargo.HCCM.Activities
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return Constants.ACTIVITY_WAITING_FOR_TRAIN_SELECTION_WAGON;
         }
 
         public override Activity Clone()

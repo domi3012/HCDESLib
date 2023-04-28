@@ -36,8 +36,8 @@ namespace RailCargo.HCCM.ControlUnits
             foreach (var request in requestsForDeparture)
             {
                 //get information from booking system if allowed to drive
-                var allowedToDrive = true;
-                if (allowedToDrive)
+                var allowedToDrive = DateTime.Compare(((EntityTrain)request.Origin[0]).DepartureTime, time);
+                if (allowedToDrive > 0)
                 {
                     ((EntityTrain)request.Origin[0]).StopCurrentActivities(time, simEngine);
                     RemoveRequest(request);

@@ -1,5 +1,6 @@
 using System;
 using RailCargo.HCCM.Entities;
+using RailCargo.HCCM.staticVariables;
 using SimulationCore.HCCMElements;
 using SimulationCore.SimulationClasses;
 
@@ -23,11 +24,12 @@ namespace RailCargo.HCCM.Activities
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
             //throw new NotImplementedException();
+            Console.WriteLine("BLAAA");
         }
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return Constants.ACTIVITY_WAGON_COLLECTION;
         }
 
         public override Activity Clone()

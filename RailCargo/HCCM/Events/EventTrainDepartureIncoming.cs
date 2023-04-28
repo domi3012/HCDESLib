@@ -31,7 +31,7 @@ namespace RailCargo.HCCM.Events
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return "Event_Train_Departure_Incoming";
         }
 
         public override Event Clone()

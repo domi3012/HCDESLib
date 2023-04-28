@@ -1,6 +1,7 @@
 using System;
 using RailCargo.HCCM.Entities;
 using RailCargo.HCCM.Events;
+using RailCargo.HCCM.staticVariables;
 using SimulationCore.HCCMElements;
 using SimulationCore.SimulationClasses;
 
@@ -23,8 +24,8 @@ namespace RailCargo.HCCM.Activities
             EventTrainArrival trainArrival = new EventTrainArrival(EventType.Standalone, ParentControlUnit, _train,
                 destinationTyp, destination);
             //TODO get drive time from cu network or bookingsystem
-            var timeToDrive = DateTime.Now;
-            simEngine.AddScheduledEvent(trainArrival, time);
+            var timeToDrive = _train.ArrivalTime;
+            simEngine.AddScheduledEvent(trainArrival, timeToDrive);
         }
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
@@ -33,7 +34,7 @@ namespace RailCargo.HCCM.Activities
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return Constants.ACTIVITY_TRAIN_DRIVE;
         }
 
         public override Activity Clone()

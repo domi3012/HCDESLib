@@ -20,25 +20,24 @@ namespace RailCargo.HCCM.Events
             parentControlUnit)
         {
             _train = train;
-            _silo = null;
+            _silo = new EntitySilo(_train.EndLocation, Constants.CAPACITY_SILO);
         }
 
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)
         {
-            var entitySilo = new EntitySilo(_train.EndLocation, Constants.CAPACITY_SILO);
             _silo.Train = _train;
-            ParentControlUnit.AddEntity(entitySilo);
-            EventFreeSilo freeSilo = new EventFreeSilo(EventType.Standalone, ParentControlUnit, entitySilo);
+            ParentControlUnit.AddEntity(_silo);
+            EventFreeSilo freeSilo = new EventFreeSilo(EventType.Standalone, ParentControlUnit, _silo);
             SequentialEvents.Add(freeSilo);
-            var activityWagonCollection =
-                new ActivityWagonCollection(ParentControlUnit, Constants.ACTIVITY_WAGON_COLLECTION, true, entitySilo);
-            Train.AddActivity(activityWagonCollection);
-            SequentialEvents.Add(activityWagonCollection.StartEvent);
+            //var activityWagonCollection =
+            //    new ActivityWagonCollection(ParentControlUnit, Constants.ACTIVITY_WAGON_COLLECTION, true, _silo);
+            //Train.AddActivity(activityWagonCollection);
+            //SequentialEvents.Add(activityWagonCollection.StartEvent);
         }
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return "Event_Silo_Selection";
         }
 
         public override Event Clone()

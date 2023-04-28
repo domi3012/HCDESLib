@@ -42,7 +42,7 @@ namespace RailCargo.HCCM.Entities
 
         public override string ToString()
         {
-            throw new System.NotImplementedException();
+            return "EntityTrain";
         }
 
         public override Entity Clone()

@@ -24,13 +24,13 @@ namespace RailCargo.HCCM.Activities
         {
             ActivityShuntingWagons shuntingWagons =
                 new ActivityShuntingWagons(ParentControlUnit, Constants.ACTIVITY_SHUNTING_WAGON, false, _silo);
-            _silo.AddActivity(shuntingWagons);
+            //_silo.AddActivity(shuntingWagons);
             EndEvent.SequentialEvents.Add(shuntingWagons.StartEvent);
         }
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return Constants.ACTIVITY_WAITING_FOR_TRAIN_SELECTION_SILO;
         }
 
         public override Activity Clone()
