@@ -19,9 +19,10 @@ namespace RailCargo.HCCM.Activities
 
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)
         {
-            RequestForDeparture requestForDeparture =
-                new RequestForDeparture(Constants.REQUEST_FOR_DEPARTURE, Train, time);
-            ParentControlUnit.AddRequest(requestForDeparture);
+            //TODO next timestamp is is in one hour how to fix this
+            //RequestForDeparture requestForDeparture =
+            //    new RequestForDeparture(Constants.REQUEST_FOR_DEPARTURE, Train, time);
+            //ParentControlUnit.AddRequest(requestForDeparture);
         }
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)

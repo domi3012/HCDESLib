@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using SimulationCore.HCCMElements;
 using SimulationCore.SimulationClasses;
 
@@ -9,6 +10,12 @@ namespace RailCargo.HCCM.Entities
     {
         private List<Activity> _currentActivies = new List<Activity>();
         private EntitySilo _silo = null;
+        private readonly List<string> _intermediateNodes;
+        private readonly string _endDestination;
+
+        public List<string> IntermediateNodes => _intermediateNodes;
+
+        public string EndDestination => _endDestination;
 
         public EntitySilo Silo
         {
@@ -16,13 +23,15 @@ namespace RailCargo.HCCM.Entities
             set => _silo = value;
         }
 
-        public EntityWagon(int identifier) : base(identifier)
+        public EntityWagon(int identifier, List<string> intermediateNodes, string endDestination) : base(identifier)
         {
+            _intermediateNodes = intermediateNodes;
+            _endDestination = endDestination;
         }
 
         public override string ToString()
         {
-            throw new System.NotImplementedException();
+            return "Entity_Wagon";
         }
 
         public override Entity Clone()
@@ -38,9 +47,9 @@ namespace RailCargo.HCCM.Entities
         public void StopCurrentActivities(DateTime time, ISimulationEngine simEngine)
         { 
             //TODO other function with while should i not delte them
-            foreach (var activity in _currentActivies)
+            while (_currentActivies.Count > 0)
             {
-                activity.EndEvent.Trigger(time, simEngine);
+                _currentActivies.First().EndEvent.Trigger(time, simEngine);
             }
         }
 

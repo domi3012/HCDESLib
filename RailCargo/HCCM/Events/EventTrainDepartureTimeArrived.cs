@@ -23,7 +23,7 @@ namespace RailCargo.HCCM.Events
             ActivityTrainWaitingForDeparture trainWaitingForDeparture =
                 new ActivityTrainWaitingForDeparture(ParentControlUnit, Constants.ACTIVITY_WAITING_FOR_DEPARTURE, false,
                     _train);
-            _train.AddActivity(trainWaitingForDeparture);
+            //_train.AddActivity(trainWaitingForDeparture);
             trainWaitingForDeparture.StartEvent.Trigger(time, simEngine);
             RequestForDeparture requestForDeparture =
                 new RequestForDeparture(Constants.REQUEST_FOR_DEPARTURE, _train, time);

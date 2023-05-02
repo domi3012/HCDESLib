@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using RailCargo.HCCM.Entities;
 using RailCargo.HCCM.Events;
 using RailCargo.HCCM.Input;
@@ -25,14 +27,30 @@ namespace RailCargo.HCCM.ControlUnits
             {
                 //need to initialize list beforehand
                 List<EntityWagon> wagons = new List<EntityWagon>();
-                train.Wagons.ForEach(x => wagons.Add(new EntityWagon(int.Parse(x))));
-                
+                train.Wagons.ForEach(x =>
+                {
+                    Match match = Regex.Match(x, @"\((\d+);(.*)\)");
+                    var id = int.Parse(match.Groups[1].Value);
+                    List<string> nodes = new List<string>(match.Groups[2].Value.Split(','));
+                    var last_node = nodes.Last();
+                    nodes.Remove(last_node);
+                    if (nodes.Count != 0)
+                    {
+                        nodes.RemoveAt(0);
+                    }
+                    wagons.Add(new EntityWagon(id, nodes, last_node));
+                });
+
                 EntityTrain scheduledEntityTrain = new EntityTrain(train.Id, train.Start, train.End,
                     train.Departure, train.Arrival, wagons);
                 //TODO change to actual typ
                 EventTrainCreation eventTrainCreation = new EventTrainCreation(this, scheduledEntityTrain, "VBF");
                 //TODO change to depatureTime - placeholder
                 simEngine.AddScheduledEvent(eventTrainCreation, train.Departure.AddHours(-1));
+                EventTrainDepartureTimeArrived trainDepartureTimeArrived =
+                    new EventTrainDepartureTimeArrived(EventType.Standalone, this.ChildControlUnits[0],
+                        scheduledEntityTrain);
+                simEngine.AddScheduledEvent(trainDepartureTimeArrived, train.Departure);
             }
         }
 

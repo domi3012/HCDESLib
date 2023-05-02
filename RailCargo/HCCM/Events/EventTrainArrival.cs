@@ -33,7 +33,7 @@ namespace RailCargo.HCCM.Events
                     if (_train.EndLocation == _destination)
                     {
                         EventTrainArrivalInEndDestination trainArrivalInEndDestination =
-                            new EventTrainArrivalInEndDestination(EventType.Standalone, ParentControlUnit);
+                            new EventTrainArrivalInEndDestination(EventType.Standalone, ParentControlUnit, _train);
                         trainArrivalInEndDestination.Trigger(time, simEngine);
                         break;
                     }

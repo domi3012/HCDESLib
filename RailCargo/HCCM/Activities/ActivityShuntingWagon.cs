@@ -26,7 +26,7 @@ namespace RailCargo.HCCM.Activities
         {
             _wagon.Silo.CurrentCapactiy++;
             var waitingInSilo =
-                new ActivityWaitingInSilo(ParentControlUnit, Constants.ACTIVITY_WAITING_IN_SILO, true);
+                new ActivityWaitingInSilo(ParentControlUnit, Constants.ACTIVITY_WAITING_IN_SILO, true, _wagon);
             EndEvent.SequentialEvents.Add(waitingInSilo.StartEvent);
         }
 

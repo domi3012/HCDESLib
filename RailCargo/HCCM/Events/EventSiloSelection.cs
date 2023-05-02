@@ -26,7 +26,7 @@ namespace RailCargo.HCCM.Events
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)
         {
             _silo.Train = _train;
-            ParentControlUnit.AddEntity(_silo);
+            //ParentControlUnit.AddEntity(_silo);
             EventFreeSilo freeSilo = new EventFreeSilo(EventType.Standalone, ParentControlUnit, _silo);
             SequentialEvents.Add(freeSilo);
             //var activityWagonCollection =

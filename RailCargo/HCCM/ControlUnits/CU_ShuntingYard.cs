@@ -13,6 +13,8 @@ namespace RailCargo.HCCM.ControlUnits
 {
     public class CU_ShuntingYard : ControlUnit
     {
+        private Dictionary<string, List<EntitySilo>> _silos = new Dictionary<string, List<EntitySilo>>();
+
         public CU_ShuntingYard(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel) :
             base(
                 name, parentControlUnit, parentSimulationModel)
@@ -32,14 +34,23 @@ namespace RailCargo.HCCM.ControlUnits
             {
                 // create when silo is possible to create TODO change to actual number
                 var siloCreationPossible = true;
+
+
                 if (siloCreationPossible)
                 {
                     //Some need to check which direction the silo has and what about multiple silos in the same direction
-                    var siloSelection = new EventSiloSelection(this, (EntityTrain)request.Origin[0]);
+                    var train = (EntityTrain)request.Origin[0];
+                    var siloSelection = new EventSiloSelection(this, train);
                     siloSelection.Trigger(time, simEngine);
-                    ((EntityTrain)request.Origin[0]).StopCurrentActivities(time, simEngine);
+                    train.StopCurrentActivities(time, simEngine);
+                    if (!_silos.ContainsKey(train.EndLocation))
+                    {
+                        _silos.Add(train.EndLocation, new List<EntitySilo>());
+                    }
+
+                    _silos[train.EndLocation].Add(siloSelection.Silo);
                     //maybe start wagon collection for train here
-                    
+
                     //siloSelection.Silo.StopCurrentActivities(time, simEngine); here the only activity is shuntingwagoons
                     RemoveRequest(request);
                 }
@@ -50,12 +61,13 @@ namespace RailCargo.HCCM.ControlUnits
             foreach (var request in requestsForSorting)
             {
                 var isSiloAvailable = true;
-                if (isSiloAvailable)
+                var wagon = (EntityWagon)request.Origin[0];
+                var next_destination = wagon.IntermediateNodes.First();
+                if (_silos.ContainsKey(next_destination))
                 {
-                    var wagon = (EntityWagon)request.Origin[0];
+                    wagon.IntermediateNodes.RemoveAt(0);
+                    wagon.Silo = _silos[next_destination].First();
                     wagon.StopCurrentActivities(time, simEngine);
-                    //var shuntingWagon = new Acitvity
-                    // is it allowed to shunt here
                     RemoveRequest(request);
                 }
                 //Create a request for silo 
@@ -75,18 +87,19 @@ namespace RailCargo.HCCM.ControlUnits
                     RemoveRequest(request);
                 }
             }
-            
+
             var requestForDepatureArea = RAEL.Where(p => p.Activity == Constants.REQUEST_FOR_DEPARTURE_AREA)
                 .Cast<RequestForDepartureArea>().ToList();
             foreach (var request in requestForDepatureArea)
             {
                 var train = (EntityTrain)request.Origin[0];
+                _silos[train.EndLocation].RemoveAt(0);
+                if (_silos[train.EndLocation].Count == 0) _silos.Remove(train.EndLocation);
                 //TODO only finish first activity
                 train.GetCurrentActivities()[0].EndEvent.Trigger(time, simEngine);
                 //train.StopCurrentActivities(time, simEngine);
                 RemoveRequest(request);
             }
-            
 
 
             return false;

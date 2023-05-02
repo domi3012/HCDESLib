@@ -24,23 +24,26 @@ namespace RailCargo.HCCM.Events
             foreach (var wagon in wagonList)
             {
                 var arrivedInEndDestination = false;
-                if (arrivedInEndDestination)
+                if (_train.EndLocation == wagon.EndDestination)
                 {
                     EventWagonArrivalInEndDestination wagonArrivalInEndDestination =
                         new EventWagonArrivalInEndDestination(EventType.Standalone, ParentControlUnit);
                     SequentialEvents.Add(wagonArrivalInEndDestination);
                     continue;
                 }
-                RequestForSilo requestForSilo = new RequestForSilo(Constants.REQUEST_FOR_SILO, wagon, time);
-                ParentControlUnit.AddRequest(requestForSilo);
-                var waitingForTrainSelectionWagon =
-                    new ActivityWaitingForTrainSelectionWagon(ParentControlUnit,
-                        Constants.ACTIVITY_WAITING_FOR_TRAIN_SELECTION_WAGON, true, wagon);
-                wagon.AddActivity(waitingForTrainSelectionWagon);
-                SequentialEvents.Add(waitingForTrainSelectionWagon.StartEvent);
 
+                var affectedShuntingYard = AllShuntingYards.Instance.GetYards(_train.EndLocation);
+                //TODO dont think that we need to make a request as silo are already existing
+                // RequestForSilo requestForSilo = new RequestForSilo(Constants.REQUEST_FOR_SILO, wagon, time);
+                // affectedShuntingYard.AddRequest(requestForSilo);
+                var waitingForTrainSelectionWagon =
+                    new ActivityWaitingForTrainSelectionWagon(affectedShuntingYard,
+                        Constants.ACTIVITY_WAITING_FOR_TRAIN_SELECTION_WAGON, true, wagon);
+                //wagon.AddActivity(waitingForTrainSelectionWagon);
+                SequentialEvents.Add(waitingForTrainSelectionWagon.StartEvent);
+                //Should wait now in arrival area
                 var requestSorting = new RequestSorting(Constants.REQUEST_FOR_SORTING, wagon, time);
-                ParentControlUnit.AddRequest(requestSorting);
+                affectedShuntingYard.AddRequest(requestSorting);
             }
         }
 

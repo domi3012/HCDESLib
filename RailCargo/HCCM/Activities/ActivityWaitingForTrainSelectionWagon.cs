@@ -26,8 +26,8 @@ namespace RailCargo.HCCM.Activities
             //throw new NotImplementedException();
             ActivityShuntingWagon shuntingWagon =
                 new ActivityShuntingWagon(ParentControlUnit, Constants.ACTIVITY_SHUNTING_WAGON, false, _wagon);
-            //TODO change to acutal time
-            simEngine.AddScheduledEvent(shuntingWagon.EndEvent, DateTime.Now);
+            //TODO how long does the shunting need?
+            simEngine.AddScheduledEvent(shuntingWagon.EndEvent, time.AddMinutes(15));
         }
 
         public override string ToString()

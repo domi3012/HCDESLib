@@ -35,11 +35,11 @@ namespace RailCargo.HCCM.ControlUnits
                 RAEL.Where(p => p.Activity == Constants.REQUEST_FOR_DEPARTURE).Cast<RequestForDeparture>().ToList();
             foreach (var request in requestsForDeparture)
             {
-                //get information from booking system if allowed to drive
+                //timestep to minutes?
                 var allowedToDrive = DateTime.Compare(((EntityTrain)request.Origin[0]).DepartureTime, time);
-                if (allowedToDrive > 0)
+                if (allowedToDrive <= 0)
                 {
-                    ((EntityTrain)request.Origin[0]).StopCurrentActivities(time, simEngine);
+                    ((EntityTrain)request.Origin[0]).GetCurrentActivities()[0].EndEvent.Trigger(time, simEngine);
                     RemoveRequest(request);
                 }
             }
