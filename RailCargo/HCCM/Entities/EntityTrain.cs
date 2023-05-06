@@ -24,12 +24,28 @@ namespace RailCargo.HCCM.Entities
         private readonly DateTime _arrivalTime;
         private List<Activity> _currentActivities = new List<Activity>();
         private readonly List<EntityWagon> _wagonList;
+        private List<EntityWagon> _actual_wagonList = new List<EntityWagon>();
+        //TODO somehow say it is the initial train
+        private bool is_Starting_Train = false;
+
+        public bool IsStartingTrain
+        {
+            get => is_Starting_Train;
+            set => is_Starting_Train = value;
+        }
+
+        public List<EntityWagon> ActualWagonList
+        {
+            get => _actual_wagonList;
+            set => _actual_wagonList = value;
+        }
+
         private readonly int _id;
 
         public List<EntityWagon> WagonList => _wagonList;
 
         public EntityTrain(int id, string startLocation, string endLocation,
-            DateTime departureTime, DateTime arrivalTime, List<EntityWagon> wagonList) : base(id)
+            DateTime departureTime, DateTime arrivalTime, List<EntityWagon> wagonList, bool isStartingTrain) : base(id)
         {
             _id = id;
             _startLocation = startLocation;
@@ -37,7 +53,8 @@ namespace RailCargo.HCCM.Entities
             _departureTime = departureTime;
             _arrivalTime = arrivalTime;
             _wagonList = wagonList;
-
+            is_Starting_Train = isStartingTrain;
+            if (isStartingTrain) ActualWagonList = wagonList;
         }
 
         public override string ToString()

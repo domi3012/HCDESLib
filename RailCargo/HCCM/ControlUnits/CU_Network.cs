@@ -39,7 +39,8 @@ namespace RailCargo.HCCM.ControlUnits
                 var allowedToDrive = DateTime.Compare(((EntityTrain)request.Origin[0]).DepartureTime, time);
                 if (allowedToDrive <= 0)
                 {
-                    ((EntityTrain)request.Origin[0]).GetCurrentActivities()[0].EndEvent.Trigger(time, simEngine);
+                    var train = ((EntityTrain)request.Origin[0]);
+                    train.GetCurrentActivities()[0].EndEvent.Trigger(time, simEngine);
                     RemoveRequest(request);
                 }
             }

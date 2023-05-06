@@ -19,20 +19,17 @@ namespace RailCargo.HCCM.Activities
 
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)
         {
-            //TODO change to actual values
-            var destinationTyp = "VBF";
-            var destination = "Vienna";
-            var affectedShuntingYard = AllShuntingYards.Instance.GetYards(_train.EndLocation);
-            EventTrainArrival trainArrival = new EventTrainArrival(EventType.Standalone, affectedShuntingYard, _train,
-                destinationTyp, _train.EndLocation);
-            //TODO get drive time from cu network or bookingsystem
             var timeToDrive = _train.ArrivalTime;
-            simEngine.AddScheduledEvent(trainArrival, timeToDrive);
+            simEngine.AddScheduledEvent(EndEvent, timeToDrive);
         }
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
-            Console.WriteLine("test");
+            var destinationTyp = "VBF";
+            var affectedShuntingYard = AllShuntingYards.Instance.GetYards(_train.EndLocation);
+            EventTrainArrival trainArrival = new EventTrainArrival(EventType.Standalone, affectedShuntingYard, _train,
+                destinationTyp, _train.EndLocation);
+            trainArrival.Trigger(time, simEngine);
         }
 
         public override string ToString()

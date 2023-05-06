@@ -42,15 +42,28 @@ namespace RailCargo.HCCM.ControlUnits
                 });
 
                 EntityTrain scheduledEntityTrain = new EntityTrain(train.Id, train.Start, train.End,
-                    train.Departure, train.Arrival, wagons);
+                    train.Departure, train.Arrival, wagons, train.StartingNode);
                 //TODO change to actual typ
                 EventTrainCreation eventTrainCreation = new EventTrainCreation(this, scheduledEntityTrain, "VBF");
                 //TODO change to depatureTime - placeholder
                 simEngine.AddScheduledEvent(eventTrainCreation, train.Departure.AddHours(-1));
+                
+                //Trigger Event for departure time will arrive
+                EventTrainDepartureTimeWillArriveIn trainDepartureTimeWillArriveIn =
+                    new EventTrainDepartureTimeWillArriveIn(EventType.Standalone, this.ChildControlUnits.First(), scheduledEntityTrain);
+                
+                simEngine.AddScheduledEvent(trainDepartureTimeWillArriveIn, train.Departure.AddMinutes(-30));
+                
+                
+                //Event Trigger for time arrived
                 EventTrainDepartureTimeArrived trainDepartureTimeArrived =
-                    new EventTrainDepartureTimeArrived(EventType.Standalone, this.ChildControlUnits[0],
+                    new EventTrainDepartureTimeArrived(EventType.Standalone, ChildControlUnits.First(),
                         scheduledEntityTrain);
                 simEngine.AddScheduledEvent(trainDepartureTimeArrived, train.Departure);
+                // EventTrainDepartureTimeArrived trainDepartureTimeArrived =
+                //     new EventTrainDepartureTimeArrived(EventType.Standalone, this.ChildControlUnits[0],
+                //         scheduledEntityTrain);
+                // simEngine.AddScheduledEvent(trainDepartureTimeArrived, train.Departure);
             }
         }
 

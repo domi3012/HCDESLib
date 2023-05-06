@@ -11,13 +11,13 @@ namespace RailCargo.HCCM.Activities
 {
     public class ActivityWaitingForSilo : Activity
     {
-        private readonly EntityTrain _entityTrain;
+        private readonly EntityTrain _train;
 
         public ActivityWaitingForSilo(ControlUnit parentControlUnit, string activityType, bool preEmptable,
             Entity train) : base(
             parentControlUnit, activityType, preEmptable)
         {
-            _entityTrain = (EntityTrain)train;
+            _train = (EntityTrain)train;
         }
 
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)
@@ -26,8 +26,10 @@ namespace RailCargo.HCCM.Activities
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
-            //EventSiloSelection eventSiloSelection = new EventSiloSelection(ParentControlUnit);
             Console.WriteLine("Received successfully a silo");
+            var activityWagonCollection =
+                new ActivityWagonCollection(ParentControlUnit, Constants.ACTIVITY_WAGON_COLLECTION, false, _train);
+            EndEvent.SequentialEvents.Add(activityWagonCollection.StartEvent);
         }
 
         public override string ToString()
@@ -42,7 +44,7 @@ namespace RailCargo.HCCM.Activities
 
         public override Entity[] AffectedEntities
         {
-            get { return new Entity[] { _entityTrain }; }
+            get { return new Entity[] { _train }; }
         }
     }
 }

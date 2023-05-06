@@ -13,7 +13,7 @@ namespace RailCargo.HCCM.ControlUnits
 {
     public class CU_ShuntingYard : ControlUnit
     {
-        private Dictionary<string, List<EntitySilo>> _silos = new Dictionary<string, List<EntitySilo>>();
+        private Dictionary<string, EntitySilo> _silos = new Dictionary<string, EntitySilo>();
 
         public CU_ShuntingYard(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel) :
             base(
@@ -42,13 +42,11 @@ namespace RailCargo.HCCM.ControlUnits
                     var train = (EntityTrain)request.Origin[0];
                     var siloSelection = new EventSiloSelection(this, train);
                     siloSelection.Trigger(time, simEngine);
-                    train.StopCurrentActivities(time, simEngine);
+                    train.GetCurrentActivities().First().EndEvent.Trigger(time, simEngine);
                     if (!_silos.ContainsKey(train.EndLocation))
                     {
-                        _silos.Add(train.EndLocation, new List<EntitySilo>());
+                        _silos.Add(train.EndLocation, siloSelection.Silo);
                     }
-
-                    _silos[train.EndLocation].Add(siloSelection.Silo);
                     //maybe start wagon collection for train here
 
                     //siloSelection.Silo.StopCurrentActivities(time, simEngine); here the only activity is shuntingwagoons
@@ -66,38 +64,37 @@ namespace RailCargo.HCCM.ControlUnits
                 if (_silos.ContainsKey(next_destination))
                 {
                     wagon.IntermediateNodes.RemoveAt(0);
-                    wagon.Silo = _silos[next_destination].First();
+                    wagon.Silo = _silos[next_destination];
                     wagon.StopCurrentActivities(time, simEngine);
                     RemoveRequest(request);
                 }
                 //Create a request for silo 
             }
-
-            var requestForSiloStatus = RAEL.Where(p => p.Activity == Constants.REQUEST_FOR_SILO_STATUS)
-                .Cast<RequestCheckSiloStatus>().ToList();
-            foreach (var request in requestForSiloStatus)
-            {
-                //how to initialy set the wagon to full?
-                var silo = (EntitySilo)request.Origin[0];
-                var currentQuantity = silo.CurrentCapactiy;
-                var maxQuantity = silo.Capacity;
-                if (maxQuantity == currentQuantity)
-                {
-                    silo.StopCurrentActivities(time, simEngine);
-                    RemoveRequest(request);
-                }
-            }
+            //
+            // var requestForSiloStatus = RAEL.Where(p => p.Activity == Constants.REQUEST_FOR_SILO_STATUS)
+            //     .Cast<RequestCheckSiloStatus>().ToList();
+            // foreach (var request in requestForSiloStatus)
+            // {
+            //     //how to initialy set the wagon to full?
+            //     var silo = (EntitySilo)request.Origin[0];
+            //     var currentQuantity = silo.CurrentCapactiy;
+            //     var maxQuantity = silo.Capacity;
+            //     if (maxQuantity == currentQuantity)
+            //     {
+            //         silo.StopCurrentActivities(time, simEngine);
+            //         RemoveRequest(request);
+            //     }
+            // }
 
             var requestForDepatureArea = RAEL.Where(p => p.Activity == Constants.REQUEST_FOR_DEPARTURE_AREA)
                 .Cast<RequestForDepartureArea>().ToList();
             foreach (var request in requestForDepatureArea)
             {
                 var train = (EntityTrain)request.Origin[0];
-                _silos[train.EndLocation].RemoveAt(0);
-                if (_silos[train.EndLocation].Count == 0) _silos.Remove(train.EndLocation);
+                if (!train.IsStartingTrain) train.ActualWagonList = _silos[train.EndLocation].WagonList;
                 //TODO only finish first activity
-                train.GetCurrentActivities()[0].EndEvent.Trigger(time, simEngine);
-                //train.StopCurrentActivities(time, simEngine);
+                Console.WriteLine("Actual size for train to " + train.EndLocation + " is " + train.ActualWagonList);
+                train.GetCurrentActivities().First().EndEvent.Trigger(time, simEngine);
                 RemoveRequest(request);
             }
 

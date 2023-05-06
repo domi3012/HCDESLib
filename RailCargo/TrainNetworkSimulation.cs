@@ -21,8 +21,8 @@ namespace RailCargo
             //     this, inputPath);
             var bookingSystem = new CU_BookingSystem("CU_BOOKINGSYSTEM", null, this, inputTimeTable);
             var network = new CU_Network("CU_NETWORK", bookingSystem, this);
-            var shuntingYards = new ControlUnit[3]; //TODO only test
-            var nodes = new List<String>() { "A", "B", "C" };
+            var shuntingYards = new ControlUnit[4]; //TODO only test
+            var nodes = new List<String>() { "A", "B", "C", "X" };
             var index = 0;
             foreach (var x in nodes)
             {

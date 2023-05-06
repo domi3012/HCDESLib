@@ -12,6 +12,14 @@ namespace RailCargo.HCCM.Entities
         private readonly string _destination;
         private int _capacity;
         private List<Activity> _currentActivities = new List<Activity>();
+        private List<EntityWagon> _wagonList = new List<EntityWagon>();
+
+        public List<EntityWagon> WagonList
+        {
+            get => _wagonList;
+            set => _wagonList = value;
+        }
+
         private int _currentCapactiy;
 
         public int Capacity

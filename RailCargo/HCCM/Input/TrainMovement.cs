@@ -6,7 +6,7 @@ namespace RailCargo.HCCM.Input
 {
     public class TrainMovement
     {
-        public TrainMovement(int id, string start, string end, DateTime departure, DateTime arrival, List<String> wagons)
+        public TrainMovement(int id, string start, string end, DateTime departure, DateTime arrival, List<String> wagons, bool startingNode)
         {
             Id = id;
             Start = start;
@@ -14,15 +14,19 @@ namespace RailCargo.HCCM.Input
             Departure = departure;
             Arrival = arrival;
             Wagons = wagons;
+            StartingNode = startingNode;
         }
 
-        public TrainMovement(int id, string start, string end, DateTime departure, DateTime arrival)
+        public bool StartingNode { get; set; }
+
+        public TrainMovement(int id, string start, string end, DateTime departure, DateTime arrival, bool startingNode)
         {
             Id = id;
             Start = start;
             End = end;
             Departure = departure;
             Arrival = arrival;
+            StartingNode = startingNode;
         }
 
         public int Id { get; set; }

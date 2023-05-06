@@ -23,16 +23,16 @@ namespace RailCargo.HCCM.Events
         {
             switch (_departureTyp)
             {
-                case "BB":
-                    ActivityTrainPreparation trainPreparation =
-                        new ActivityTrainPreparation(ParentControlUnit, Constants.ACTIVITY_TRAIN_PREPARATION, false);
-                    //TODO change to acutal time
-                    trainPreparation.StartEvent.Trigger(time, simEngine);
-                    //GET train depature time somehow
-                    EventTrainDepartureTimeArrived trainDepartureTimeArrived =
-                        new EventTrainDepartureTimeArrived(EventType.Standalone, ParentControlUnit, _entityTrain);
-                    simEngine.AddScheduledEvent(trainDepartureTimeArrived, DateTime.Today);
-                    break;
+                // case "BB":
+                //     ActivityTrainPreparation trainPreparation =
+                //         new ActivityTrainPreparation(ParentControlUnit, Constants.ACTIVITY_TRAIN_PREPARATION, false);
+                //     //TODO change to acutal time
+                //     trainPreparation.StartEvent.Trigger(time, simEngine);
+                //     //GET train depature time somehow
+                //     EventTrainDepartureTimeArrived trainDepartureTimeArrived =
+                //         new EventTrainDepartureTimeArrived(EventType.Standalone, ParentControlUnit, _entityTrain);
+                //     simEngine.AddScheduledEvent(trainDepartureTimeArrived, DateTime.Today);
+                //     break;
                 case "VBF":
                     //TODO overthink the concept of train creation
                     var affectedShuntingYard = AllShuntingYards.Instance.GetYards(_entityTrain.StartLocation);
@@ -43,9 +43,9 @@ namespace RailCargo.HCCM.Events
                         Constants.ACTIVITY_WAITING_FOR_SILO, true, _entityTrain);
                     //_entityTrain.AddActivity(waitingForSilo);
                     SequentialEvents.Add(waitingForSilo.StartEvent);
-                    var trainDepartureIncoming =
-                        new EventTrainDepartureIncoming(EventType.Standalone, _entityTrain, affectedShuntingYard);
-                    simEngine.AddScheduledEvent(trainDepartureIncoming, _entityTrain.DepartureTime.AddMinutes(-15));
+                    // var trainDepartureIncoming =
+                    //     new EventTrainDepartureIncoming(EventType.Standalone, _entityTrain, affectedShuntingYard);
+                    // simEngine.AddScheduledEvent(trainDepartureIncoming, _entityTrain.DepartureTime.AddMinutes(-15));
                     break;
                 default:
                     Console.WriteLine("Not implemented" + _departureTyp);

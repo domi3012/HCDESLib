@@ -42,7 +42,9 @@ namespace RailCargo.HCCM.Input
                     var departureTime = DateTime.Parse(result[3]);
                     var arrivalTime = DateTime.Parse(result[4]);
                     var wagons = Regex.Split(Regex.Replace(result[5], "<|>", ""), "&");
-                    Trains.Add(new TrainMovement(id, departure, destination, departureTime, arrivalTime, wagons.ToList()));
+                    var startingNode = false;
+                    if (result.Length == 7) startingNode = bool.Parse(result[6]);
+                    Trains.Add(new TrainMovement(id, departure, destination, departureTime, arrivalTime, wagons.ToList(), startingNode));
 
                 }
             }

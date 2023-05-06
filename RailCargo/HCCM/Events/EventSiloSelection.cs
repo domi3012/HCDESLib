@@ -27,12 +27,8 @@ namespace RailCargo.HCCM.Events
         {
             _silo.Train = _train;
             //ParentControlUnit.AddEntity(_silo);
-            EventFreeSilo freeSilo = new EventFreeSilo(EventType.Standalone, ParentControlUnit, _silo);
-            SequentialEvents.Add(freeSilo);
-            //var activityWagonCollection =
-            //    new ActivityWagonCollection(ParentControlUnit, Constants.ACTIVITY_WAGON_COLLECTION, true, _silo);
-            //Train.AddActivity(activityWagonCollection);
-            //SequentialEvents.Add(activityWagonCollection.StartEvent);
+            //EventFreeSilo freeSilo = new EventFreeSilo(EventType.Standalone, ParentControlUnit, _silo);
+            //SequentialEvents.Add(freeSilo);
         }
 
         public override string ToString()

@@ -25,9 +25,13 @@ namespace RailCargo.HCCM.Activities
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
             //Request for Ausfahrt
-            //ActivityTrainWaitingForDeparture trainWaitingForDeparture =
-            //    new ActivityTrainWaitingForDeparture(ParentControlUnit.ParentControlUnit, Constants.ACTIVITY_WAITING_FOR_DEPARTURE, false, _train);
-            //EndEvent.SequentialEvents.Add(trainWaitingForDeparture.StartEvent);
+            var networkCU = ParentControlUnit.ParentControlUnit;
+            RequestForDeparture requestForDeparture =
+                new RequestForDeparture(Constants.REQUEST_FOR_DEPARTURE, _train, time);
+            networkCU.AddRequest(requestForDeparture);
+            var trainWaitingForDeparture =
+                new ActivityTrainWaitingForDeparture(networkCU, Constants.ACTIVITY_WAITING_FOR_DEPARTURE, false, _train);
+            EndEvent.SequentialEvents.Add(trainWaitingForDeparture.StartEvent);
         }
 
         public override string ToString()

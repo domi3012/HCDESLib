@@ -20,14 +20,14 @@ namespace RailCargo.HCCM.Events
 
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)
         {
-            ActivityTrainWaitingForDeparture trainWaitingForDeparture =
-                new ActivityTrainWaitingForDeparture(ParentControlUnit, Constants.ACTIVITY_WAITING_FOR_DEPARTURE, false,
-                    _train);
-            //_train.AddActivity(trainWaitingForDeparture);
-            trainWaitingForDeparture.StartEvent.Trigger(time, simEngine);
-            RequestForDeparture requestForDeparture =
-                new RequestForDeparture(Constants.REQUEST_FOR_DEPARTURE, _train, time);
-            ParentControlUnit.AddRequest(requestForDeparture);
+            // ActivityTrainWaitingForDeparture trainWaitingForDeparture =
+            //     new ActivityTrainWaitingForDeparture(ParentControlUnit, Constants.ACTIVITY_WAITING_FOR_DEPARTURE, false,
+            //         _train);
+            // //_train.AddActivity(trainWaitingForDeparture);
+            // trainWaitingForDeparture.StartEvent.Trigger(time, simEngine);
+            // RequestForDeparture requestForDeparture =
+            //     new RequestForDeparture(Constants.REQUEST_FOR_DEPARTURE, _train, time);
+            // ParentControlUnit.AddRequest(requestForDeparture);
         }
 
         public override string ToString()
