@@ -28,28 +28,23 @@ namespace RailCargo.HCCM.ControlUnits
 
         protected override bool PerformCustomRules(DateTime time, ISimulationEngine simEngine)
         {
+            //TODO what is if silo is needed and the amount can not be defined initially? 
+            // A => B
             var requestsForSilo =
                 RAEL.Where(p => p.Activity == Constants.REQUEST_FOR_SILO).Cast<RequestForSilo>().ToList();
             foreach (RequestForSilo request in requestsForSilo)
             {
-                // create when silo is possible to create TODO change to actual number
-                var siloCreationPossible = true;
-
-
-                if (siloCreationPossible)
+                var train = (EntityTrain)request.Origin[0];
+                if (!_silos.ContainsKey(train.EndLocation))
                 {
                     //Some need to check which direction the silo has and what about multiple silos in the same direction
-                    var train = (EntityTrain)request.Origin[0];
                     var siloSelection = new EventSiloSelection(this, train);
                     siloSelection.Trigger(time, simEngine);
                     train.GetCurrentActivities().First().EndEvent.Trigger(time, simEngine);
-                    if (!_silos.ContainsKey(train.EndLocation))
-                    {
-                        _silos.Add(train.EndLocation, siloSelection.Silo);
-                    }
+                    _silos.Add(train.EndLocation, siloSelection.Silo);
+
                     //maybe start wagon collection for train here
 
-                    //siloSelection.Silo.StopCurrentActivities(time, simEngine); here the only activity is shuntingwagoons
                     RemoveRequest(request);
                 }
             }
@@ -58,44 +53,75 @@ namespace RailCargo.HCCM.ControlUnits
                 .ToList();
             foreach (var request in requestsForSorting)
             {
-                var isSiloAvailable = true;
                 var wagon = (EntityWagon)request.Origin[0];
-                var next_destination = wagon.IntermediateNodes.First();
-                if (_silos.ContainsKey(next_destination))
+                var next_destination = wagon.EndDestination;
+                if (wagon.IntermediateNodes.Count != 0)
+                    next_destination = wagon.IntermediateNodes.First();
+                if (_silos.ContainsKey(next_destination) &&
+                    _silos[next_destination].WagonList.Count() < _silos[next_destination].MaxCapacity)
                 {
-                    wagon.IntermediateNodes.RemoveAt(0);
+                    if (wagon.IntermediateNodes.Count != 0) wagon.IntermediateNodes.RemoveAt(0);
                     wagon.Silo = _silos[next_destination];
                     wagon.StopCurrentActivities(time, simEngine);
                     RemoveRequest(request);
                 }
-                //Create a request for silo 
             }
-            //
-            // var requestForSiloStatus = RAEL.Where(p => p.Activity == Constants.REQUEST_FOR_SILO_STATUS)
-            //     .Cast<RequestCheckSiloStatus>().ToList();
-            // foreach (var request in requestForSiloStatus)
-            // {
-            //     //how to initialy set the wagon to full?
-            //     var silo = (EntitySilo)request.Origin[0];
-            //     var currentQuantity = silo.CurrentCapactiy;
-            //     var maxQuantity = silo.Capacity;
-            //     if (maxQuantity == currentQuantity)
-            //     {
-            //         silo.StopCurrentActivities(time, simEngine);
-            //         RemoveRequest(request);
-            //     }
-            // }
 
+            var requestForSiloStatus = RAEL.Where(p => p.Activity == Constants.REQUEST_FOR_SILO_STATUS)
+                .Cast<RequestCheckSiloStatus>().ToList();
+            foreach (var request in requestForSiloStatus)
+            {
+                var silo = (EntitySilo)request.Origin[0];
+                var currentQuantity = silo.WagonList.Count;
+                if (silo.Train.IsStartingTrain)
+                {
+                    currentQuantity = silo.Train.WagonList.Count;
+                }
+
+                var maxQuantity = silo.MaxCapacity;
+                if (maxQuantity == currentQuantity)
+                {
+                    silo.StopCurrentActivities(time, simEngine);
+                    RemoveRequest(request);
+                }
+            }
+            //TODO important what happens if two trains are in same direction 
+            var iterateAgain = false;
             var requestForDepatureArea = RAEL.Where(p => p.Activity == Constants.REQUEST_FOR_DEPARTURE_AREA)
                 .Cast<RequestForDepartureArea>().ToList();
             foreach (var request in requestForDepatureArea)
             {
                 var train = (EntityTrain)request.Origin[0];
+                if (!_silos.ContainsKey(train.EndLocation))
+                {
+                    iterateAgain = true;
+                    break;
+                }
+
                 if (!train.IsStartingTrain) train.ActualWagonList = _silos[train.EndLocation].WagonList;
+                _silos[train.EndLocation].StopCurrentActivities(time, simEngine);
                 //TODO only finish first activity
-                Console.WriteLine("Actual size for train to " + train.EndLocation + " is " + train.ActualWagonList);
+                Helper.print("Train to " + train.EndLocation);
+                
+                Helper.print("Actual list ");
+                foreach (var wagon in train.ActualWagonList)
+                {
+                    Helper.print(wagon.Identifier.ToString());
+                }
+                Helper.print("List ");
+                foreach (var wagon in train.WagonList)
+                {
+                    Helper.print(wagon.Identifier.ToString());
+                }
                 train.GetCurrentActivities().First().EndEvent.Trigger(time, simEngine);
+                _silos.Remove(train.EndLocation);
                 RemoveRequest(request);
+            }
+
+            if (iterateAgain)
+            {
+                //not sure if allowed
+                PerformCustomRules(time, simEngine);
             }
 
 

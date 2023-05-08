@@ -16,7 +16,7 @@ namespace RailCargo.HCCM.Events
 
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)
         {
-            _silo.Train.StopCurrentActivities(time, simEngine);
+            //_silo.Train.StopCurrentActivities(time, simEngine);
         }
 
         public override string ToString()

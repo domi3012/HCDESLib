@@ -10,7 +10,7 @@ namespace RailCargo.HCCM.Entities
     {
         private static int s_identifier;
         private readonly string _destination;
-        private int _capacity;
+        private int _maxCapacity;
         private List<Activity> _currentActivities = new List<Activity>();
         private List<EntityWagon> _wagonList = new List<EntityWagon>();
 
@@ -22,10 +22,10 @@ namespace RailCargo.HCCM.Entities
 
         private int _currentCapactiy;
 
-        public int Capacity
+        public int MaxCapacity
         {
-            get => _capacity;
-            set => _capacity = value;
+            get => _maxCapacity;
+            set => _maxCapacity = value;
         }
 
         public int CurrentCapactiy
@@ -36,10 +36,10 @@ namespace RailCargo.HCCM.Entities
 
         public EntityTrain Train { get; set; }
 
-        public EntitySilo(string destination, int capacity) : base(++s_identifier)
+        public EntitySilo(string destination, int maxCapacity) : base(++s_identifier)
         {
             _destination = destination;
-            _capacity = capacity;
+            _maxCapacity = maxCapacity;
             _currentCapactiy = 0;
         }
 
@@ -50,7 +50,7 @@ namespace RailCargo.HCCM.Entities
 
         public override Entity Clone()
         {
-            return new EntitySilo(_destination, _capacity);
+            return new EntitySilo(_destination, _maxCapacity);
         }
 
         public List<Activity> GetCurrentActivities()

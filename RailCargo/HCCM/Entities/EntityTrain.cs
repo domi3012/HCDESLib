@@ -41,13 +41,17 @@ namespace RailCargo.HCCM.Entities
         }
 
         private readonly int _id;
+        private readonly string _trainType;
+
+        public string TrainType => _trainType;
 
         public List<EntityWagon> WagonList => _wagonList;
 
-        public EntityTrain(int id, string startLocation, string endLocation,
+        public EntityTrain(int id, string trainType, string startLocation, string endLocation,
             DateTime departureTime, DateTime arrivalTime, List<EntityWagon> wagonList, bool isStartingTrain) : base(id)
         {
             _id = id;
+            _trainType = trainType;
             _startLocation = startLocation;
             _endLocation = endLocation;
             _departureTime = departureTime;

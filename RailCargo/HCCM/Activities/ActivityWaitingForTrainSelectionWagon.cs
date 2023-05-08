@@ -24,6 +24,7 @@ namespace RailCargo.HCCM.Activities
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
             //throw new NotImplementedException();
+            _wagon.Silo.WagonList.Add(_wagon);
             ActivityShuntingWagon shuntingWagon =
                 new ActivityShuntingWagon(ParentControlUnit, Constants.ACTIVITY_SHUNTING_WAGON, false, _wagon);
             //TODO how long does the shunting need?

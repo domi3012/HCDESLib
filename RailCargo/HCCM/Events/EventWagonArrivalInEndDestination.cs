@@ -1,4 +1,5 @@
 using System;
+using RailCargo.HCCM.Entities;
 using SimulationCore.HCCMElements;
 using SimulationCore.SimulationClasses;
 
@@ -6,13 +7,16 @@ namespace RailCargo.HCCM.Events
 {
     public class EventWagonArrivalInEndDestination : Event
     {
-        public EventWagonArrivalInEndDestination(EventType type, ControlUnit parentControlUnit) : base(type, parentControlUnit)
+        private readonly EntityWagon _wagon;
+
+        public EventWagonArrivalInEndDestination(EventType type, ControlUnit parentControlUnit, EntityWagon wagon) : base(type, parentControlUnit)
         {
+            _wagon = wagon;
         }
 
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("YEAH you did it");
         }
 
         public override string ToString()
@@ -25,6 +29,9 @@ namespace RailCargo.HCCM.Events
             throw new NotImplementedException();
         }
 
-        public override Entity[] AffectedEntities { get; }
+        public override Entity[] AffectedEntities
+        {
+            get { return new Entity[] { _wagon }; }
+        }
     }
 }

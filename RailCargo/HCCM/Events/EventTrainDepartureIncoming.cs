@@ -20,12 +20,12 @@ namespace RailCargo.HCCM.Events
 
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)
         {
-            var waitingForAllowance =
-                new ActivityWaitingForAllowance(ParentControlUnit, Constants.ACTIVITY_WAITING_FOR_ALLOWANCE, false, _train);
-            RequestForDepartureArea requestForDepartureArea =
-                new RequestForDepartureArea(Constants.REQUEST_FOR_DEPARTURE_AREA, _train, time);
-            SequentialEvents.Add(waitingForAllowance.StartEvent);
-            ParentControlUnit.AddRequest(requestForDepartureArea);
+            // var waitingForAllowance =
+            //     new ActivityWaitingForAllowance(ParentControlUnit, Constants.ACTIVITY_WAITING_FOR_ALLOWANCE, false, _train);
+            // RequestForDepartureArea requestForDepartureArea =
+            //     new RequestForDepartureArea(Constants.REQUEST_FOR_DEPARTURE_AREA, _train, time);
+            // SequentialEvents.Add(waitingForAllowance.StartEvent);
+            // ParentControlUnit.AddRequest(requestForDepartureArea);
             
         }
 

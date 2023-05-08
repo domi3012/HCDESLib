@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace RailCargo.HCCM.staticVariables
 {
@@ -6,15 +7,17 @@ namespace RailCargo.HCCM.staticVariables
     {
         //---------------------- integer values
         public static readonly int TIME_TO_WAIT_FOR_SILO = 2;
-        public static int CAPACITY_SILO = 2;
-        
+
+        public static Dictionary<string, int> trainCapacity = new Dictionary<string, int>
+            { { "Fast", 5 }, { "Slow", 2 } };
+
         //---------------------- requests
         public static readonly string REQUEST_FOR_SILO = "REQUEST_FOR_SILO";
         public static string REQUEST_FOR_DEPARTURE_AREA = "REQUEST_FOR_DEPARTURE_AREA";
         public static string REQUEST_FOR_DEPARTURE = "REQUEST_FOR_DEPARTURE";
         public static string REQUEST_FOR_SORTING = "REQUEST_FOR_SORTING";
         public static string REQUEST_FOR_SILO_STATUS = "REQUEST_FOR_SILO_STATUS";
-        
+
         //---------------------- activity
         public static readonly string ACTIVITY_WAITING_FOR_SILO = "ACTIVITY_WAITING_FOR_SILO";
         public static string ACTIVITY_DRIVE_TO_DEPARTURE_AREA = "ACTIVITY_DRIVE_TO_DEPARTURE_AREA";

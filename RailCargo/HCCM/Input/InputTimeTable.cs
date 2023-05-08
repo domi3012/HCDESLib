@@ -35,8 +35,9 @@ namespace RailCargo.HCCM.Input
 
 
                     var result = Regex.Split(line, ",(?![^<]*>)");
-
-                    var id = int.Parse(result[0]);
+                    var trainSpecification = Regex.Split(Regex.Replace(result[0], "<|>", ""), "&"); 
+                    var id = int.Parse(trainSpecification[0]);
+                    var trainType = trainSpecification[1];
                     var departure = result[1];
                     var destination = result[2];
                     var departureTime = DateTime.Parse(result[3]);
@@ -44,7 +45,7 @@ namespace RailCargo.HCCM.Input
                     var wagons = Regex.Split(Regex.Replace(result[5], "<|>", ""), "&");
                     var startingNode = false;
                     if (result.Length == 7) startingNode = bool.Parse(result[6]);
-                    Trains.Add(new TrainMovement(id, departure, destination, departureTime, arrivalTime, wagons.ToList(), startingNode));
+                    Trains.Add(new TrainMovement(id, trainType, departure, destination, departureTime, arrivalTime, wagons.ToList(), startingNode));
 
                 }
             }

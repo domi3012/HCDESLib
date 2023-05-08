@@ -20,15 +20,15 @@ namespace RailCargo.HCCM.Events
             parentControlUnit)
         {
             _train = train;
-            _silo = new EntitySilo(_train.EndLocation, Constants.CAPACITY_SILO);
+            _silo = new EntitySilo(_train.EndLocation, Constants.trainCapacity[train.TrainType]);
         }
 
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)
         {
             _silo.Train = _train;
             //ParentControlUnit.AddEntity(_silo);
-            //EventFreeSilo freeSilo = new EventFreeSilo(EventType.Standalone, ParentControlUnit, _silo);
-            //SequentialEvents.Add(freeSilo);
+            EventFreeSilo freeSilo = new EventFreeSilo(EventType.Standalone, ParentControlUnit, _silo);
+            SequentialEvents.Add(freeSilo);
         }
 
         public override string ToString()

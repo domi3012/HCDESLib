@@ -21,13 +21,17 @@ namespace RailCargo.HCCM.Activities
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)
         {
             //throw new NotImplementedException();
-            var checkSiloStatus =
+             checkSiloStatus =
                 new RequestCheckSiloStatus(Constants.REQUEST_FOR_SILO_STATUS, _silo, time);
             ParentControlUnit.AddRequest(checkSiloStatus);
         }
 
+        public RequestCheckSiloStatus checkSiloStatus { get; set; }
+
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
+            //Need to remove the request as if silo is not finished it should also delete the request
+            ParentControlUnit.RemoveRequest(checkSiloStatus);
             EventSiloFinished siloFinished = new EventSiloFinished(EventType.Standalone, ParentControlUnit, _silo);
             EndEvent.SequentialEvents.Add(siloFinished);
         }

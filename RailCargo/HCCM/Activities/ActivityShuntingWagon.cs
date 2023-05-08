@@ -25,7 +25,6 @@ namespace RailCargo.HCCM.Activities
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
             //_wagon.Silo.CurrentCapactiy++;
-            _wagon.Silo.WagonList.Add(_wagon);
             var waitingInSilo =
                 new ActivityWaitingInSilo(ParentControlUnit, Constants.ACTIVITY_WAITING_IN_SILO, true, _wagon);
             EndEvent.SequentialEvents.Add(waitingInSilo.StartEvent);

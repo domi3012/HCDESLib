@@ -29,7 +29,7 @@ namespace RailCargo.HCCM.Activities
             var affectedShuntingYard = AllShuntingYards.Instance.GetYards(_train.EndLocation);
             EventTrainArrival trainArrival = new EventTrainArrival(EventType.Standalone, affectedShuntingYard, _train,
                 destinationTyp, _train.EndLocation);
-            trainArrival.Trigger(time, simEngine);
+            EndEvent.SequentialEvents.Add(trainArrival);
         }
 
         public override string ToString()

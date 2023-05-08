@@ -20,14 +20,14 @@ namespace RailCargo.HCCM.Events
 
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)
         {
-            var wagonList = _train.WagonList;
+            var wagonList = _train.ActualWagonList;
             foreach (var wagon in wagonList)
             {
                 var arrivedInEndDestination = false;
                 if (_train.EndLocation == wagon.EndDestination)
                 {
                     EventWagonArrivalInEndDestination wagonArrivalInEndDestination =
-                        new EventWagonArrivalInEndDestination(EventType.Standalone, ParentControlUnit);
+                        new EventWagonArrivalInEndDestination(EventType.Standalone, ParentControlUnit, wagon);
                     SequentialEvents.Add(wagonArrivalInEndDestination);
                     continue;
                 }
