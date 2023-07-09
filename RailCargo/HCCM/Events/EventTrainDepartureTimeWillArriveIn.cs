@@ -24,9 +24,9 @@ namespace RailCargo.HCCM.Events
             _train.StopCurrentActivities(time, simEngine);
             var affectedShuntingYard = AllShuntingYards.Instance.GetYards(_train.StartLocation);
             //TODO who triggers this?
-            var waitingForAllowance = new ActivityWaitingForAllowance(affectedShuntingYard, Constants.ACTIVITY_WAITING_FOR_ALLOWANCE, false, _train);
+            var waitingForAllowance = new ActivityWaitingForAllowance(affectedShuntingYard, Constants.ActivityWaitingForAllowance, false, _train);
             RequestForDepartureArea requestForDepartureArea =
-                new RequestForDepartureArea(Constants.REQUEST_FOR_DEPARTURE_AREA, _train, time);
+                new RequestForDepartureArea(Constants.RequestForDepartureArea, _train, time);
             SequentialEvents.Add(waitingForAllowance.StartEvent);
             affectedShuntingYard.AddRequest(requestForDepartureArea);
             

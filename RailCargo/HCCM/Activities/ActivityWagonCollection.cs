@@ -30,7 +30,7 @@ namespace RailCargo.HCCM.Activities
 
         public override string ToString()
         {
-            return Constants.ACTIVITY_WAGON_COLLECTION;
+            return Constants.ActivityWagonCollection;
         }
 
         public override Activity Clone()

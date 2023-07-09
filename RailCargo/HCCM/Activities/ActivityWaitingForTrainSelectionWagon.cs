@@ -1,5 +1,6 @@
 using System;
 using RailCargo.HCCM.Entities;
+using RailCargo.HCCM.Requests;
 using RailCargo.HCCM.staticVariables;
 using SimulationCore.HCCMElements;
 using SimulationCore.SimulationClasses;
@@ -19,6 +20,8 @@ namespace RailCargo.HCCM.Activities
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)
         {
             //throw new NotImplementedException();
+            var requestSorting = new RequestSorting(Constants.RequestForSorting, _wagon, time);
+            ParentControlUnit.AddRequest(requestSorting);
         }
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
@@ -26,14 +29,14 @@ namespace RailCargo.HCCM.Activities
             //throw new NotImplementedException();
             _wagon.Silo.WagonList.Add(_wagon);
             ActivityShuntingWagon shuntingWagon =
-                new ActivityShuntingWagon(ParentControlUnit, Constants.ACTIVITY_SHUNTING_WAGON, false, _wagon);
+                new ActivityShuntingWagon(ParentControlUnit, Constants.ActivityShuntingWagon, false, _wagon);
             //TODO how long does the shunting need?
             simEngine.AddScheduledEvent(shuntingWagon.EndEvent, time.AddMinutes(15));
         }
 
         public override string ToString()
         {
-            return Constants.ACTIVITY_WAITING_FOR_TRAIN_SELECTION_WAGON;
+            return Constants.ActivityWaitingForTrainSelectionWagon;
         }
 
         public override Activity Clone()

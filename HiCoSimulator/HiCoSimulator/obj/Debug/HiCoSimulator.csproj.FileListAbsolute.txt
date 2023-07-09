@@ -163,3 +163,6 @@ C:\Users\koenig11\RiderProjects\HCDESLib\HiCoSimulator\HiCoSimulator\obj\Debug\H
 C:\Users\koenig11\RiderProjects\HCDESLib\HiCoSimulator\HiCoSimulator\obj\Debug\HiCoSimulator.csproj.CopyComplete
 C:\Users\koenig11\RiderProjects\HCDESLib\HiCoSimulator\HiCoSimulator\obj\Debug\HiCoSimulator.exe
 C:\Users\koenig11\RiderProjects\HCDESLib\HiCoSimulator\HiCoSimulator\obj\Debug\HiCoSimulator.pdb
+C:\Users\koenig11\RiderProjects\HCDESLib\HiCoSimulator\HiCoSimulator\bin\Debug\RailCargo.dll.config
+C:\Users\koenig11\RiderProjects\HCDESLib\HiCoSimulator\HiCoSimulator\bin\Debug\Newtonsoft.Json.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\HiCoSimulator\HiCoSimulator\bin\Debug\Newtonsoft.Json.xml

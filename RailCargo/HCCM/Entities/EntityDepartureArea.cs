@@ -5,10 +5,10 @@ namespace RailCargo.HCCM.Entities
 {
     public class EntityDepartureArea : Entity, IDynamicHoldingEntity
     {
-        private static int s_identifier;
+        private static int _sIdentifier;
         private List<Entity> _holdedEntities = new List<Entity>();
 
-        public EntityDepartureArea() : base(++s_identifier)
+        public EntityDepartureArea() : base(++_sIdentifier)
         {
         }
 

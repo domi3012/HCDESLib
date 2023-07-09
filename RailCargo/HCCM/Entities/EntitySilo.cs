@@ -8,9 +8,8 @@ namespace RailCargo.HCCM.Entities
 {
     public class EntitySilo : Entity, IActiveEntity
     {
-        private static int s_identifier;
+        private static int _sIdentifier;
         private readonly string _destination;
-        private int _maxCapacity;
         private List<Activity> _currentActivities = new List<Activity>();
         private List<EntityWagon> _wagonList = new List<EntityWagon>();
 
@@ -21,26 +20,31 @@ namespace RailCargo.HCCM.Entities
         }
 
         private int _currentCapactiy;
+        private readonly int _maxLength;
+        private readonly int _maxWeight;
+        private readonly int _currentLength;
+        private readonly int _currentWeight;
 
-        public int MaxCapacity
-        {
-            get => _maxCapacity;
-            set => _maxCapacity = value;
-        }
+        public string Destination => _destination;
 
-        public int CurrentCapactiy
-        {
-            get => _currentCapactiy;
-            set => _currentCapactiy = value;
-        }
+        public int MaxLength => _maxLength;
+
+        public int MaxWeight => _maxWeight;
+        
+        public int CurrentLength => _currentLength;
+
+        public int CurrentWeight => _currentWeight;
+
 
         public EntityTrain Train { get; set; }
 
-        public EntitySilo(string destination, int maxCapacity) : base(++s_identifier)
+        public EntitySilo(string destination, int maxLength, int maxWeight) : base(++_sIdentifier)
         {
             _destination = destination;
-            _maxCapacity = maxCapacity;
-            _currentCapactiy = 0;
+            _maxLength = maxLength;
+            _maxWeight = maxWeight;
+            _currentLength = 0;
+            _currentWeight = 0;
         }
 
         public override string ToString()
@@ -50,7 +54,7 @@ namespace RailCargo.HCCM.Entities
 
         public override Entity Clone()
         {
-            return new EntitySilo(_destination, _maxCapacity);
+            return new EntitySilo(_destination, _maxLength, _maxWeight);
         }
 
         public List<Activity> GetCurrentActivities()

@@ -10,11 +10,11 @@ using SimulationCore.SimulationClasses;
 
 namespace RailCargo.HCCM.ControlUnits
 {
-    public class CU_BookingSystem : ControlUnit
+    public class CuBookingSystem : ControlUnit
     {
         private readonly InputTimeTable _input;
 
-        public CU_BookingSystem(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel,
+        public CuBookingSystem(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel,
             InputTimeTable input) : base(name, parentControlUnit, parentSimulationModel)
         {
             _input = input;
@@ -29,36 +29,49 @@ namespace RailCargo.HCCM.ControlUnits
                 List<EntityWagon> wagons = new List<EntityWagon>();
                 train.Wagons.ForEach(x =>
                 {
-                    Match match = Regex.Match(x, @"\((\d+);(.*)\)");
-                    var id = int.Parse(match.Groups[1].Value);
-                    List<string> nodes = new List<string>(match.Groups[2].Value.Split(','));
-                    var last_node = nodes.Last();
-                    nodes.Remove(last_node);
-                    if (nodes.Count != 0)
-                    {
-                        nodes.RemoveAt(0);
-                    }
-                    wagons.Add(new EntityWagon(id, nodes, last_node));
+                    var wagonId = Int64.Parse(x.WagonId);
+                    var wagonLength = x.WagonLength;
+                    var wagonMass = x.WagonMass;
+                    var destinationRpc = x.DestinationRpc;
+                    var endLocation = x.EndLocation;
+
+                    wagons.Add(new EntityWagon(wagonId, wagonLength, wagonMass, endLocation, destinationRpc));
                 });
 
-                EntityTrain scheduledEntityTrain = new EntityTrain(train.Id, train.TrainType, train.Start, train.End,
-                    train.Departure, train.Arrival, wagons, train.StartingNode);
-                EventTrainCreation eventTrainCreation = new EventTrainCreation(this, scheduledEntityTrain, "VBF");
-                //TODO change to depatureTime - placeholder
-                simEngine.AddScheduledEvent(eventTrainCreation, train.Departure.AddHours(-1));
-                
+                var trainId = train.Id;
+                var startStation = train.StartLocation;
+                var arrivalStation = train.EndLocation;
+                var departureTime = DateTime.Parse(train.DepartureTime);
+                var arrivalTime = DateTime.Parse(train.ArrivalTime);
+                var formationsTime = train.FormationsTime;
+                var disassembleTime = train.DisassembleTime;
+                var rpc_codes = train.RpcCodes;
+                var trainWeight = train.TrainWeight;
+                var trainLenght = train.TrainLength;
+                var startTrain = train.StartTrain;
+
+
+                var scheduledEntityTrain = new EntityTrain(trainId, startStation, departureTime, arrivalStation,
+                    arrivalTime, formationsTime, disassembleTime,
+                    rpc_codes, trainWeight, trainLenght, startTrain, wagons);
+                var eventTrainCreation = new EventTrainCreation(this, scheduledEntityTrain);
+
+                var trainCreationTime = departureTime.AddHours(-1).AddMinutes(-formationsTime);
+                simEngine.AddScheduledEvent(eventTrainCreation, trainCreationTime);
+
                 //Trigger Event for departure time will arrive
                 var trainDepartureTimeWillArriveIn =
-                    new EventTrainDepartureTimeWillArriveIn(EventType.Standalone, ChildControlUnits.First(), scheduledEntityTrain);
-                
-                simEngine.AddScheduledEvent(trainDepartureTimeWillArriveIn, train.Departure.AddMinutes(-30));
-                
-                
+                    new EventTrainDepartureTimeWillArriveIn(EventType.Standalone, ChildControlUnits.First(),
+                        scheduledEntityTrain);
+
+                simEngine.AddScheduledEvent(trainDepartureTimeWillArriveIn, departureTime.AddMinutes(-formationsTime));
+
+
                 //Event Trigger for time arrived
                 EventTrainDepartureTimeArrived trainDepartureTimeArrived =
                     new EventTrainDepartureTimeArrived(EventType.Standalone, ChildControlUnits.First(),
                         scheduledEntityTrain);
-                simEngine.AddScheduledEvent(trainDepartureTimeArrived, train.Departure);
+                simEngine.AddScheduledEvent(trainDepartureTimeArrived, departureTime);
                 // EventTrainDepartureTimeArrived trainDepartureTimeArrived =
                 //     new EventTrainDepartureTimeArrived(EventType.Standalone, this.ChildControlUnits[0],
                 //         scheduledEntityTrain);

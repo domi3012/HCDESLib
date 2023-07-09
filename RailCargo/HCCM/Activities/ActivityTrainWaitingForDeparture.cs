@@ -26,14 +26,14 @@ namespace RailCargo.HCCM.Activities
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
             var trainDrive =
-                new ActivityTrainDrive(ParentControlUnit, Constants.ACTIVITY_TRAIN_DRIVE, false, Train);
+                new ActivityTrainDrive(ParentControlUnit, Constants.ActivityTrainDrive, false, Train);
             
             EndEvent.SequentialEvents.Add(trainDrive.StartEvent);
         }
 
         public override string ToString()
         {
-            return Constants.ACTIVITY_TRAIN_WAITING_FOR_DEPARTURE;
+            return Constants.ActivityTrainWaitingForDeparture;
         }
 
         public override Activity Clone()

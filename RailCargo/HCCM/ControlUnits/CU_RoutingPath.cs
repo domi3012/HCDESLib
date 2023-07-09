@@ -5,11 +5,11 @@ using SimulationCore.SimulationClasses;
 
 namespace RailCargo.HCCM.ControlUnits
 {
-    public class CU_RoutingPath : ControlUnit
+    public class CuRoutingPath : ControlUnit
     {
         private readonly object _inputPaths;
 
-        public CU_RoutingPath(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel, InputPath inputPath) : base(
+        public CuRoutingPath(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel, InputPath inputPath) : base(
             name, parentControlUnit, parentSimulationModel)
         {
             _inputPaths = inputPath;

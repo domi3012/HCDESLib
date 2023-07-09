@@ -11,14 +11,14 @@ using SimulationCore.SimulationClasses;
 
 namespace RailCargo.HCCM.ControlUnits
 {
-    public class CU_Network : ControlUnit
+    public class CuNetwork : ControlUnit
     {
         //private readonly InputTimeTable _timeTable;
         // TODO change back to InputTimeTable
         // private readonly List<Tuple<String, String, int, int, List<EntityWagon>>> _timeTable = new List<Tuple<String, String, int, int, List<EntityWagon>>>
         //     { Tuple.Create("1", "2", 1, 2, new List<EntityWagon>()), Tuple.Create("2", "3", 1, 2, new List<EntityWagon>()), Tuple.Create("4", "2", 2, 3, new List<EntityWagon>()) };
 
-        public CU_Network(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel
+        public CuNetwork(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel
             ) : base(name,
             parentControlUnit, parentSimulationModel)
         {
@@ -32,11 +32,11 @@ namespace RailCargo.HCCM.ControlUnits
         protected override bool PerformCustomRules(DateTime time, ISimulationEngine simEngine)
         {
             var requestsForDeparture =
-                RAEL.Where(p => p.Activity == Constants.REQUEST_FOR_DEPARTURE).Cast<RequestForDeparture>().ToList();
+                RAEL.Where(p => p.Activity == Constants.RequestForDeparture).Cast<RequestForDeparture>().ToList();
             foreach (var request in requestsForDeparture)
             {
                 //timestep to minutes?
-                var allowedToDrive = DateTime.Compare(((EntityTrain)request.Origin[0]).DepartureTime, time);
+                var allowedToDrive = DateTime.Compare(((EntityTrain)request.Origin[0]).DeparturTime, time);
                 if (allowedToDrive <= 0)
                 {
                     var train = ((EntityTrain)request.Origin[0]);

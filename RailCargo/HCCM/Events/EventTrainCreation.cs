@@ -12,17 +12,16 @@ namespace RailCargo.HCCM.Events
         private readonly EntityTrain _entityTrain;
         private readonly string _departureTyp;
 
-        public EventTrainCreation(ControlUnit parentControlUnit, EntityTrain entityTrain, string departureTyp) : base(
+        public EventTrainCreation(ControlUnit parentControlUnit, EntityTrain entityTrain) : base(
             EventType.Standalone, parentControlUnit)
         {
             _entityTrain = entityTrain;
-            _departureTyp = departureTyp;
         }
 
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)
         {
-            switch (_departureTyp)
-            {
+            // switch (_departureTyp)
+            // {
                 // case "BB":
                 //     ActivityTrainPreparation trainPreparation =
                 //         new ActivityTrainPreparation(ParentControlUnit, Constants.ACTIVITY_TRAIN_PREPARATION, false);
@@ -33,24 +32,24 @@ namespace RailCargo.HCCM.Events
                 //         new EventTrainDepartureTimeArrived(EventType.Standalone, ParentControlUnit, _entityTrain);
                 //     simEngine.AddScheduledEvent(trainDepartureTimeArrived, DateTime.Today);
                 //     break;
-                case "VBF":
-                    //TODO overthink the concept of train creation
+                // case "VBF":
+                //     //TODO overthink the concept of train creation
                     var affectedShuntingYard = AllShuntingYards.Instance.GetYards(_entityTrain.StartLocation);
-                    affectedShuntingYard.AddRequest(new Requests.RequestForSilo(Constants.REQUEST_FOR_SILO,
+                    affectedShuntingYard.AddRequest(new Requests.RequestForSilo(Constants.RequestForSilo,
                         _entityTrain, time));
                     //zug wartet hier
                     var waitingForSilo = new ActivityWaitingForSilo(affectedShuntingYard,
-                        Constants.ACTIVITY_WAITING_FOR_SILO, true, _entityTrain);
+                        Constants.ActivityWaitingForSilo, true, _entityTrain);
                     //_entityTrain.AddActivity(waitingForSilo);
                     SequentialEvents.Add(waitingForSilo.StartEvent);
                     // var trainDepartureIncoming =
                     //     new EventTrainDepartureIncoming(EventType.Standalone, _entityTrain, affectedShuntingYard);
                     // simEngine.AddScheduledEvent(trainDepartureIncoming, _entityTrain.DepartureTime.AddMinutes(-15));
-                    break;
-                default:
-                    Console.WriteLine("Not implemented" + _departureTyp);
-                    break;
-            }
+            //         break;
+            //     default:
+            //         Console.WriteLine("Not implemented" + _departureTyp);
+            //         break;
+            // }
         }
 
         public override string ToString()

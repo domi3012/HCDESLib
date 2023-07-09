@@ -8,14 +8,23 @@ namespace RailCargo.HCCM.Entities
 {
     public class EntityWagon : Entity, IActiveEntity
     {
+        private static int _sIdentifier = 0;
         private List<Activity> _currentActivies = new List<Activity>();
         private EntitySilo _silo = null;
-        private readonly List<string> _intermediateNodes;
-        private readonly string _endDestination;
+        private readonly string _wagonLength;
+        private readonly string _wagonMass;
+        private readonly string _destinationRpc;
+        private readonly string _endLocation;
 
-        public List<string> IntermediateNodes => _intermediateNodes;
+        public string WagonLength => _wagonLength;
 
-        public string EndDestination => _endDestination;
+        public string WagonMass => _wagonMass;
+
+        public long WagonId => _wagonId;
+
+        private readonly long _wagonId;
+
+        
 
         public EntitySilo Silo
         {
@@ -23,11 +32,20 @@ namespace RailCargo.HCCM.Entities
             set => _silo = value;
         }
 
-        public EntityWagon(int identifier, List<string> intermediateNodes, string endDestination) : base(identifier)
+        public EntityWagon(long wagonId, string wagonLength, string wagonMass,string endLocation, string destinationRcp) : base(_sIdentifier++)
         {
-            _intermediateNodes = intermediateNodes;
-            _endDestination = endDestination;
+            _wagonId = wagonId;
+            _wagonLength = wagonLength;
+            _wagonMass = wagonMass;
+            _endLocation = endLocation;
+            _destinationRpc = destinationRcp;
         }
+
+        public List<Activity> CurrentActivies => _currentActivies;
+
+        public string DestinationRpc => _destinationRpc;
+
+        public string EndLocation => _endLocation;
 
         public override string ToString()
         {

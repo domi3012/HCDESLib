@@ -20,7 +20,8 @@ namespace RailCargo.HCCM.Events
             parentControlUnit)
         {
             _train = train;
-            _silo = new EntitySilo(_train.EndLocation, Constants.trainCapacity[train.TrainType]);
+            // TODO include the size of train
+            _silo = new EntitySilo(_train.ArrivalStation, train.TrainLength, train.TrainWeight);
         }
 
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)

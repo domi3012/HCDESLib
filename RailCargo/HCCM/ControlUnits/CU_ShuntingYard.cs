@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using RailCargo.HCCM.Activities;
 using RailCargo.HCCM.Entities;
@@ -11,11 +12,11 @@ using SimulationCore.SimulationClasses;
 
 namespace RailCargo.HCCM.ControlUnits
 {
-    public class CU_ShuntingYard : ControlUnit
+    public class CuShuntingYard : ControlUnit
     {
-        private Dictionary<string, EntitySilo> _silos = new Dictionary<string, EntitySilo>();
+        private Dictionary<string, List<EntitySilo>> _silos = new Dictionary<string, List<EntitySilo>>();
 
-        public CU_ShuntingYard(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel) :
+        public CuShuntingYard(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel) :
             base(
                 name, parentControlUnit, parentSimulationModel)
         {
@@ -26,22 +27,54 @@ namespace RailCargo.HCCM.ControlUnits
             Console.WriteLine(Name);
         }
 
+        private bool check_rpcs(List<List<string>> rpc_codes, string rpc_code_to_check)
+        {
+            foreach (var rpc_code in rpc_codes)
+            {
+                var from = rpc_code[0];
+                var until = rpc_code[1];
+                if (rpc_code_to_check.Length == 4)
+                {
+                    var check_rpc = int.Parse(rpc_code_to_check);
+                    var from_int = int.Parse(from.Substring(0,4));
+                    var until_int = int.Parse(until.Substring(0,4));
+                    if (from_int <= check_rpc && check_rpc >= until_int)
+                    {
+                        return true;
+                    }
+                }
+                from = from.Replace("-", "");
+                until = from.Replace("-", "");
+                rpc_code_to_check = rpc_code_to_check.Replace("-", "");
+                if (int.Parse(from) <= int.Parse(rpc_code_to_check) && int.Parse(rpc_code_to_check) >= int.Parse(until))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         protected override bool PerformCustomRules(DateTime time, ISimulationEngine simEngine)
         {
-            //TODO what is if silo is needed and the amount can not be defined initially? 
             // A => B
             var requestsForSilo =
-                RAEL.Where(p => p.Activity == Constants.REQUEST_FOR_SILO).Cast<RequestForSilo>().ToList();
+                RAEL.Where(p => p.Activity == Constants.RequestForSilo).Cast<RequestForSilo>().ToList();
             foreach (RequestForSilo request in requestsForSilo)
             {
+                var siloCreationPossible = true;
                 var train = (EntityTrain)request.Origin[0];
-                if (!_silos.ContainsKey(train.EndLocation))
+                if (siloCreationPossible)
                 {
                     //Some need to check which direction the silo has and what about multiple silos in the same direction
                     var siloSelection = new EventSiloSelection(this, train);
                     siloSelection.Trigger(time, simEngine);
                     train.GetCurrentActivities().First().EndEvent.Trigger(time, simEngine);
-                    _silos.Add(train.EndLocation, siloSelection.Silo);
+                    if (!_silos.ContainsKey(train.ArrivalStation))
+                    {
+                        _silos.Add(train.ArrivalStation, new List<EntitySilo>());
+                    }
+
+                    _silos[train.ArrivalStation].Add(siloSelection.Silo);
 
                     //maybe start wagon collection for train here
 
@@ -49,82 +82,90 @@ namespace RailCargo.HCCM.ControlUnits
                 }
             }
 
-            var requestsForSorting = RAEL.Where(p => p.Activity == Constants.REQUEST_FOR_SORTING).Cast<RequestSorting>()
+            var requestsForSorting = RAEL.Where(p => p.Activity == Constants.RequestForSorting).Cast<RequestSorting>()
                 .ToList();
             foreach (var request in requestsForSorting)
             {
                 var wagon = (EntityWagon)request.Origin[0];
-                var next_destination = wagon.EndDestination;
-                if (wagon.IntermediateNodes.Count != 0)
-                    next_destination = wagon.IntermediateNodes.First();
-                if (_silos.ContainsKey(next_destination) &&
-                    _silos[next_destination].WagonList.Count() < _silos[next_destination].MaxCapacity)
+                var nextDestination = wagon.EndLocation;
+                var wagon_rpc_code = wagon.DestinationRpc;
+                foreach (var silos in _silos.Values)
                 {
-                    if (wagon.IntermediateNodes.Count != 0) wagon.IntermediateNodes.RemoveAt(0);
-                    wagon.Silo = _silos[next_destination];
-                    wagon.StopCurrentActivities(time, simEngine);
-                    RemoveRequest(request);
+                    var possible_train = silos.First().Train;
+                    var availableSilo = check_rpcs(possible_train.RpcCodes, wagon_rpc_code);
+                    if (availableSilo)
+                    {
+                        foreach (var silo in silos)
+                        {
+                            var maxLength = silo.MaxLength;
+                            var maxWeight = silo.MaxWeight;
+                            var currentLength = silo.CurrentLength;
+                            var currentWeight = silo.CurrentWeight;
+                            if (currentLength + float.Parse(wagon.WagonLength, CultureInfo.InvariantCulture.NumberFormat) <= maxLength &&
+                                (currentWeight + float.Parse(wagon.WagonMass, CultureInfo.InvariantCulture.NumberFormat)) <= (maxWeight*1000))
+                            {
+                                wagon.Silo = silo;
+                                wagon.StopCurrentActivities(time, simEngine);
+                                RemoveRequest(request);
+                                break;
+                            }
+                        }
+                    }
                 }
             }
 
-            var requestForSiloStatus = RAEL.Where(p => p.Activity == Constants.REQUEST_FOR_SILO_STATUS)
+            var requestForSiloStatus = RAEL.Where(p => p.Activity == Constants.RequestForSiloStatus)
                 .Cast<RequestCheckSiloStatus>().ToList();
             foreach (var request in requestForSiloStatus)
             {
                 var silo = (EntitySilo)request.Origin[0];
-                var currentQuantity = silo.WagonList.Count;
-                if (silo.Train.IsStartingTrain)
+                var siloMaxWeight = silo.MaxWeight;
+                var siloMaxLength = silo.MaxLength;
+                var siloCurrentWeight = silo.CurrentWeight;
+                var siloCurrentLength = silo.CurrentLength;
+                if (silo.Train.isStartTrain)
                 {
-                    currentQuantity = silo.Train.WagonList.Count;
+                    siloCurrentWeight = siloMaxWeight;
+                    siloCurrentLength = siloMaxLength;
                 }
 
-                var maxQuantity = silo.MaxCapacity;
-                if (maxQuantity == currentQuantity)
+                
+                if (siloCurrentLength == siloMaxLength || siloCurrentWeight == siloMaxLength)
                 {
                     silo.StopCurrentActivities(time, simEngine);
                     RemoveRequest(request);
                 }
             }
-            //TODO important what happens if two trains are in same direction 
-            var iterateAgain = false;
-            var requestForDepatureArea = RAEL.Where(p => p.Activity == Constants.REQUEST_FOR_DEPARTURE_AREA)
+
+            var requestForDepatureArea = RAEL.Where(p => p.Activity == Constants.RequestForDepartureArea)
                 .Cast<RequestForDepartureArea>().ToList();
             foreach (var request in requestForDepatureArea)
             {
                 var train = (EntityTrain)request.Origin[0];
-                if (!_silos.ContainsKey(train.EndLocation))
-                {
-                    iterateAgain = true;
-                    break;
-                }
-
-                if (!train.IsStartingTrain) train.ActualWagonList = _silos[train.EndLocation].WagonList;
-                _silos[train.EndLocation].StopCurrentActivities(time, simEngine);
+                var silo = _silos[train.ArrivalStation].First();
+                if (!train.isStartTrain) train.ActualWagonList = silo.WagonList;
+                silo.StopCurrentActivities(time, simEngine);
                 //TODO only finish first activity
-                Helper.print("Train to " + train.EndLocation);
-                
-                Helper.print("Actual list ");
+                Helper.Print("Train to " + train.ArrivalStation);
+
+                Helper.Print("Actual list ");
                 foreach (var wagon in train.ActualWagonList)
                 {
-                    Helper.print(wagon.Identifier.ToString());
+                    Helper.Print(wagon.WagonId.ToString());
                 }
-                Helper.print("List ");
-                foreach (var wagon in train.WagonList)
+
+                Helper.Print("List ");
+                foreach (var wagon in train.Wagons)
                 {
-                    Helper.print(wagon.Identifier.ToString());
+                    Helper.Print(wagon.WagonId.ToString());
                 }
+
                 train.GetCurrentActivities().First().EndEvent.Trigger(time, simEngine);
-                _silos.Remove(train.EndLocation);
+                if (_silos[train.ArrivalStation].Count != 0)
+                    _silos[train.ArrivalStation].Remove(silo);
                 RemoveRequest(request);
             }
-
-            if (iterateAgain)
-            {
-                //not sure if allowed
-                PerformCustomRules(time, simEngine);
-            }
-
-
+            
             return false;
         }
 

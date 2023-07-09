@@ -30,7 +30,7 @@ namespace RailCargo.HCCM.Events
             switch (_destinationTyp)
             {
                 case "BB":
-                    if (_train.EndLocation == _destination)
+                    if (_train.ArrivalStation == _destination)
                     {
                         EventTrainArrivalInEndDestination trainArrivalInEndDestination =
                             new EventTrainArrivalInEndDestination(EventType.Standalone, ParentControlUnit, _train);
@@ -38,7 +38,7 @@ namespace RailCargo.HCCM.Events
                         break;
                     }
                     ActivityTrainPreparation trainPreparation =
-                        new ActivityTrainPreparation(ParentControlUnit, Constants.ACTIVITY_TRAIN_PREPARATION, false);
+                        new ActivityTrainPreparation(ParentControlUnit, Constants.ActivityTrainPreparation, false);
                     //TODO change to acutal time
                     trainPreparation.StartEvent.Trigger(time, simEngine);
                     //GET train depature time somehow
@@ -51,6 +51,8 @@ namespace RailCargo.HCCM.Events
                     //ParentControlUnit.AddRequest(requestForSilo);
                     EventWagonArrival wagonArrival =
                         new EventWagonArrival(EventType.Standalone, ParentControlUnit, _train);
+                    //TODO add zerlegezeiten
+                    //simEngine.AddScheduledEvent();
                     SequentialEvents.Add(wagonArrival);
                     break;
                 default:

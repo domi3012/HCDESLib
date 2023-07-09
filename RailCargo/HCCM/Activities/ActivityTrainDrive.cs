@@ -26,15 +26,15 @@ namespace RailCargo.HCCM.Activities
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
             var destinationTyp = "VBF";
-            var affectedShuntingYard = AllShuntingYards.Instance.GetYards(_train.EndLocation);
+            var affectedShuntingYard = AllShuntingYards.Instance.GetYards(_train.ArrivalStation);
             EventTrainArrival trainArrival = new EventTrainArrival(EventType.Standalone, affectedShuntingYard, _train,
-                destinationTyp, _train.EndLocation);
+                destinationTyp, _train.ArrivalStation);
             EndEvent.SequentialEvents.Add(trainArrival);
         }
 
         public override string ToString()
         {
-            return Constants.ACTIVITY_TRAIN_DRIVE;
+            return Constants.ActivityTrainDrive;
         }
 
         public override Activity Clone()

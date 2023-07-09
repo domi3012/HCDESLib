@@ -1,54 +1,69 @@
-using SimulationCore.HCCMElements;
-using SimulationCore.MathTool;
-using SimulationCore.MathTool.Distributions;
-using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-//using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace RailCargo.HCCM.Input
 {
+    public class Wagon
+    {
+        [JsonProperty("wagon_id")]
+        public string WagonId { get; set; }
+        [JsonProperty("wagon_mass")]
+        public string WagonMass { get; set; }
+        [JsonProperty("wagon_length")]
+        public string WagonLength { get; set; }
+        [JsonProperty("destination_rpc")]
+        public string DestinationRpc { get; set; }
+        [JsonProperty("end_location")]
+        public string EndLocation { get; set; }
+    }
+
+    public class Train
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+        [JsonProperty("departure_time")]
+        public string DepartureTime { get; set; }
+        [JsonProperty("arrival_time")]
+        public string ArrivalTime { get; set; }
+        [JsonProperty("start_location")]
+        public string StartLocation { get; set; }
+        [JsonProperty("end_location")]
+        public string EndLocation { get; set; }
+        [JsonProperty("start_train")]
+        public bool StartTrain { get; set; }
+        [JsonProperty("train_weight")]
+        public int TrainWeight { get; set; }
+        [JsonProperty("train_length")]
+        public int TrainLength { get; set; }
+        [JsonProperty("formations_time")]
+        public int FormationsTime { get; set; }
+        [JsonProperty("disassemble_time")]
+        public int DisassembleTime { get; set; }
+        [JsonProperty("rpc_codes")]
+        public List<List<string>> RpcCodes { get; set; }
+        public List<Wagon> Wagons { get; set; }
+    }
     public class InputTimeTable
     {
-        List<TrainMovement> _trains = new List<TrainMovement>();
+        List<Train> _trains = new List<Train>();
 
-        public List<TrainMovement> Trains
+        public List<Train> Trains
         {
             get => _trains;
-            set => _trains = value;
         }
 
         public InputTimeTable()
         {
-            
-            using (StreamReader reader = new StreamReader(@"C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\HCCM\Data\TimeTable.csv"))
+            string json = File.ReadAllText(
+                @"C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\HCCM\Data\timetable_simulation.json");
+            List<Train> test = JsonConvert.DeserializeObject<List<Train>>(json);
+            test.ForEach(x =>
             {
-                string line; 
+                Trains.Add(x);
+            });
 
-                while ((line = reader.ReadLine()) != null)
-                {
-
-
-                    var result = Regex.Split(line, ",(?![^<]*>)");
-                    var trainSpecification = Regex.Split(Regex.Replace(result[0], "<|>", ""), "&"); 
-                    var id = int.Parse(trainSpecification[0]);
-                    var trainType = trainSpecification[1];
-                    var departure = result[1];
-                    var destination = result[2];
-                    var departureTime = DateTime.Parse(result[3]);
-                    var arrivalTime = DateTime.Parse(result[4]);
-                    var wagons = Regex.Split(Regex.Replace(result[5], "<|>", ""), "&");
-                    var startingNode = false;
-                    if (result.Length == 7) startingNode = bool.Parse(result[6]);
-                    Trains.Add(new TrainMovement(id, trainType, departure, destination, departureTime, arrivalTime, wagons.ToList(), startingNode));
-
-                }
-            }
         }
     }
 }

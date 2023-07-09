@@ -13,20 +13,21 @@ namespace RailCargo
     {
         public TrainNetworkSimulation(DateTime startTime, DateTime endTime) : base(startTime, endTime)
         {
-            //Defining the inputs
-            //var inputPath = new InputPath();
+            List<string> locations = new List<string>();
             var inputTimeTable = new InputTimeTable();
-            // Initialize all control units
-            // var routingPath = new CU_RoutingPath("CU_RoutingPath", null,
-            //     this, inputPath);
-            var bookingSystem = new CU_BookingSystem("CU_BOOKINGSYSTEM", null, this, inputTimeTable);
-            var network = new CU_Network("CU_NETWORK", bookingSystem, this);
-            var shuntingYards = new ControlUnit[5]; //TODO only test
-            var nodes = new List<String>() { "A", "B", "C", "D", "X" };
-            var index = 0;
-            foreach (var x in nodes)
+            inputTimeTable.Trains.ForEach(x =>
             {
-                var tmp = new CU_ShuntingYard(x, network, this);
+                locations.Add(x.EndLocation);
+                locations.Add(x.StartLocation);
+            });
+            locations = locations.Distinct().ToList();
+            var bookingSystem = new CuBookingSystem("CU_BOOKINGSYSTEM", null, this, inputTimeTable);
+            var network = new CuNetwork("CU_NETWORK", bookingSystem, this);
+            var shuntingYards = new ControlUnit[locations.Count]; //TODO only test
+            var index = 0;
+            foreach (var x in locations)
+            {
+                var tmp = new CuShuntingYard(x, network, this);
                 shuntingYards[index++] = tmp;
                 AllShuntingYards.Instance.SetYards(x, tmp);
             }

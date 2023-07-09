@@ -23,8 +23,7 @@ namespace RailCargo.HCCM.Events
             var wagonList = _train.ActualWagonList;
             foreach (var wagon in wagonList)
             {
-                var arrivedInEndDestination = false;
-                if (_train.EndLocation == wagon.EndDestination)
+                if (_train.ArrivalStation == wagon.EndLocation)
                 {
                     EventWagonArrivalInEndDestination wagonArrivalInEndDestination =
                         new EventWagonArrivalInEndDestination(EventType.Standalone, ParentControlUnit, wagon);
@@ -32,18 +31,16 @@ namespace RailCargo.HCCM.Events
                     continue;
                 }
 
-                var affectedShuntingYard = AllShuntingYards.Instance.GetYards(_train.EndLocation);
+                var affectedShuntingYard = AllShuntingYards.Instance.GetYards(_train.ArrivalStation);
                 //TODO dont think that we need to make a request as silo are already existing
                 // RequestForSilo requestForSilo = new RequestForSilo(Constants.REQUEST_FOR_SILO, wagon, time);
                 // affectedShuntingYard.AddRequest(requestForSilo);
                 var waitingForTrainSelectionWagon =
                     new ActivityWaitingForTrainSelectionWagon(affectedShuntingYard,
-                        Constants.ACTIVITY_WAITING_FOR_TRAIN_SELECTION_WAGON, true, wagon);
+                        Constants.ActivityWaitingForTrainSelectionWagon, true, wagon);
                 //wagon.AddActivity(waitingForTrainSelectionWagon);
-                SequentialEvents.Add(waitingForTrainSelectionWagon.StartEvent);
-                //Should wait now in arrival area
-                var requestSorting = new RequestSorting(Constants.REQUEST_FOR_SORTING, wagon, time);
-                affectedShuntingYard.AddRequest(requestSorting);
+               simEngine.AddScheduledEvent(waitingForTrainSelectionWagon.StartEvent, time.AddMinutes(_train.DisassembleTime));
+
             }
         }
 

@@ -4,10 +4,10 @@ namespace RailCargo.HCCM.Entities
 {
     public class EntityArrivalArea : Entity, IDynamicHoldingEntity
     {
-        private static int s_identifier;
+        private static int _sIdentifier;
         private List<Entity> _holdedEntities = new List<Entity>();
         
-        public EntityArrivalArea() : base(++s_identifier)
+        public EntityArrivalArea() : base(++_sIdentifier)
         {
         }
 

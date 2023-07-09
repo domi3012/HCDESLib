@@ -8,57 +8,90 @@ namespace RailCargo.HCCM.Entities
 {
     public class EntityTrain : Entity, IActiveEntity
     {
+        
+        private List<Activity> _currentActivities = new List<Activity>();
+        private List<EntityWagon> _actualWagonList = new List<EntityWagon>();
+
+        private readonly int _trainId;
+
         private readonly string _startLocation;
-        private readonly string _endLocation;
-        private readonly DateTime _departureTime;
+
+        private readonly DateTime _departurTime;
+
+        private readonly string _arrivalStation;
+
+        private readonly DateTime _arrivalTime;
+
+        private readonly int _formationsTime;
+
+        private readonly int _disassembleTime;
+
+        private readonly List<List<string>> _rpcCodes;
+
+        private readonly int _trainWeight;
+
+        private readonly int _trainLength;
+
+        private readonly bool _startTrain;
+
+        public List<Activity> CurrentActivities => _currentActivities;
+
+        public int TrainId => _trainId;
 
         public string StartLocation => _startLocation;
-        
 
-        public string EndLocation => _endLocation;
+        public DateTime DeparturTime => _departurTime;
 
-        public DateTime DepartureTime => _departureTime;
+        public string ArrivalStation => _arrivalStation;
 
         public DateTime ArrivalTime => _arrivalTime;
 
-        private readonly DateTime _arrivalTime;
-        private List<Activity> _currentActivities = new List<Activity>();
-        private readonly List<EntityWagon> _wagonList;
-        private List<EntityWagon> _actual_wagonList = new List<EntityWagon>();
-        //TODO somehow say it is the initial train
-        private bool is_Starting_Train = false;
+        public int FormationsTime => _formationsTime;
 
-        public bool IsStartingTrain
-        {
-            get => is_Starting_Train;
-            set => is_Starting_Train = value;
-        }
+        public int DisassembleTime => _disassembleTime;
+
+        public List<List<string>> RpcCodes => _rpcCodes;
+
+        public int TrainWeight => _trainWeight;
+
+        public int TrainLength => _trainLength;
+
+        public bool isStartTrain => _startTrain;
+
+        public List<EntityWagon> Wagons => _wagons;
+
+        private readonly List<EntityWagon> _wagons;
 
         public List<EntityWagon> ActualWagonList
         {
-            get => _actual_wagonList;
-            set => _actual_wagonList = value;
+            get => _actualWagonList;
+            set => _actualWagonList = value;
         }
+        
 
-        private readonly int _id;
-        private readonly string _trainType;
-
-        public string TrainType => _trainType;
-
-        public List<EntityWagon> WagonList => _wagonList;
-
-        public EntityTrain(int id, string trainType, string startLocation, string endLocation,
-            DateTime departureTime, DateTime arrivalTime, List<EntityWagon> wagonList, bool isStartingTrain) : base(id)
+        public EntityTrain(int trainId, string startLocation,
+            DateTime departureTime, string arrivalStation, DateTime arrivalTime, int formationsTime,
+            int disassembleTime,
+            List<List<string>> rpcCodes, int trainWeight, int trainLength, bool startTrain,
+            List<EntityWagon> wagons) : base(trainId)
         {
-            _id = id;
-            _trainType = trainType;
+            _trainId = trainId;
             _startLocation = startLocation;
-            _endLocation = endLocation;
-            _departureTime = departureTime;
+            _departurTime = departureTime;
+            _arrivalStation = arrivalStation;
             _arrivalTime = arrivalTime;
-            _wagonList = wagonList;
-            is_Starting_Train = isStartingTrain;
-            if (isStartingTrain) ActualWagonList = wagonList;
+            _formationsTime = formationsTime;
+            _disassembleTime = disassembleTime;
+            _rpcCodes = rpcCodes;
+            _trainWeight = trainWeight;
+            _trainLength = trainLength;
+            _startTrain = startTrain;
+            _wagons = wagons;
+            // TODO not sure if allowed as the wagons are then already matching
+            if (_startTrain)
+            {
+                _actualWagonList = wagons;
+            }
         }
 
         public override string ToString()

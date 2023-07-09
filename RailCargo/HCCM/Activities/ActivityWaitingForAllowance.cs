@@ -23,13 +23,13 @@ namespace RailCargo.HCCM.Activities
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
             ActivityDriveToDepartureArea driveToDepartureArea =
-                new ActivityDriveToDepartureArea(ParentControlUnit, _train, Constants.ACTIVITY_DRIVE_TO_DEPARTURE_AREA, false);
+                new ActivityDriveToDepartureArea(ParentControlUnit, _train, Constants.ActivityDriveToDepartureArea, false);
             EndEvent.SequentialEvents.Add(driveToDepartureArea.StartEvent);
         }
 
         public override string ToString()
         {
-            return Constants.ACTIVITY_WAITING_FOR_ALLOWANCE;
+            return Constants.ActivityWaitingForAllowance;
         }
 
         public override Activity Clone()

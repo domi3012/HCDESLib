@@ -26,13 +26,13 @@ namespace RailCargo.HCCM.Activities
         {
             //_wagon.Silo.CurrentCapactiy++;
             var waitingInSilo =
-                new ActivityWaitingInSilo(ParentControlUnit, Constants.ACTIVITY_WAITING_IN_SILO, true, _wagon);
+                new ActivityWaitingInSilo(ParentControlUnit, Constants.ActivityWaitingInSilo, true, _wagon);
             EndEvent.SequentialEvents.Add(waitingInSilo.StartEvent);
         }
 
         public override string ToString()
         {
-            return Constants.ACTIVITY_SHUNTING_WAGON;
+            return Constants.ActivityShuntingWagon;
         }
 
         public override Activity Clone()

@@ -28,13 +28,13 @@ namespace RailCargo.HCCM.Activities
         {
             Console.WriteLine("Received successfully a silo");
             var activityWagonCollection =
-                new ActivityWagonCollection(ParentControlUnit, Constants.ACTIVITY_WAGON_COLLECTION, false, _train);
+                new ActivityWagonCollection(ParentControlUnit, Constants.ActivityWagonCollection, false, _train);
             EndEvent.SequentialEvents.Add(activityWagonCollection.StartEvent);
         }
 
         public override string ToString()
         {
-            return Constants.ACTIVITY_WAITING_FOR_SILO;
+            return Constants.ActivityWaitingForSilo;
         }
 
         public override Activity Clone()

@@ -28,7 +28,7 @@ namespace RailCargo.HCCM.Activities
 
         public override string ToString()
         {
-            return Constants.ACTIVITY_WAITING_IN_SILO;
+            return Constants.ActivityWaitingInSilo;
         }
 
         public override Activity Clone()
