@@ -22,29 +22,45 @@ namespace RailCargo.HCCM.Entities
         private int _currentCapactiy;
         private readonly int _maxLength;
         private readonly int _maxWeight;
-        private readonly int _currentLength;
-        private readonly int _currentWeight;
+        private int _currentLength;
+        private int _currentWeight;
+        private readonly List<EntityWagon> _waitingWagons;
 
         public string Destination => _destination;
 
         public int MaxLength => _maxLength;
 
         public int MaxWeight => _maxWeight;
-        
-        public int CurrentLength => _currentLength;
 
-        public int CurrentWeight => _currentWeight;
 
+        public int CurrentLength
+        {
+            get => _currentLength;
+            set => _currentLength = value;
+        }
+
+        public int CurrentWeight
+        {
+            get => _currentWeight;
+            set => _currentWeight = value;
+        }
 
         public EntityTrain Train { get; set; }
 
-        public EntitySilo(string destination, int maxLength, int maxWeight) : base(++_sIdentifier)
+        public EntitySilo(string destination, int maxLength, int maxWeight, List<EntityWagon> wagons) : base(++_sIdentifier)
         {
             _destination = destination;
             _maxLength = maxLength;
             _maxWeight = maxWeight;
+            _waitingWagons = wagons;
             _currentLength = 0;
             _currentWeight = 0;
+            _waitingWagons.ForEach(x =>
+            {
+                _currentLength += x.WagonLength;
+                _currentWeight += x.WagonMass;
+            });
+            
         }
 
         public override string ToString()
@@ -54,7 +70,7 @@ namespace RailCargo.HCCM.Entities
 
         public override Entity Clone()
         {
-            return new EntitySilo(_destination, _maxLength, _maxWeight);
+            return new EntitySilo(_destination, _maxLength, _maxWeight, _waitingWagons);
         }
 
         public List<Activity> GetCurrentActivities()

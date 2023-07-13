@@ -129,6 +129,7 @@
         <Compile Include="HCCM\Requests\RequestSiloStatus.cs" />
         <Compile Include="HCCM\Requests\RequestDepartureAllowed.cs" />
         <Compile Include="HCCM\Requests\RequestSorting.cs" />
+        <Compile Include="HCCM\Requests\RequestTrainContinuation.cs" />
         <Compile Include="HCCM\staticVariables\AllShuntingYards.cs" />
         <Compile Include="HCCM\staticVariables\Constants.cs" />
         <Compile Include="HCCM\staticVariables\Helper.cs" />

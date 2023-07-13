@@ -12,7 +12,8 @@ namespace RailCargo.HCCM.Events
     {
         private readonly EntityTrain _train;
 
-        public EventWagonArrival(EventType type, ControlUnit parentControlUnit, EntityTrain train) : base(type,
+        public 
+            EventWagonArrival(EventType type, ControlUnit parentControlUnit, EntityTrain train) : base(type,
             parentControlUnit)
         {
             _train = train;
@@ -23,6 +24,10 @@ namespace RailCargo.HCCM.Events
             var wagonList = _train.ActualWagonList;
             foreach (var wagon in wagonList)
             {
+                if (wagon.CurrentTrain != null)
+                {
+                    continue;
+                }
                 if (_train.ArrivalStation == wagon.EndLocation)
                 {
                     EventWagonArrivalInEndDestination wagonArrivalInEndDestination =
@@ -37,9 +42,8 @@ namespace RailCargo.HCCM.Events
                 // affectedShuntingYard.AddRequest(requestForSilo);
                 var waitingForTrainSelectionWagon =
                     new ActivityWaitingForTrainSelectionWagon(affectedShuntingYard,
-                        Constants.ActivityWaitingForTrainSelectionWagon, true, wagon);
-                //wagon.AddActivity(waitingForTrainSelectionWagon);
-               simEngine.AddScheduledEvent(waitingForTrainSelectionWagon.StartEvent, time.AddMinutes(_train.DisassembleTime));
+                        Constants.ActivityWaitingForTrainSelectionWagon, true, wagon, time);
+                simEngine.AddScheduledEvent(waitingForTrainSelectionWagon.StartEvent, time.AddMinutes(_train.DisassembleTime));
 
             }
         }

@@ -21,7 +21,7 @@ namespace RailCargo.HCCM.Events
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)
         {
             // //TODO is this correct to stop waiting for wagon collection
-            _train.StopCurrentActivities(time, simEngine);
+            //_train.StopCurrentActivities(time, simEngine);
             var affectedShuntingYard = AllShuntingYards.Instance.GetYards(_train.StartLocation);
             //TODO who triggers this?
             var waitingForAllowance = new ActivityWaitingForAllowance(affectedShuntingYard, Constants.ActivityWaitingForAllowance, false, _train);

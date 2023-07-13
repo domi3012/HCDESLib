@@ -61,6 +61,17 @@ namespace RailCargo.HCCM.Entities
         public List<EntityWagon> Wagons => _wagons;
 
         private readonly List<EntityWagon> _wagons;
+        private readonly bool _append;
+        private readonly bool _pop;
+        private readonly bool _endTrain;
+
+        public bool StartTrain => _startTrain;
+
+        public bool Append => _append;
+
+        public bool Pop => _pop;
+
+        public bool EndTrain => _endTrain;
 
         public List<EntityWagon> ActualWagonList
         {
@@ -72,8 +83,8 @@ namespace RailCargo.HCCM.Entities
         public EntityTrain(int trainId, string startLocation,
             DateTime departureTime, string arrivalStation, DateTime arrivalTime, int formationsTime,
             int disassembleTime,
-            List<List<string>> rpcCodes, int trainWeight, int trainLength, bool startTrain,
-            List<EntityWagon> wagons) : base(trainId)
+            List<List<string>> rpcCodes, int trainWeight, int trainLength, bool startTrain, bool endTrain,
+            List<EntityWagon> wagons, bool append, bool pop) : base(trainId)
         {
             _trainId = trainId;
             _startLocation = startLocation;
@@ -83,15 +94,14 @@ namespace RailCargo.HCCM.Entities
             _formationsTime = formationsTime;
             _disassembleTime = disassembleTime;
             _rpcCodes = rpcCodes;
-            _trainWeight = trainWeight;
+            _trainWeight = trainWeight * 1000;
             _trainLength = trainLength;
             _startTrain = startTrain;
+            _endTrain = endTrain;
             _wagons = wagons;
-            // TODO not sure if allowed as the wagons are then already matching
-            if (_startTrain)
-            {
-                _actualWagonList = wagons;
-            }
+            _append = append;
+            _pop = pop;
+
         }
 
         public override string ToString()

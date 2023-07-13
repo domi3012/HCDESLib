@@ -49,11 +49,18 @@ namespace RailCargo.HCCM.Events
                 case "VBF":
                     //RequestForSilo requestForSilo = new RequestForSilo(Constants.REQUEST_FOR_SILO, _train, time);
                     //ParentControlUnit.AddRequest(requestForSilo);
-                    EventWagonArrival wagonArrival =
-                        new EventWagonArrival(EventType.Standalone, ParentControlUnit, _train);
+                    _train.ActualWagonList.ForEach(x => x.CurrentTrain = null);
+                    var requestTrainContinuation =
+                        new RequestTrainContinuation(Constants.RequestTrainContinuation, _train, time);
+                    var affectedShuntingYard = AllShuntingYards.Instance.GetYards(_train.ArrivalStation);
+                    affectedShuntingYard.AddRequest(requestTrainContinuation);
+                    
+                   // var wagonArrival =
+                    //    new EventWagonArrival(EventType.Standalone, ParentControlUnit, _train);
+                    
                     //TODO add zerlegezeiten
                     //simEngine.AddScheduledEvent();
-                    SequentialEvents.Add(wagonArrival);
+                    //SequentialEvents.Add(wagonArrival);
                     break;
                 default:
                     Console.WriteLine("Not implemented typ");

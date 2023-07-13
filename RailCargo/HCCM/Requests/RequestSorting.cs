@@ -4,12 +4,18 @@ namespace RailCargo.HCCM.Requests
 {
     public class RequestSorting : ActivityRequest
     {
-        public RequestSorting(string activity, Entity[] origin, DateTime time) : base(activity, origin, time)
+        private readonly DateTime _arrivalTime;
+
+        public DateTime ArrivalTime => _arrivalTime;
+
+        public RequestSorting(string activity, Entity[] origin, DateTime time, DateTime arrivalTime) : base(activity, origin, time)
         {
+            _arrivalTime = arrivalTime;
         }
 
-        public RequestSorting(string activity, Entity origin, DateTime time) : base(activity, origin, time)
+        public RequestSorting(string activity, Entity origin, DateTime time, DateTime arrivalTime) : base(activity, origin, time)
         {
+            _arrivalTime = arrivalTime;
         }
     }
 }

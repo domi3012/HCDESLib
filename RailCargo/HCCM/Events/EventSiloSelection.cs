@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using RailCargo.HCCM.Activities;
 using RailCargo.HCCM.Entities;
 using RailCargo.HCCM.staticVariables;
@@ -16,12 +17,12 @@ namespace RailCargo.HCCM.Events
 
         public EntitySilo Silo => _silo;
 
-        public EventSiloSelection(ControlUnit parentControlUnit, EntityTrain train) : base(EventType.Standalone,
+        public EventSiloSelection(ControlUnit parentControlUnit, EntityTrain train, List<EntityWagon> waitingWagons) : base(EventType.Standalone,
             parentControlUnit)
         {
             _train = train;
             // TODO include the size of train
-            _silo = new EntitySilo(_train.ArrivalStation, train.TrainLength, train.TrainWeight);
+            _silo = new EntitySilo(_train.ArrivalStation, train.TrainLength, train.TrainWeight, waitingWagons);
         }
 
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)

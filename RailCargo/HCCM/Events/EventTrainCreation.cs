@@ -38,10 +38,10 @@ namespace RailCargo.HCCM.Events
                     affectedShuntingYard.AddRequest(new Requests.RequestForSilo(Constants.RequestForSilo,
                         _entityTrain, time));
                     //zug wartet hier
-                    var waitingForSilo = new ActivityWaitingForSilo(affectedShuntingYard,
-                        Constants.ActivityWaitingForSilo, true, _entityTrain);
-                    //_entityTrain.AddActivity(waitingForSilo);
-                    SequentialEvents.Add(waitingForSilo.StartEvent);
+                    // var waitingForSilo = new ActivityWaitingForSilo(affectedShuntingYard,
+                    //     Constants.ActivityWaitingForSilo, true, _entityTrain);
+                    // //_entityTrain.AddActivity(waitingForSilo);
+                    // SequentialEvents.Add(waitingForSilo.StartEvent);
                     // var trainDepartureIncoming =
                     //     new EventTrainDepartureIncoming(EventType.Standalone, _entityTrain, affectedShuntingYard);
                     // simEngine.AddScheduledEvent(trainDepartureIncoming, _entityTrain.DepartureTime.AddMinutes(-15));

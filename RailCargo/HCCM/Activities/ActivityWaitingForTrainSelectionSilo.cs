@@ -22,10 +22,10 @@ namespace RailCargo.HCCM.Activities
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
-            ActivityShuntingWagons shuntingWagons =
-                new ActivityShuntingWagons(ParentControlUnit, Constants.ActivityShuntingWagon, false, _silo);
-            //_silo.AddActivity(shuntingWagons);
-            EndEvent.SequentialEvents.Add(shuntingWagons.StartEvent);
+            // ActivityShuntingWagons shuntingWagons =
+            //     new ActivityShuntingWagons(ParentControlUnit, Constants.ActivityShuntingWagon, false, _silo);
+            // //_silo.AddActivity(shuntingWagons);
+            // EndEvent.SequentialEvents.Add(shuntingWagons.StartEvent);
         }
 
         public override string ToString()

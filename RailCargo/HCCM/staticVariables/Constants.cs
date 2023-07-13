@@ -17,6 +17,7 @@ namespace RailCargo.HCCM.staticVariables
         public static string RequestForDeparture = "REQUEST_FOR_DEPARTURE";
         public static string RequestForSorting = "REQUEST_FOR_SORTING";
         public static string RequestForSiloStatus = "REQUEST_FOR_SILO_STATUS";
+        public static string RequestTrainContinuation = "REQUEST_TRAIN_CONTINUATION";
 
         //---------------------- activity
         public static readonly string ActivityWaitingForSilo = "ACTIVITY_WAITING_FOR_SILO";
@@ -32,5 +33,6 @@ namespace RailCargo.HCCM.staticVariables
         public static string ActivityTrainPreparation = "ACTIVITY_TRAIN_PREPARATION";
         public static string ActivityShuntingWagons = "ACTIVITY_SHUNTING_WAGONS";
         public static string ActivityTrainWaitingForDeparture = "ACTIVITY_TRAIN_WAITING_FOR_DEPARTURE";
+        
     }
 }
