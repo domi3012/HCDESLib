@@ -52,10 +52,10 @@ namespace RailCargo.HCCM.Entities
             _destination = destination;
             _maxLength = maxLength;
             _maxWeight = maxWeight;
-            _waitingWagons = wagons;
+            _wagonList = wagons;
             _currentLength = 0;
             _currentWeight = 0;
-            _waitingWagons.ForEach(x =>
+            wagons.ForEach(x =>
             {
                 _currentLength += x.WagonLength;
                 _currentWeight += x.WagonMass;

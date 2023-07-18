@@ -23,6 +23,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using RailCargo.HCCM.ControlUnits;
 using WPFVisualizationBase;
 
 namespace HiCoSimulator
@@ -449,7 +450,8 @@ namespace HiCoSimulator
             SimulationModel.CreateSimulationResultsAfterStop();
             _simulationRunning = false;
             _simulationInitialized = false;
-            SimulationModel = null;
+            //SimulationModel = null;
+            //SimulationModel.ControlUnits[].
         } // end of ActionsAfterFinishingSimulationRun
 
         #endregion
@@ -492,8 +494,8 @@ namespace HiCoSimulator
             //     3,
             //     5,
             //     10);
-            _simulationModel = new TrainNetworkSimulation((DateTime)DatePickerStartDate.SelectedDate,
-                (DateTime)DatePickerEndDate.SelectedDate);
+            _simulationModel = new TrainNetworkSimulation(DateTime.Parse("2023-02-01 00:00:00"),
+                DateTime.Parse("2023-03-31 23:59:59"));
 
             _simulationEngine = new SimulationEngine();
             SimulationEngine.LoggingEngine = new BaseLoggingEngine(SimulationModel);

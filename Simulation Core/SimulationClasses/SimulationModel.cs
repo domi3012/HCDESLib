@@ -199,8 +199,8 @@ namespace SimulationCore.SimulationClasses
         /// Virtual method to be overwritten if actions at end of model execution are required.
         /// </summary>
         public virtual void CreateSimulationResultsAfterStop()
-        { 
-        
+        {
+
         } // end of DisplaySimulationResultsAfterStop
 
         #endregion

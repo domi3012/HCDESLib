@@ -37,9 +37,6 @@ namespace RailCargo.HCCM.Events
                 }
 
                 var affectedShuntingYard = AllShuntingYards.Instance.GetYards(_train.ArrivalStation);
-                //TODO dont think that we need to make a request as silo are already existing
-                // RequestForSilo requestForSilo = new RequestForSilo(Constants.REQUEST_FOR_SILO, wagon, time);
-                // affectedShuntingYard.AddRequest(requestForSilo);
                 var waitingForTrainSelectionWagon =
                     new ActivityWaitingForTrainSelectionWagon(affectedShuntingYard,
                         Constants.ActivityWaitingForTrainSelectionWagon, true, wagon, time);

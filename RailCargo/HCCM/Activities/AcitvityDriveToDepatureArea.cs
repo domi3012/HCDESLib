@@ -1,4 +1,5 @@
 using System;
+using RailCargo.HCCM.ControlUnits;
 using RailCargo.HCCM.Entities;
 using RailCargo.HCCM.Requests;
 using RailCargo.HCCM.staticVariables;
@@ -19,12 +20,23 @@ namespace RailCargo.HCCM.Activities
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)
         {
             //TODO is 10 minutes accurate
-            simEngine.AddScheduledEvent(EndEvent, time.AddMinutes(10));
+            simEngine.AddScheduledEvent(EndEvent, time.AddMinutes(_train.FormationsTime).AddTicks(-1));
         }
 
         public override void StateChangeEndEvent(DateTime time, ISimulationEngine simEngine)
         {
             //Request for Ausfahrt
+            //Helper.Print("Calculated wagons " + _train.TrainId.ToString() + " -> " + _train.ArrivalStation);
+            ((CuShuntingYard)ParentControlUnit).calculatePossibleWagons(_train, _train.Silo);
+            //foreach (var wagon in _train.Wagons)
+            //{
+            //    Helper.Print(wagon.WagonId.ToString());
+            //}
+            //Helper.Print("Actural wagons "+ _train.TrainId.ToString() + " -> " + _train.ArrivalStation);
+            //foreach (var wagon in _train.ActualWagonList)
+            //{
+            //    Helper.Print(wagon.WagonId.ToString());
+            //}
             var networkCu = ParentControlUnit.ParentControlUnit;
             RequestForDeparture requestForDeparture =
                 new RequestForDeparture(Constants.RequestForDeparture, _train, time);

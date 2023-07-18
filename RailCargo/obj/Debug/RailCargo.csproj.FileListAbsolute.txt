@@ -51,3 +51,9 @@ C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\bin\Debug\System.Threading.Ta
 C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\bin\Debug\System.ValueTuple.xml
 C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\bin\Debug\Newtonsoft.Json.dll
 C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\bin\Debug\Newtonsoft.Json.xml
+C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\bin\Debug\EPPlus.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\bin\Debug\EPPlus.Interfaces.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\bin\Debug\EPPlus.System.Drawing.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\bin\Debug\EPPlus.xml
+C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml

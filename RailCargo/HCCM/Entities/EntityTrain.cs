@@ -64,6 +64,14 @@ namespace RailCargo.HCCM.Entities
         private readonly bool _append;
         private readonly bool _pop;
         private readonly bool _endTrain;
+        private EntitySilo _silo;
+
+        public EntitySilo Silo
+        {
+            get => _silo;
+            set => _silo = value;
+        }
+
 
         public bool StartTrain => _startTrain;
 
@@ -101,6 +109,7 @@ namespace RailCargo.HCCM.Entities
             _wagons = wagons;
             _append = append;
             _pop = pop;
+            _silo = null;
 
         }
 

@@ -166,3 +166,9 @@ C:\Users\koenig11\RiderProjects\HCDESLib\HiCoSimulator\HiCoSimulator\obj\Debug\H
 C:\Users\koenig11\RiderProjects\HCDESLib\HiCoSimulator\HiCoSimulator\bin\Debug\RailCargo.dll.config
 C:\Users\koenig11\RiderProjects\HCDESLib\HiCoSimulator\HiCoSimulator\bin\Debug\Newtonsoft.Json.dll
 C:\Users\koenig11\RiderProjects\HCDESLib\HiCoSimulator\HiCoSimulator\bin\Debug\Newtonsoft.Json.xml
+C:\Users\koenig11\RiderProjects\HCDESLib\HiCoSimulator\HiCoSimulator\bin\Debug\EPPlus.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\HiCoSimulator\HiCoSimulator\bin\Debug\EPPlus.Interfaces.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\HiCoSimulator\HiCoSimulator\bin\Debug\EPPlus.System.Drawing.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\HiCoSimulator\HiCoSimulator\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\koenig11\RiderProjects\HCDESLib\HiCoSimulator\HiCoSimulator\bin\Debug\EPPlus.xml
+C:\Users\koenig11\RiderProjects\HCDESLib\HiCoSimulator\HiCoSimulator\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml

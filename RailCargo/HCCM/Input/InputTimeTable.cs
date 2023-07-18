@@ -55,6 +55,7 @@ namespace RailCargo.HCCM.Input
         public List<Train> Trains
         {
             get => _trains;
+            set => _trains = value; 
         }
 
         public InputTimeTable()

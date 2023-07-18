@@ -20,7 +20,7 @@ namespace RailCargo.HCCM.Events
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)
         {
             ActivityShuntingWagons shuntingWagons =
-                new ActivityShuntingWagons(ParentControlUnit, Constants.ActivityShuntingWagon, false, _silo);
+                new ActivityShuntingWagons(ParentControlUnit, Constants.ActivityShuntingWagons, false, _silo);
             //_silo.AddActivity(shuntingWagons);
             SequentialEvents.Add(shuntingWagons.StartEvent);
             // var waitingForTrainSelectionSilo = new ActivityWaitingForTrainSelectionSilo(ParentControlUnit,

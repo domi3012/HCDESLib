@@ -15,6 +15,13 @@ namespace RailCargo.HCCM.ControlUnits
     public class CuBookingSystem : ControlUnit
     {
         private readonly InputTimeTable _input;
+        private List<EntityWagon> _allWagons = new List<EntityWagon>();
+
+        public List<EntityWagon> AllWagons
+        {
+            get => _allWagons;
+            set => _allWagons = value;
+        }
 
         public CuBookingSystem(string name, ControlUnit parentControlUnit, SimulationModel parentSimulationModel,
             InputTimeTable input) : base(name, parentControlUnit, parentSimulationModel)
@@ -39,6 +46,7 @@ namespace RailCargo.HCCM.ControlUnits
                 var wagonEntity = new EntityWagon(wagonId, wagonLength, wagonMass, startLocation, endLocation,
                     destinationRpc, endTime,
                     acceptanceDate);
+                _allWagons.Add(wagonEntity);
                 var affectedShuntingYard = AllShuntingYards.Instance.GetYards(startLocation);
                 var waitingForTrainSelectionWagon =
                     new ActivityWaitingForTrainSelectionWagon(affectedShuntingYard,
@@ -48,6 +56,7 @@ namespace RailCargo.HCCM.ControlUnits
                 simEngine.AddScheduledEvent(waitingForTrainSelectionWagon.StartEvent, wagonEntity.AcceptanceDate.AddTicks(ticks));
                 ticks += 1;
             }
+            _input.Wagons = new List<Wagon>();
 
             foreach (var train in _input.Trains)
             {
@@ -111,6 +120,8 @@ namespace RailCargo.HCCM.ControlUnits
                 //         scheduledEntityTrain);
                 // simEngine.AddScheduledEvent(trainDepartureTimeArrived, train.Departure);
             }
+
+            _input.Trains = new List<Train>();
         }
 
         private static void addTrainToShuntingYard(string startStation, int trainId, EntityTrain scheduledEntityTrain)

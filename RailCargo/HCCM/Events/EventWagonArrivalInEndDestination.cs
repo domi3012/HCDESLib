@@ -1,5 +1,6 @@
 using System;
 using RailCargo.HCCM.Entities;
+using RailCargo.HCCM.staticVariables;
 using SimulationCore.HCCMElements;
 using SimulationCore.SimulationClasses;
 
@@ -16,7 +17,12 @@ namespace RailCargo.HCCM.Events
 
         protected override void StateChange(DateTime time, ISimulationEngine simEngine)
         {
-            Console.WriteLine("YEAH you did it");
+            var calculatedTime = _wagon.EndTime;
+            var real_time = time;
+            _wagon.RealTime = time;
+            _wagon.TimeDelta = Math.Abs((calculatedTime - real_time).TotalMinutes);
+            _wagon.CurrentTrain = null;
+            //Helper.Print("Arrival Time for " + _wagon.WagonId.ToString() +" " + _wagon.TimeDelta.ToString());
         }
 
         public override string ToString()

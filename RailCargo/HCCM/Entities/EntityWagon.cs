@@ -65,6 +65,8 @@ namespace RailCargo.HCCM.Entities
         public string DestinationRpc => _destinationRpc;
 
         public string EndLocation => _endLocation;
+        public double TimeDelta { get; set; }
+        public DateTime RealTime { get; set; }
 
         public override string ToString()
         {
