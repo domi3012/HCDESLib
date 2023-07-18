@@ -91,6 +91,8 @@ namespace RailCargo
                     worksheet.Cells[counter, 1].Value = wagon.WagonId.ToString();  // Writes "Hello" to cell A1
                     worksheet.Cells[counter, 2].Value = wagon.TimeDelta.ToString();
                     worksheet.Cells[counter, 3].Value = wagon.EndTime.ToString();
+                    var realtime = wagon.RealTime.ToString();
+                    if (realtime == "01.01.0001 00:00:00") continue;
                     worksheet.Cells[counter, 4].Value = wagon.RealTime.ToString();
                     counter += 1;
                 }

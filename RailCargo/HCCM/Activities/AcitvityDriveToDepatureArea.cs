@@ -27,11 +27,12 @@ namespace RailCargo.HCCM.Activities
         {
             //Request for Ausfahrt
             //Helper.Print("Calculated wagons " + _train.TrainId.ToString() + " -> " + _train.ArrivalStation);
-            if (_train.TrainId == 56501)
+            if (_train.TrainId == 45854)
             {
                 Helper.Print("wtf");
             }
             ((CuShuntingYard)ParentControlUnit).calculatePossibleWagons(_train, _train.Silo);
+            _train.ActualWagonList.ForEach(x => x.StopCurrentActivities(time, simEngine));
             //foreach (var wagon in _train.Wagons)
             //{
             //    Helper.Print(wagon.WagonId.ToString());

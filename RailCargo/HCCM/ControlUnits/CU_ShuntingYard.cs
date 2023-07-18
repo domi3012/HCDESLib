@@ -74,6 +74,7 @@ namespace RailCargo.HCCM.ControlUnits
             foreach (var request in requestForTrainContinuation)
             {
                 var train = (EntityTrain)request.Origin[0];
+                
                 var trainId = train.TrainId;
                 var possibleTrains = (Trains.ContainsKey(trainId)) ? Trains[trainId] : null;
                 if (possibleTrains != null)
@@ -84,11 +85,10 @@ namespace RailCargo.HCCM.ControlUnits
                 }
 
                 RemoveRequest(request);
-                if (possibleTrains != null && possibleTrains.Count == 0) continue;
-                var possibleTrain = possibleTrains?[0];
+                //if (possibleTrains != null && possibleTrains.Count == 0) continue;
                 foreach (var wagon in train.ActualWagonList)
                 {
-                    if (wagon.WagonId == 338149340089)
+                    if (wagon.WagonId == 315659516209)
                     {
                         Helper.Print("Wtf");
                     }
@@ -101,6 +101,12 @@ namespace RailCargo.HCCM.ControlUnits
                         continue;
                     }
 
+                    EntityTrain possibleTrain = null;
+                    if (possibleTrains != null && possibleTrains.Count != 0)
+                    {
+                        possibleTrain = possibleTrains[0];
+                    }
+                    
                     if (possibleTrain != null &&
                         (check_rpcs(possibleTrain.RpcCodes, wagon.DestinationRpc) || !train.Pop))
                     {
@@ -132,6 +138,10 @@ namespace RailCargo.HCCM.ControlUnits
                     if (_waitingWagons.ContainsKey(train.ArrivalStation))
                     {
                         waitingWagons = _waitingWagons[train.ArrivalStation];
+                        if (waitingWagons.Where(x => x.WagonId == 315659516209).ToList().Count >= 1)
+                        {
+                            Helper.Print("Wtf");
+                        }
                         _waitingWagons.Remove(train.ArrivalStation);
                     }
 
@@ -156,17 +166,27 @@ namespace RailCargo.HCCM.ControlUnits
             foreach (var request in requestsForSorting)
             {
                 var wagon = (EntityWagon)request.Origin[0];
-
+                if (Name == "81011841" && wagon.WagonId == 315659516209) Helper.Print("tes");
                 var wagon_rpc_code = wagon.DestinationRpc;
                 var has_train = false;
+                if ((time - ((RequestSorting)request).ArrivalTime).TotalDays >= 0.5)
+                {
+                    wagon.StopCurrentActivities(((RequestSorting)request).ArrivalTime, simEngine);
+                    RemoveRequest(request);
+                    var wagonArrived = new EventWagonArrivalInEndDestination(EventType.Standalone, this, wagon);
+                    wagonArrived.Trigger(((RequestSorting)request).ArrivalTime, simEngine);
+                    continue;
+                }
                 foreach (var silos in _silos.Values)
                 {
+                    if(has_train) break;
                     var possible_train = silos.First().Train;
                     var availableSilo = check_rpcs(possible_train.RpcCodes, wagon_rpc_code);
                     if (availableSilo)
                     {
                         foreach (var silo in silos)
                         {
+                            
                             var maxLength = silo.MaxLength;
                             var maxWeight = silo.MaxWeight;
                             var currentLength = silo.CurrentLength;
@@ -175,6 +195,10 @@ namespace RailCargo.HCCM.ControlUnits
                             if (currentLength + wagon.WagonLength <= maxLength &&
                                 (currentWeight + wagon.WagonMass) <= (maxWeight))
                             {
+                                if (wagon.WagonId == 315659516209)
+                                {
+                                    Helper.Print("Wtf");
+                                }
                                 has_train = true;
                                 wagon.Silo = silo;
                                 wagon.StopCurrentActivities(time, simEngine);
@@ -182,22 +206,6 @@ namespace RailCargo.HCCM.ControlUnits
                                 break;
                             }
                         }
-                    }
-                }
-
-                if (!has_train)
-                {
-                    // Not really happy with the solution but problem is that we dont know if a train will create a silo into right direction
-                    if ((time - ((RequestSorting)request).ArrivalTime).TotalDays >= 1)
-                    {
-                        if (wagon.WagonId == 338149340089)
-                        {
-                            Helper.Print("Wtf");
-                        }
-                        wagon.StopCurrentActivities(((RequestSorting)request).ArrivalTime, simEngine);
-                        RemoveRequest(request);
-                        var wagonArrived = new EventWagonArrivalInEndDestination(EventType.Standalone, this, wagon);
-                        wagonArrived.Trigger(((RequestSorting)request).ArrivalTime, simEngine);
                     }
                 }
             }
@@ -229,7 +237,7 @@ namespace RailCargo.HCCM.ControlUnits
             {
                 //Idea close silo, and create a request with the wagons on the closed silo, which is appended to the train when departure time has arrived
                 var train = (EntityTrain)request.Origin[0];
-                if (train.TrainId == 56501)
+                if (train.TrainId == 45854)
                 {
                     Helper.Print("wtf");
                 }
@@ -279,6 +287,10 @@ namespace RailCargo.HCCM.ControlUnits
             {
                 silo.WagonList.ForEach(x =>
                 {
+                    if (x.WagonId == 315659516209)
+                    {
+                        Helper.Print("Wtf");
+                    }
                     if ((current_length + x.WagonLength) > train_length ||
                         (current_weight + x.WagonMass) > train_weight)
                     {
