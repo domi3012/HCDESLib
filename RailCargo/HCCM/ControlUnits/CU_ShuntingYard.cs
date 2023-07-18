@@ -79,7 +79,8 @@ namespace RailCargo.HCCM.ControlUnits
                 if (possibleTrains != null)
                 {
                     possibleTrains = possibleTrains
-                        .Where(x => Math.Abs((x.DeparturTime - train.ArrivalTime).TotalDays) < 1).ToList();
+                        .Where(x => 0 < (x.DeparturTime - train.ArrivalTime).TotalDays &&
+                                    (x.DeparturTime - train.ArrivalTime).TotalDays < 1).ToList();
                 }
 
                 RemoveRequest(request);
@@ -87,7 +88,7 @@ namespace RailCargo.HCCM.ControlUnits
                 var possibleTrain = possibleTrains?[0];
                 foreach (var wagon in train.ActualWagonList)
                 {
-                    if (wagon.WagonId == 318128930951)
+                    if (wagon.WagonId == 338149340089)
                     {
                         Helper.Print("Wtf");
                     }
@@ -155,10 +156,7 @@ namespace RailCargo.HCCM.ControlUnits
             foreach (var request in requestsForSorting)
             {
                 var wagon = (EntityWagon)request.Origin[0];
-                if (wagon.WagonId == 318128930951)
-                {
-                    Helper.Print("Wtf");
-                }
+
                 var wagon_rpc_code = wagon.DestinationRpc;
                 var has_train = false;
                 foreach (var silos in _silos.Values)
@@ -192,6 +190,10 @@ namespace RailCargo.HCCM.ControlUnits
                     // Not really happy with the solution but problem is that we dont know if a train will create a silo into right direction
                     if ((time - ((RequestSorting)request).ArrivalTime).TotalDays >= 1)
                     {
+                        if (wagon.WagonId == 338149340089)
+                        {
+                            Helper.Print("Wtf");
+                        }
                         wagon.StopCurrentActivities(((RequestSorting)request).ArrivalTime, simEngine);
                         RemoveRequest(request);
                         var wagonArrived = new EventWagonArrivalInEndDestination(EventType.Standalone, this, wagon);
@@ -227,6 +229,11 @@ namespace RailCargo.HCCM.ControlUnits
             {
                 //Idea close silo, and create a request with the wagons on the closed silo, which is appended to the train when departure time has arrived
                 var train = (EntityTrain)request.Origin[0];
+                if (train.TrainId == 56501)
+                {
+                    Helper.Print("wtf");
+                }
+
                 train = Trains[train.TrainId].Where(x => x == train).ToList()[0];
                 RemoveRequest(request);
                 train.GetCurrentActivities().First().EndEvent.Trigger(time, simEngine);
@@ -235,6 +242,7 @@ namespace RailCargo.HCCM.ControlUnits
                     train.Silo = null;
                     continue;
                 }
+
                 var silo = _silos[train.ArrivalStation].First();
 
                 silo.StopCurrentActivities(time, simEngine);

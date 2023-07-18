@@ -4,8 +4,11 @@ using System.IO;
 using System.Linq;
 using OfficeOpenXml;
 using RailCargo.HCCM.ControlUnits;
+using RailCargo.HCCM.Entities;
+using RailCargo.HCCM.Events;
 using SimulationCore.SimulationClasses;
 using RailCargo.HCCM.Input;
+using RailCargo.HCCM.Requests;
 using RailCargo.HCCM.staticVariables;
 using SimulationCore.HCCMElements;
 
@@ -16,6 +19,7 @@ namespace RailCargo
     {
         private readonly CuNetwork network;
         private readonly CuBookingSystem bookingSystem;
+        private readonly ControlUnit[] shuntingYards;
 
         public TrainNetworkSimulation(DateTime startTime, DateTime endTime) : base(startTime, endTime)
         {
@@ -29,7 +33,7 @@ namespace RailCargo
             locations = locations.Distinct().ToList();
             bookingSystem = new CuBookingSystem("CU_BOOKINGSYSTEM", null, this, inputTimeTable);
             network = new CuNetwork("CU_NETWORK", bookingSystem, this);
-            var shuntingYards = new ControlUnit[locations.Count]; //TODO only test
+            shuntingYards = new ControlUnit[locations.Count]; //TODO only test
             var index = 0;
             foreach (var x in locations)
             {
@@ -57,6 +61,22 @@ namespace RailCargo
 
         public override void CreateSimulationResultsAfterStop()
         {
+            foreach (var yard in shuntingYards)
+            {
+                var sortingRequest = yard.RAEL.Where(p => p.Activity == Constants.RequestForSorting).Cast<RequestSorting>()
+                    .ToList();
+                if (sortingRequest.Count != 0)
+                {
+                    foreach (var request in sortingRequest)
+                    {
+                        var wagon = (EntityWagon)request.Origin[0];
+                        var calculatedTime = wagon.EndTime;
+                        var real_time = ((RequestSorting)request).ArrivalTime;
+                        wagon.RealTime = real_time;
+                        wagon.TimeDelta = Math.Abs((calculatedTime - real_time).TotalMinutes);
+                    }
+                }
+            }
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // Use this for EPPlus 5.0 onwards
             using (ExcelPackage package = new ExcelPackage(new FileInfo(@"C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\result.xlsx")))
             {
