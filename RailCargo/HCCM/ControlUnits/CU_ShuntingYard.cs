@@ -47,14 +47,14 @@ namespace RailCargo.HCCM.ControlUnits
                     var check_rpc = int.Parse(rpc_code_to_check);
                     var from_int = int.Parse(from.Substring(0, 4));
                     var until_int = int.Parse(until.Substring(0, 4));
-                    if (from_int <= check_rpc && check_rpc >= until_int)
+                    if (from_int <= check_rpc && check_rpc <= until_int)
                     {
                         return true;
                     }
                 }
 
                 rpc_code_to_check = rpc_code_to_check.Replace("-", "");
-                if (int.Parse(from) <= int.Parse(rpc_code_to_check) && int.Parse(rpc_code_to_check) >= int.Parse(until))
+                if (int.Parse(from) <= int.Parse(rpc_code_to_check) && int.Parse(rpc_code_to_check) <= int.Parse(until))
                 {
                     return true;
                 }
@@ -88,12 +88,12 @@ namespace RailCargo.HCCM.ControlUnits
                 //if (possibleTrains != null && possibleTrains.Count == 0) continue;
                 foreach (var wagon in train.ActualWagonList)
                 {
-                    if (wagon.WagonId == 315659516209)
+                    if (wagon.WagonId == 315166661407)
                     {
                         Helper.Print("Wtf");
                     }
 
-                    if (wagon.EndLocation == Name)
+                    if (wagon.EndLocation == Name || (wagon.EndLocation == "-1" && !Name.StartsWith("81")))
                     {
                         EventWagonArrivalInEndDestination wagonArrivalInEndDestination =
                             new EventWagonArrivalInEndDestination(EventType.Standalone, ParentControlUnit, wagon);
@@ -138,7 +138,7 @@ namespace RailCargo.HCCM.ControlUnits
                     if (_waitingWagons.ContainsKey(train.ArrivalStation))
                     {
                         waitingWagons = _waitingWagons[train.ArrivalStation];
-                        if (waitingWagons.Where(x => x.WagonId == 315659516209).ToList().Count >= 1)
+                        if (waitingWagons.Where(x => x.WagonId == 315166661407).ToList().Count >= 1)
                         {
                             Helper.Print("Wtf");
                         }
@@ -166,10 +166,10 @@ namespace RailCargo.HCCM.ControlUnits
             foreach (var request in requestsForSorting)
             {
                 var wagon = (EntityWagon)request.Origin[0];
-                if (Name == "81011841" && wagon.WagonId == 315659516209) Helper.Print("tes");
+                if (wagon.WagonId == 315166661407) Helper.Print("tes");
                 var wagon_rpc_code = wagon.DestinationRpc;
                 var has_train = false;
-                if ((time - ((RequestSorting)request).ArrivalTime).TotalDays >= 0.5)
+                if ((time - ((RequestSorting)request).ArrivalTime).TotalDays >= 7)
                 {
                     wagon.StopCurrentActivities(((RequestSorting)request).ArrivalTime, simEngine);
                     RemoveRequest(request);
@@ -195,7 +195,7 @@ namespace RailCargo.HCCM.ControlUnits
                             if (currentLength + wagon.WagonLength <= maxLength &&
                                 (currentWeight + wagon.WagonMass) <= (maxWeight))
                             {
-                                if (wagon.WagonId == 315659516209)
+                                if (wagon.WagonId == 315166661407)
                                 {
                                     Helper.Print("Wtf");
                                 }
@@ -237,7 +237,7 @@ namespace RailCargo.HCCM.ControlUnits
             {
                 //Idea close silo, and create a request with the wagons on the closed silo, which is appended to the train when departure time has arrived
                 var train = (EntityTrain)request.Origin[0];
-                if (train.TrainId == 45854)
+                if (train.TrainId == 44303)
                 {
                     Helper.Print("wtf");
                 }
@@ -287,7 +287,7 @@ namespace RailCargo.HCCM.ControlUnits
             {
                 silo.WagonList.ForEach(x =>
                 {
-                    if (x.WagonId == 315659516209)
+                    if (x.WagonId == 318047260860)
                     {
                         Helper.Print("Wtf");
                     }

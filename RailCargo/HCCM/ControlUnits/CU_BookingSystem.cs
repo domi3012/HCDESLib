@@ -36,6 +36,10 @@ namespace RailCargo.HCCM.ControlUnits
             foreach (var wagon in _input.Wagons)
             {
                 var wagonId = Int64.Parse(wagon.WagonId);
+                if (wagonId == 258043715063)
+                {
+                    Helper.Print("wtf");
+                }
                 var wagonLength = wagon.WagonLength;
                 var wagonMass = wagon.WagonMass;
                 var destinationRpc = wagon.DestinationRpc;

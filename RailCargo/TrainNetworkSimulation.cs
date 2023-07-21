@@ -33,7 +33,7 @@ namespace RailCargo
             locations = locations.Distinct().ToList();
             bookingSystem = new CuBookingSystem("CU_BOOKINGSYSTEM", null, this, inputTimeTable);
             network = new CuNetwork("CU_NETWORK", bookingSystem, this);
-            shuntingYards = new ControlUnit[locations.Count]; //TODO only test
+            shuntingYards = new ControlUnit[locations.Count]; 
             var index = 0;
             foreach (var x in locations)
             {

@@ -24,11 +24,8 @@ namespace RailCargo.HCCM.Activities
 
         public override void StateChangeStartEvent(DateTime time, ISimulationEngine simEngine)
         {
+            //TODO check this why
             //throw new NotImplementedException();
-            if (_wagon.WagonId == 315659516209)
-            {
-                Helper.Print("Wtf");
-            }
             var requestSorting = new RequestSorting(Constants.RequestForSorting, _wagon, time, _arrivalTime);
             ParentControlUnit.AddRequest(requestSorting);
         }
