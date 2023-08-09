@@ -49,7 +49,9 @@ namespace RailCargo.HCCM.Events
                 case "VBF":
                     //RequestForSilo requestForSilo = new RequestForSilo(Constants.REQUEST_FOR_SILO, _train, time);
                     //ParentControlUnit.AddRequest(requestForSilo);
-                    _train.ActualWagonList.ForEach(x => x.CurrentTrain = null);
+                    _train.ActualWagonList.ForEach(x => { x.CurrentTrain = null;
+                        x.Silo = null;
+                    });
                     var requestTrainContinuation =
                         new RequestTrainContinuation(Constants.RequestTrainContinuation, _train, time);
                     var affectedShuntingYard = AllShuntingYards.Instance.GetYards(_train.ArrivalStation);

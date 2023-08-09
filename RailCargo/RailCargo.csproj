@@ -155,6 +155,8 @@
     <ItemGroup>
       <Content Include="HCCM\Data\TimeTable.csv" />
       <Content Include="HCCM\Data\timetable_simulation.json" />
+      <Content Include="HCCM\Data\timetable_simulation_model_1.json" />
+      <Content Include="HCCM\Data\timetable_simulation_model_2.json" />
       <Content Include="HCCM\Data\timetable_simulation_test.json" />
     </ItemGroup>
     <ItemGroup>

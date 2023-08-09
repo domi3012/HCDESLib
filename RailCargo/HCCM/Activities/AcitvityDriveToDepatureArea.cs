@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using RailCargo.HCCM.ControlUnits;
 using RailCargo.HCCM.Entities;
+using RailCargo.HCCM.Input;
 using RailCargo.HCCM.Requests;
 using RailCargo.HCCM.staticVariables;
 using SimulationCore.HCCMElements;
@@ -12,7 +15,8 @@ namespace RailCargo.HCCM.Activities
     {
         private readonly EntityTrain _train;
 
-        public ActivityDriveToDepartureArea(ControlUnit parentControlUnit, EntityTrain train, string activityType, bool preEmptable) : base(parentControlUnit, activityType, preEmptable)
+        public ActivityDriveToDepartureArea(ControlUnit parentControlUnit, EntityTrain train, string activityType,
+            bool preEmptable) : base(parentControlUnit, activityType, preEmptable)
         {
             _train = train;
         }
@@ -31,8 +35,30 @@ namespace RailCargo.HCCM.Activities
             {
                 Helper.Print("wtf");
             }
+
             ((CuShuntingYard)ParentControlUnit).calculatePossibleWagons(_train, _train.Silo);
-            _train.ActualWagonList.ForEach(x => x.StopCurrentActivities(time, simEngine));
+            _train.ActualWagonList.ForEach(x =>
+            {
+                if (!_train.Wagons.Contains(x.WagonId.ToString()))
+                {
+                    var currentIndex = x.currentIndex;
+                    if (currentIndex < x.UsedTrains.Count)
+                    {
+                        var departureTime = x.UsedTrains[currentIndex].StartTime;
+                        // TODO write somehow to log
+                    }
+                }
+
+                x.StopCurrentActivities(time, simEngine);
+                x.alreadyStations.Add(_train.ArrivalStation);
+                x.ActualDepartureTime.Add(new List<string>()
+                {
+                    _train.TrainId.ToString(), _train.StartLocation,
+                    _train.DeparturTime.ToString()
+                });
+            });
+
+
             //foreach (var wagon in _train.Wagons)
             //{
             //    Helper.Print(wagon.WagonId.ToString());
@@ -61,6 +87,9 @@ namespace RailCargo.HCCM.Activities
             throw new NotImplementedException();
         }
 
-        public override Entity[] AffectedEntities { get { return new Entity[] { _train }; } }
+        public override Entity[] AffectedEntities
+        {
+            get { return new Entity[] { _train }; }
+        }
     }
 }

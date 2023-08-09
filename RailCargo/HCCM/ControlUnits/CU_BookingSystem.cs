@@ -15,9 +15,9 @@ namespace RailCargo.HCCM.ControlUnits
     public class CuBookingSystem : ControlUnit
     {
         private readonly InputTimeTable _input;
-        private List<EntityWagon> _allWagons = new List<EntityWagon>();
+        private static List<EntityWagon> _allWagons = new List<EntityWagon>();
 
-        public List<EntityWagon> AllWagons
+        public static List<EntityWagon> AllWagons
         {
             get => _allWagons;
             set => _allWagons = value;
@@ -36,10 +36,6 @@ namespace RailCargo.HCCM.ControlUnits
             foreach (var wagon in _input.Wagons)
             {
                 var wagonId = Int64.Parse(wagon.WagonId);
-                if (wagonId == 258043715063)
-                {
-                    Helper.Print("wtf");
-                }
                 var wagonLength = wagon.WagonLength;
                 var wagonMass = wagon.WagonMass;
                 var destinationRpc = wagon.DestinationRpc;
@@ -47,9 +43,18 @@ namespace RailCargo.HCCM.ControlUnits
                 var endLocation = wagon.EndLocation;
                 var endTime = wagon.EndTime;
                 var acceptanceDate = wagon.AcceptanceDate;
+                var bookingDate = wagon.BookingDate;
+                var rebookedTimes = wagon.RebookingTimes;
+                var usedTrains = wagon.UsedTrains;
+                var uuid = wagon.Uuid;
                 var wagonEntity = new EntityWagon(wagonId, wagonLength, wagonMass, startLocation, endLocation,
                     destinationRpc, endTime,
-                    acceptanceDate);
+                    acceptanceDate, bookingDate, rebookedTimes, usedTrains, uuid);
+                if (wagonId == 318146681768)
+                {
+                    Helper.Print("www");
+                }
+
                 _allWagons.Add(wagonEntity);
                 var affectedShuntingYard = AllShuntingYards.Instance.GetYards(startLocation);
                 var waitingForTrainSelectionWagon =
@@ -79,21 +84,11 @@ namespace RailCargo.HCCM.ControlUnits
                 var append = train.Append;
                 var pop = train.Pop;
                 var startTrain = train.StartTrain;
-                List<EntityWagon> wagons = new List<EntityWagon>();
+                List<string> wagons = new List<string>();
                 train.Wagons.ForEach(x =>
                 {
                     var wagonId = Int64.Parse(x.WagonId);
-                    var wagonLength = x.WagonLength;
-                    var wagonMass = x.WagonMass;
-                    var destinationRpc = x.DestinationRpc;
-                    var startLocation = x.StartLocation;
-                    var endLocation = x.EndLocation;
-                    var endTime = x.EndTime;
-                    var acceptanceDate = x.AcceptanceDate;
-
-                    wagons.Add(new EntityWagon(wagonId, wagonLength, wagonMass, startLocation, endLocation,
-                        destinationRpc, endTime,
-                        acceptanceDate));
+                    wagons.Add(wagonId.ToString());
                 });
                 var scheduledEntityTrain = new EntityTrain(trainId, startStation, departureTime, arrivalStation,
                     arrivalTime, formationsTime, disassembleTime,
@@ -107,6 +102,10 @@ namespace RailCargo.HCCM.ControlUnits
                 simEngine.AddScheduledEvent(eventTrainCreation, trainCreationTime);
 
                 //Trigger Event for departure time will arrive
+                if (trainId == 45301)
+                {
+                    Helper.Print(departureTime.AddMinutes(-formationsTime).ToString());
+                }
                 var trainDepartureTimeWillArriveIn =
                     new EventTrainDepartureTimeWillArriveIn(EventType.Standalone, ChildControlUnits.First(),
                         scheduledEntityTrain);

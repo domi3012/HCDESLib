@@ -58,9 +58,9 @@ namespace RailCargo.HCCM.Entities
 
         public bool isStartTrain => _startTrain;
 
-        public List<EntityWagon> Wagons => _wagons;
+        public List<string> Wagons => _wagons;
 
-        private readonly List<EntityWagon> _wagons;
+        private readonly List<string> _wagons;
         private readonly bool _append;
         private readonly bool _pop;
         private readonly bool _endTrain;
@@ -92,7 +92,7 @@ namespace RailCargo.HCCM.Entities
             DateTime departureTime, string arrivalStation, DateTime arrivalTime, int formationsTime,
             int disassembleTime,
             List<List<string>> rpcCodes, int trainWeight, int trainLength, bool startTrain, bool endTrain,
-            List<EntityWagon> wagons, bool append, bool pop) : base(trainId)
+            List<string> wagons, bool append, bool pop) : base(trainId)
         {
             _trainId = trainId;
             _startLocation = startLocation;

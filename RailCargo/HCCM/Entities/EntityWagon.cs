@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using RailCargo.HCCM.Input;
 using SimulationCore.HCCMElements;
 using SimulationCore.SimulationClasses;
 
@@ -28,6 +29,17 @@ namespace RailCargo.HCCM.Entities
         private readonly DateTime _acceptanceDate;
         private readonly string _startLocation;
         private EntityTrain _currentTrain = null;
+        public List<string> alreadyStations = new List<string>();
+        private readonly DateTime _bookingDate;
+        private readonly List<string> _rebookedTimes;
+        private readonly List<UsedTrains> _usedTrains;
+        private List<List<String>> _actualDepartureTime;
+        public int currentIndex = 0;
+        private readonly string _uuid;
+        public bool arrived;
+        public bool printed = false;
+
+        public string Uuid => _uuid;
 
         public EntityTrain CurrentTrain
         {
@@ -48,16 +60,33 @@ namespace RailCargo.HCCM.Entities
         }
 
         public EntityWagon(long wagonId, string wagonLength, string wagonMass,string startLocation, string endLocation,
-            string destinationRcp, string endTime, string acceptance_date) : base(_sIdentifier++)
+            string destinationRcp, string endTime, string acceptance_date, string bookingDate, List<string> rebookedTimes, List<UsedTrains> usedTrains, string uuid) : base(_sIdentifier++)
         {
             _wagonId = wagonId;
-            _wagonLength = (int)float.Parse(wagonLength, CultureInfo.InvariantCulture.NumberFormat);;
-            _wagonMass = (int)float.Parse(wagonMass, CultureInfo.InvariantCulture.NumberFormat);;;
+            _wagonLength = (int)float.Parse(wagonLength, CultureInfo.InvariantCulture.NumberFormat);
+            _wagonMass = (int)float.Parse(wagonMass, CultureInfo.InvariantCulture.NumberFormat);
             _startLocation = startLocation;
             _endLocation = endLocation;
             _destinationRpc = destinationRcp;
             _endTime = DateTime.Parse(endTime);
             _acceptanceDate = DateTime.Parse(acceptance_date);
+            _bookingDate = DateTime.Parse(bookingDate);
+            _rebookedTimes = rebookedTimes;
+            _usedTrains = usedTrains;
+            _actualDepartureTime = new List<List<string>>();
+            _uuid = uuid;
+        }
+
+        public DateTime BookingDate => _bookingDate;
+
+        public List<string> RebookedTimes => _rebookedTimes;
+
+        public List<UsedTrains> UsedTrains => _usedTrains;
+
+        public List<List<string>> ActualDepartureTime
+        {
+            get => _actualDepartureTime;
+            set => _actualDepartureTime = value;
         }
 
         public List<Activity> CurrentActivies => _currentActivies;

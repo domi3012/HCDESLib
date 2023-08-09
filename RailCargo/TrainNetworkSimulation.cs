@@ -33,7 +33,7 @@ namespace RailCargo
             locations = locations.Distinct().ToList();
             bookingSystem = new CuBookingSystem("CU_BOOKINGSYSTEM", null, this, inputTimeTable);
             network = new CuNetwork("CU_NETWORK", bookingSystem, this);
-            shuntingYards = new ControlUnit[locations.Count]; 
+            shuntingYards = new ControlUnit[locations.Count];
             var index = 0;
             foreach (var x in locations)
             {
@@ -63,7 +63,8 @@ namespace RailCargo
         {
             foreach (var yard in shuntingYards)
             {
-                var sortingRequest = yard.RAEL.Where(p => p.Activity == Constants.RequestForSorting).Cast<RequestSorting>()
+                var sortingRequest = yard.RAEL.Where(p => p.Activity == Constants.RequestForSorting)
+                    .Cast<RequestSorting>()
                     .ToList();
                 if (sortingRequest.Count != 0)
                 {
@@ -77,25 +78,44 @@ namespace RailCargo
                     }
                 }
             }
+
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // Use this for EPPlus 5.0 onwards
-            using (ExcelPackage package = new ExcelPackage(new FileInfo(@"C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\result.xlsx")))
+            using (ExcelPackage package =
+                   new ExcelPackage(new FileInfo(@"C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\result.xlsx")))
             {
                 ExcelWorksheet worksheet = package.Workbook.Worksheets["Sheet1"];
+                worksheet.Cells.Clear();
                 worksheet.Cells[1, 1].Value = "WagonId";
                 worksheet.Cells[1, 2].Value = "Timedelta";
                 worksheet.Cells[1, 3].Value = "Calculated Time";
                 worksheet.Cells[1, 4].Value = "Actual Time";
+                worksheet.Cells[1, 5].Value = "Booked Time";
+                worksheet.Cells[1, 6].Value = "Acceptance Date";
+                worksheet.Cells[1, 7].Value = "Trains used";
+                worksheet.Cells[1, 8].Value = "Recalculated on";
                 var counter = 2;
-                foreach (var wagon in bookingSystem.AllWagons)
+                foreach (var wagon in CuBookingSystem.AllWagons)
                 {
-                    worksheet.Cells[counter, 1].Value = wagon.WagonId.ToString();  // Writes "Hello" to cell A1
+                    worksheet.Cells[counter, 1].Value = wagon.WagonId.ToString(); // Writes "Hello" to cell A1
                     worksheet.Cells[counter, 2].Value = wagon.TimeDelta.ToString();
                     worksheet.Cells[counter, 3].Value = wagon.EndTime.ToString();
                     var realtime = wagon.RealTime.ToString();
                     if (realtime == "01.01.0001 00:00:00") continue;
                     worksheet.Cells[counter, 4].Value = wagon.RealTime.ToString();
+                    Helper.Print(wagon.RealTime.ToString());
+                    worksheet.Cells[counter, 5].Value = wagon.BookingDate.ToString();
+                    Helper.Print(wagon.BookingDate.ToString());
+                    worksheet.Cells[counter, 6].Value = wagon.AcceptanceDate.ToString();
+                    Helper.Print(wagon.AcceptanceDate.ToString());
+                    worksheet.Cells[counter, 7].Value = "Calculated Trains: " +
+                                                        Helper.StringifyCollection(wagon.UsedTrains) + "\n" +
+                                                        "Actual Trains: " +
+                                                        Helper.StringifyCollection(wagon.ActualDepartureTime);
+                    worksheet.Cells[counter, 7].Style.WrapText = true;
+                    worksheet.Cells[counter, 8].Value = Helper.StringifyCollection(wagon.RebookedTimes);
                     counter += 1;
                 }
+
                 package.Save();
             }
         }
