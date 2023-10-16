@@ -76,7 +76,7 @@ namespace RailCargo.HCCM.Input
         public InputTimeTable()
         {
             string json = File.ReadAllText(
-                @"C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\HCCM\Data\timetable_simulation_model_1.json");
+                @"C:\Users\koenig11\RiderProjects\HCDESLib\RailCargo\HCCM\Data\timetable_simulation_model_2.json");
             List<Train> test = JsonConvert.DeserializeObject<List<Train>>(json);
             test.ForEach(x =>
             {

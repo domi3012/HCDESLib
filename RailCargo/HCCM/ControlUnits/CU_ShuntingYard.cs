@@ -182,13 +182,6 @@ namespace RailCargo.HCCM.ControlUnits
                 {
                     Helper.Print("wtf");
                 }
-                // if (wagon.arrived)
-                // {
-                //     RemoveRequest(request);
-                //     continue;
-                // }
-                // var same_uuid = requestsForSorting.Where(p => ((EntityWagon)p.Origin[0]).Uuid == wagon.Uuid)
-                //     .OrderBy(x => x.TimeRequested).ToList();
      
                 var has_train = false;
                 foreach (var silos in _silos.Values)
@@ -210,7 +203,9 @@ namespace RailCargo.HCCM.ControlUnits
                             break;
                         }
                     }
-
+                    
+                    // Must stay, as booking system only matches for starting trains
+                    // further research can be done by implementing passing-by trains.
                     if (!possible_train.StartTrain) break;
                     if (availableSilo)
                     {
@@ -240,7 +235,6 @@ namespace RailCargo.HCCM.ControlUnits
                 }
             }
 
-            //TODO think about this silo status
             var requestForSiloStatus = RAEL.Where(p => p.Activity == Constants.RequestForSiloStatus)
                 .Cast<RequestCheckSiloStatus>().ToList();
             foreach (var request in requestForSiloStatus)
@@ -252,7 +246,7 @@ namespace RailCargo.HCCM.ControlUnits
                 var siloCurrentLength = silo.CurrentLength;
 
 
-                // TODO check when the condition is really achieved
+                // For further research, as we can specify the max silo lenght
 
                 if (siloCurrentLength >= siloMaxLength || siloCurrentWeight >= siloMaxWeight)
                 {
@@ -261,9 +255,9 @@ namespace RailCargo.HCCM.ControlUnits
                 }
             }
 
-            var requestForDepatureArea = RAEL.Where(p => p.Activity == Constants.RequestForDepartureArea)
+            var requestForDepartureArea = RAEL.Where(p => p.Activity == Constants.RequestForDepartureArea)
                 .Cast<RequestForDepartureArea>().ToList();
-            foreach (var request in requestForDepatureArea)
+            foreach (var request in requestForDepartureArea)
             {
                 //Idea close silo, and create a request with the wagons on the closed silo, which is appended to the train when departure time has arrived
                 var train = (EntityTrain)request.Origin[0];
